@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="./index.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Swiper CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css"
+    />
+
     <style></style>
   </head>
   <body>
@@ -50,17 +56,17 @@
     </header>
 
     <!-- main sections -->
-    <main>
+    <main class="panels main-container">
       <section class="panel panel-1">
         <!-- GLOW + GRID OVERLAY -->
 
         <div class="container-overlay">
-          <div id="hex-grid">
+          <div class="hex-grid">
             <div class="light"></div>
             <div class="grid"></div>
           </div>
         </div>
-        <div class="content hero-section">
+        <div class="panel-container hero-section">
           <video
             src="https://blog.fastlearner.ai/wp-content/uploads/2025/10/mosaic-video.mp4"
             muted
@@ -68,70 +74,264 @@
             loop
             playsinline
           ></video>
-          <!-- https://blog.fastlearner.ai/wp-content/uploads/2025/10/mosaic-video.mp4 -->
         </div>
       </section>
       <section class="panel panel-2">
         <!-- GLOW + GRID OVERLAY -->
 
         <div class="container-overlay">
-          <div id="hex-grid">
+          <div class="hex-grid">
             <div class="light"></div>
-            <div class="grid"></div>
+            <div class="grid-2"></div>
           </div>
         </div>
-        <h2>Section 2</h2>
+        <div class="panel-container ats-container">
+          <h1 class="ats-title">Mosaic ATS</h1>
+          <p class="ats-description">
+            A merit driven market: Mosaic transforms existing market matching
+            models to deliver a unified trading system.
+          </p>
+          <p class="ats-subtitle">Our platform is:</p>
+
+          <div class="ats-cards">
+            <div class="ats-card">
+              <img src="./images/ats-cards-icon.svg" alt="Icon 1" />
+              <p>A centralized operating system to align market trading.</p>
+            </div>
+
+            <div class="ats-card">
+              <img src="./images/ats-cards-icon-2.svg" alt="Icon 2" />
+              <p>
+                A community built for investors, brokers, and risk providers to
+                share value.
+              </p>
+            </div>
+
+            <div class="ats-card">
+              <img src="./images/ats-cards-icon-3.svg" alt="Icon 3" />
+              <p>
+                Design centred on trading compatibility and confidentiality.
+              </p>
+            </div>
+          </div>
+        </div>
       </section>
       <section class="panel panel-3">
         <!-- GLOW + GRID OVERLAY -->
 
         <div class="container-overlay">
-          <div id="hex-grid">
+          <div class="hex-grid">
             <div class="light"></div>
             <div class="grid"></div>
           </div>
         </div>
-        <h2>Section 3</h2>
+        <div class="panel-container">
+          <div class="teams-header">
+            <h2 class="teams-title">Team</h2>
+            <p class="teams-description">
+              Mosaic Platforms was founded by experienced industry practitioners
+              and uniquely qualified operators to solve the blind spot within
+              the value chain and unify a fragmented trading eco-system.
+            </p>
+          </div>
+
+          <div class="panel team-section">
+            <div class="team-container">
+              <div class="team-wrapper"></div>
+            </div>
+          </div>
+        </div>
+        <div class="team-footer">
+          <p>Interested in joining our team? <a href="">Click Here</a></p>
+        </div>
       </section>
       <section class="panel panel-4">
         <!-- GLOW + GRID OVERLAY -->
 
         <div class="container-overlay">
-          <div id="hex-grid">
+          <div class="hex-grid">
             <div class="light"></div>
-            <div class="grid"></div>
+            <div class="grid-2"></div>
           </div>
         </div>
-        <h2>Section 4</h2>
+        <div class="news-container">
+          <h2 class="news-title">News</h2>
+          <p class="news-description">
+            Mosaic in the News, Stay in the loop on what we are up to.
+          </p>
+        </div>
+        <div class="swiper blogSwiper">
+          <div class="swiper-wrapper">
+            <!-- Slide 1 -->
+            <div class="swiper-slide">
+              <div class="blog-card">
+                <div class="blog-img">
+                  <img src="images/Thumbnail.png" alt="Chart" />
+                </div>
+                <div class="blog-content">
+                  <div class="blog-tags">
+                    <span class="tag">Featured</span>
+                    <span class="tag">Trending</span>
+                  </div>
+                  <h3 class="blog-title">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  </h3>
+                  <p class="blog-desc">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Maecenas pellentesque dignissim dictum.
+                  </p>
+                  <div class="blog-meta">
+                    <span class="author">Lorem Ipsum</span>
+                    <span class="date">Sept 23, 2025</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="swiper-slide">
+              <div class="blog-card">
+                <div class="blog-img">
+                  <img src="images/Thumbnail3.png" alt="Stock" />
+                </div>
+                <div class="blog-content">
+                  <div class="blog-tags">
+                    <span class="tag">Featured</span>
+                    <span class="tag">News</span>
+                  </div>
+                  <h3 class="blog-title">
+                    Praesent commodo cursus magna vel scelerisque nisl
+                    consectetur.
+                  </h3>
+                  <p class="blog-desc">
+                    Aenean lacinia bibendum nulla sed consectetur. Integer
+                    posuere erat a ante venenatis dapibus posuere velit aliquet.
+                  </p>
+                  <div class="blog-meta">
+                    <span class="author">Jane Doe</span>
+                    <span class="date">Sept 26, 2025</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="swiper-slide">
+              <div class="blog-card">
+                <div class="blog-img">
+                  <img src="images/Thumbnail4.png" alt="Graph" />
+                </div>
+                <div class="blog-content">
+                  <div class="blog-tags">
+                    <span class="tag">Featured</span>
+                    <span class="tag">Market</span>
+                  </div>
+                  <h3 class="blog-title">
+                    Integer posuere erat a ante venenatis dapibus posuere velit.
+                  </h3>
+                  <p class="blog-desc">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Maecenas pellentesque dignissim dictum.
+                  </p>
+                  <div class="blog-meta">
+                    <span class="author">John Smith</span>
+                    <span class="date">Sept 29, 2025</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 4 -->
+            <div class="swiper-slide">
+              <div class="blog-card">
+                <div class="blog-img">
+                  <img src="images/Thumbnail5.png" alt="Analysis" />
+                </div>
+                <div class="blog-content">
+                  <div class="blog-tags">
+                    <span class="tag">Featured</span>
+                    <span class="tag">Finance</span>
+                  </div>
+                  <h3 class="blog-title">
+                    Donec ullamcorper nulla non metus auctor fringilla.
+                  </h3>
+                  <p class="blog-desc">
+                    Aenean lacinia bibendum nulla sed consectetur. Integer
+                    posuere erat a ante venenatis dapibus posuere velit aliquet.
+                  </p>
+                  <div class="blog-meta">
+                    <span class="author">Emma White</span>
+                    <span class="date">Sept 30, 2025</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Custom blog slider arrows below -->
+        </div>
+        <div class="blog-nav">
+          <button class="blog-button-prev" aria-label="Previous">
+            <img src="./images/arrow-left-icon.svg" alt="arrow-left-icon" />
+          </button>
+          <button class="blog-button-next" aria-label="Next">
+            <img src="./images/arrow-right-icon.svg" alt="arrow-right-icon" />
+          </button>
+        </div>
       </section>
       <section class="panel panel-5">
         <!-- GLOW + GRID OVERLAY -->
 
         <div class="container-overlay">
-          <div id="hex-grid">
+          <div class="hex-grid">
             <div class="light"></div>
             <div class="grid"></div>
           </div>
         </div>
-        <h2>Section 5</h2>
-      </section>
-      <section class="panel panel-6">
-        <!-- GLOW + GRID OVERLAY -->
+        <div class="footer-inner">
+          <div class="footer-left">
+            <img
+              src="./images/footer-logo.png"
+              alt="Mosaic"
+              class="footer-logo"
+            />
+          </div>
 
-        <div class="container-overlay">
-          <div id="hex-grid">
-            <div class="light"></div>
-            <div class="grid"></div>
+          <nav class="footer-nav">
+            <a href="#">Mosaic</a>
+            <a href="#">Team</a>
+            <a href="#">News</a>
+          </nav>
+
+          <div class="footer-contact">
+            <h4>Connect</h4>
+            <a href="tel:+1234567890">+1 2345 67890</a>
+            <a href="mailto:info@mosaicats.com">info@mosaicats.com</a>
+            <address>
+              Mosaic Platforms, Inc.<br />
+              875 Washington Street, 4th<br />
+              Floor New York, NY 10014
+            </address>
+            <a class="footer-link" href="#" target="_blank" rel="noopener"
+              >LinkedIn <img src="images/Vector.svg" alt=""
+            /></a>
           </div>
         </div>
-        <h2>Section 6</h2>
+
+        <div class="footer-bottom">
+          <ul class="footer-legal">
+            <li>© 2025 Mosaic. All Rights Reserved.</li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Use</a></li>
+            <li><a href="#">Disclosure Statements</a></li>
+            <li><a href="#">Site Legal</a></li>
+            <li><a href="#">Compliance Disclaimers</a></li>
+          </ul>
+        </div>
       </section>
     </main>
 
-    <footer>
-      <p>Footer</p>
-    </footer>
-
     <script src="./index.js"></script>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
   </body>
 </html>

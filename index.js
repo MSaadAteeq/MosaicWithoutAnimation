@@ -4,77 +4,106 @@
 //   light.style.left = `${e.clientX}px`
 //   light.style.top = `${e.clientY}px`
 // })
-
-const light = document.querySelector('.light')
-const grid = document.querySelector('#hex-grid')
-
-let mouse = { x: 0, y: 0 }
-let lightPos = { x: 0, y: 0 }
-let trails = []
-const trailCount = 10 // number of trailing glows
-
-// Create trail elements
-for (let i = 0; i < trailCount; i++) {
-  const trail = document.createElement('div')
-  trail.classList.add('trail')
-  grid.appendChild(trail)
-  trails.push({ el: trail, x: 0, y: 0 })
-}
-
-// Track mouse movement
-grid.addEventListener('mousemove', (e) => {
-  mouse.x = e.clientX
-  mouse.y = e.clientY
-})
-
-// Smoothly animate the light & trail
-function animateGlow() {
-  // interpolate the main glow position
-  lightPos.x += (mouse.x - lightPos.x) * 0.15
-  lightPos.y += (mouse.y - lightPos.y) * 0.15
-
-  light.style.left = `${lightPos.x}px`
-  light.style.top = `${lightPos.y}px`
-
-  // make the first trail follow the main glow closely
-  let prevX = lightPos.x
-  let prevY = lightPos.y
-
-  trails.forEach((t, i) => {
-    const speed = 0.25 - i * 0.015 // smaller difference for smoother blend
-    t.x += (prevX - t.x) * speed
-    t.y += (prevY - t.y) * speed
-
-    // No offset subtraction — center trail exactly on main glow
-    t.el.style.left = `${t.x}px`
-    t.el.style.top = `${t.y}px`
-    t.el.style.transform = `translate(-50%, -50%) scale(${1 - i * 0.05})`
-    t.el.style.opacity = 0.5 - i * 0.04
-
-    prevX = t.x
-    prevY = t.y
-  })
-
-  requestAnimationFrame(animateGlow)
-}
-
-animateGlow()
-
-// === GSAP ScrollTrigger for Section Transitions ===
+// === Register GSAP ScrollTrigger ===
 gsap.registerPlugin(ScrollTrigger)
 
-gsap.utils.toArray('.content h2').forEach((heading) => {
-  gsap.from(heading, {
-    y: 80,
-    opacity: 0,
-    duration: 1,
-    scrollTrigger: {
-      trigger: heading,
-      start: 'top 80%',
-      toggleActions: 'play none none reverse',
-    },
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.hex-grid').forEach((grid) => {
+    const light = grid.querySelector('.light')
+    let mouse = { x: 0, y: 0 }
+    let lightPos = { x: 0, y: 0 }
+    let trails = []
+    const trailCount = 10 // number of trailing glows
+
+    // Create trail elements
+    for (let i = 0; i < trailCount; i++) {
+      const trail = document.createElement('div')
+      trail.classList.add('trail')
+      grid.appendChild(trail)
+      trails.push({ el: trail, x: 0, y: 0 })
+    }
+
+    // Track mouse movement
+    grid.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX
+      mouse.y = e.clientY
+    })
+
+    // Smoothly animate the light & trail
+    function animateGlow() {
+      // interpolate the main glow position
+      lightPos.x += (mouse.x - lightPos.x) * 0.15
+      lightPos.y += (mouse.y - lightPos.y) * 0.15
+
+      light.style.left = `${lightPos.x}px`
+      light.style.top = `${lightPos.y}px`
+
+      // make the first trail follow the main glow closely
+      let prevX = lightPos.x
+      let prevY = lightPos.y
+
+      trails.forEach((t, i) => {
+        const speed = 0.25 - i * 0.015 // smaller difference for smoother blend
+        t.x += (prevX - t.x) * speed
+        t.y += (prevY - t.y) * speed
+
+        // No offset subtraction — center trail exactly on main glow
+        t.el.style.left = `${t.x}px`
+        t.el.style.top = `${t.y}px`
+        t.el.style.transform = `translate(-50%, -50%) scale(${1 - i * 0.05})`
+        t.el.style.opacity = 0.5 - i * 0.04
+
+        prevX = t.x
+        prevY = t.y
+      })
+
+      requestAnimationFrame(animateGlow)
+    }
+
+    animateGlow()
   })
 })
+
+// Teams Section - Dynamic render
+const teamMembers = [
+  {
+    name: 'Alice Johnson',
+    role: 'CEO',
+    image: './images/John-Cosenza-Team-Member.png',
+  },
+  {
+    name: 'Mark Stone',
+    role: 'CTO',
+    image: './images/John-Cosenza-Team-Member.png',
+  },
+  {
+    name: 'Sophia Lee',
+    role: 'Head of Design',
+    image: './images/John-Cosenza-Team-Member.png',
+  },
+  {
+    name: 'David Kim',
+    role: 'Operations Manager',
+    image: './images/John-Cosenza-Team-Member.png',
+  },
+]
+
+const teamWrapper = document.querySelector('.team-wrapper')
+if (teamWrapper) {
+  teamMembers.forEach((member) => {
+    const card = document.createElement('div')
+    card.className = 'team-card'
+    card.innerHTML = `
+      <img src="${member.image}" alt="${member.name}" class="team-profile" />
+      <div class="team-info">
+      <h3 class="team-name">${member.name}</h3>
+      <p class="team-role">${member.role}</p>
+      </div>
+    `
+    teamWrapper.appendChild(card)
+  })
+}
+
 /* ---------------------- Loader Animation ---------------------- */
 window.addEventListener('load', async () => {
   const loader = document.querySelector('.loader-overlay')
@@ -169,4 +198,39 @@ window.addEventListener('load', async () => {
       },
       '-=0.3' // overlap slightly with header
     )
+})
+
+document.addEventListener('DOMContentLoaded', function () {
+  const swiper = new Swiper('.blogSwiper', {
+    loop: true,
+    effect: 'slide',
+    speed: 800,
+    slidesPerView: 1.2,
+    centeredSlides: true,
+    spaceBetween: 30,
+    grabCursor: true,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+    },
+
+    navigation: {
+      nextEl: '.blog-button-next',
+      prevEl: '.blog-button-prev',
+    },
+    breakpoints: {
+      640: {
+        slidesPerView: 1.5,
+        spaceBetween: 20,
+      },
+      768: {
+        slidesPerView: 1.8,
+        spaceBetween: 30,
+      },
+      1024: {
+        slidesPerView: 2.2,
+        spaceBetween: 40,
+      },
+    },
+  })
 })

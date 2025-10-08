@@ -1,0 +1,12 @@
+[
+  {
+    "name": "John Doe",
+    "role": "Founder & CEO",
+    "image": "./images/John-Cosenza-Team-Member.png"
+  },
+  {
+    "name": "Sarah Khan",
+    "role": "CTO",
+    "image": "./images/Robert-Weiss-Team-Member-5.png"
+  }
+]

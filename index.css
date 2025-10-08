@@ -14,13 +14,37 @@
   --color-background-color: rgb(255, 255, 255);
   --color-background-color-gradiant: ;
 }
+/* Font Style 1 */
+@font-face {
+  font-family: 'Armstrong', sans-serif;
+  src: url('./fonts/armstring-ttf/ArmstrongRegular.ttf'),
+    url('./fonts/armstring-ttf/ArmstrongRegular.woff'),
+    url('./fonts/armstring-ttf/ArmstrongRegular.woff2'),
+    url('./fonts/armstring-ttf/ArmstrongRegular.svg'),
+    url('./fonts/armstring-ttf/ArmstrongRegular.eot');
+  font-style: normal;
+  font-weight: normal;
+}
+
+/* Font Style 2 */
+@font-face {
+  font-family: 'Helvetica', sans-serif;
+  src: url('./fonts/helvetica-ttf/Helvetica.ttf'),
+    url('./fonts/helvetica-ttf/Helvetica.woff'),
+    url('./fonts/helvetica-ttf/Helvetica.woff2'),
+    url('./fonts/helvetica-ttf/Helvetica.svg'),
+    url('./fonts/helvetica-ttf/Helvetica.eot');
+  font-style: normal;
+  font-weight: normal;
+}
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Helvetica', sans-serif;
   font-weight: 400;
   line-height: 1.2em;
   font-style: normal;
   color: var(--color-text);
+  overflow-x: hidden;
 }
 a {
   text-decoration: none;
@@ -32,30 +56,157 @@ ul {
 html {
   font-size: 100%;
 }
-body {
-  color: #fff;
-  overflow: hidden;
-}
+
 html,
 body {
   scroll-behavior: smooth;
 }
+body.loaded {
+  overflow-y: auto;
+}
+main {
+  position: relative;
+}
+
+.mosaic-header {
+  background: transparent;
+  padding: 20px 40px;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  margin-bottom: -150px;
+}
+.mosaic-header .header-container {
+  max-width: 80%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+/* Logo */
+.mosaic-header .logo .mosaic-logo {
+  height: 100px;
+  width: 130px;
+}
+/* Navigation */
+.mosaic-header .nav-menu {
+  display: flex;
+  gap: 60px;
+}
+.mosaic-header .nav-menu a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  transition: 0.3s;
+}
+.mosaic-header .nav-menu a:hover {
+  opacity: 0.8;
+}
+/* Connect Button */
+.mosaic-header .connect-btn a {
+  border: 1px solid #fff;
+  color: #fff;
+  padding: 10px 26px;
+  border-radius: 6px;
+  font-size: 15px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.mosaic-header .connect-btn a:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+.mosaic-header .connect-btn a,
+.mosaic-header .nav-menu a,
+.mosaic-header .logo .mosaic-logo {
+  position: relative;
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(-150px);
+}
+/* animation */
+
+body.loaded .mosaic-header .logo .mosaic-logo,
+body.loaded .mosaic-header .connect-btn a,
+body.loaded .mosaic-header .nav-menu a {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* End Header Section Style */
+/* Hero Section Style */
+.hero-section {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding-top: 100px;
+}
+.hero-section video {
+  opacity: 0;
+  transform: translateY(450px) scale(0.2);
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  height: 720px;
+  display: block;
+  transform-origin: bottom center;
+  transition: opacity 1s ease, transform 1s ease;
+  border-radius: 15px;
+  border: 6px solid #fff;
+}
+
+body.loaded .hero-section video {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+/* Hero Section Style End*/
+
+/* Each section fills viewport */
+section.panel {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+/* Gradient per section */
+.panel-1 {
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+}
+.panel-2 {
+  background: linear-gradient(135deg, #43cea2, #185a9d);
+}
+.panel-3 {
+  background: linear-gradient(135deg, #ff512f, #dd2476);
+}
+.panel-4 {
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+}
+.panel-5 {
+  background: linear-gradient(135deg, #f7971e, #ffd200);
+}
+.panel-6 {
+  background: linear-gradient(135deg, #00b09b, #96c93d);
+}
 /* Background Grid Sections Style*/
-.container {
-  background: url(./images/gradient-bg-image.png) center center;
+.container-overlay {
+  background: url('./images/gradient-bg-image.png') center center;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  position: relative;
+  /* min-height: 100vh;
+  position: relative; */
+  height: 100%;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 #hex-grid {
   height: 100vh;
-  background: url(./images/gradient-bg-image.png) center center;
-  background-repeat: no-repeat;
-  background-size: 500px 500px;
 }
 #hex-grid .grid {
   position: absolute;
@@ -66,21 +217,116 @@ body {
   width: 100%;
   height: 100%;
   background-size: cover;
+  z-index: 2;
 }
 #hex-grid .light {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 60px;
-  height: 60px;
-  filter: blur(30px);
-  background: radial-gradient(
-    circle,
-    rgba(254, 169, 19, 1) 0%,
-    rgba(254, 169, 19, 1) 100%,
-    transparent 70%
-  );
+  width: 30px;
+  height: 30px;
+  filter: blur(20px);
+  background: radial-gradient(circle, var(--color-fourth) 60%, transparent 70%);
+  border-radius: 50%;
+  opacity: 0.8;
   z-index: 0;
 }
 /* Background Grid Sections Style End*/
+
+/* 🌟 Trail Elements */
+.trail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  background: radial-gradient(circle, var(--color-fourth) 60%, transparent 70%);
+  filter: blur(20px);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+  transition: transform 0.3s ease, opacity 0.4s ease;
+}
+
+/* Content Part Style under sections */
+.content {
+  position: relative;
+  z-index: 9;
+}
+
+/* ---------------------- Loader Styles ---------------------- */
+.loader-overlay {
+  position: fixed;
+  inset: 0;
+  /* background: #fff; */
+  display: grid;
+  place-items: center;
+  z-index: 2000;
+  overflow: hidden;
+}
+
+/* panels for staggered reveal */
+.loader-overlay .reveal-panels {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: row;
+  z-index: 2001;
+}
+.loader-overlay .reveal-panel {
+  flex: 1;
+  background: #fff;
+  transform-origin: bottom center;
+  width: 100vw;
+  height: 100svh;
+}
+
+.loader-overlay .logo-stage {
+  display: grid;
+  place-items: center;
+  background: transparent;
+  position: relative;
+  z-index: 2010;
+}
+
+.loader-overlay .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  will-change: transform, opacity;
+  opacity: 0;
+}
+
+.loader-overlay .icon {
+  width: 120px;
+  height: auto;
+  will-change: transform, opacity, filter;
+}
+
+.loader-overlay .logowrap {
+  display: inline-block;
+  overflow: hidden;
+  width: 0;
+}
+
+.loader-overlay .wordmark {
+  width: 500px;
+  height: auto;
+  display: block;
+  will-change: transform, opacity, clip-path;
+}
+
+@media (max-width: 767px) {
+  .loader-overlay .icon {
+    width: 80px;
+  }
+  .loader-overlay .wordmark {
+    width: 300px;
+  }
+  .loader-overlay .logo {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

@@ -5,14 +5,133 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mosaic</title>
     <link rel="stylesheet" href="./index.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style></style>
   </head>
   <body>
-    <div class="container">
-      <div id="hex-grid">
-        <div class="light"></div>
-        <div class="grid"></div>
+    <!-- Loader -->
+    <div class="loader-overlay">
+      <!-- panels for stagger -->
+      <div class="reveal-panels">
+        <div class="reveal-panel"></div>
+        <div class="reveal-panel"></div>
+        <div class="reveal-panel"></div>
+        <div class="reveal-panel"></div>
+        <div class="reveal-panel"></div>
+      </div>
+      <div class="logo-stage">
+        <div class="logo">
+          <img src="./images/mos-icon.svg" alt="MOS Icon" class="icon" />
+          <span class="logowrap">
+            <img src="./images/mos-logo.svg" alt="MOS Logo" class="wordmark" />
+          </span>
+        </div>
       </div>
     </div>
+    <!-- Header Section -->
+    <header class="mosaic-header">
+      <div class="header-container">
+        <!-- Left: Logo -->
+        <div class="logo">
+          <img src="./images/logo.svg" class="mosaic-logo" alt="Mosaic Logo" />
+        </div>
+        <!-- Center: Navigation -->
+        <nav class="nav-menu">
+          <a href="#">Team</a>
+          <a href="#">Careers</a>
+          <a href="#">News</a>
+        </nav>
+        <!-- Right: Button -->
+        <div class="connect-btn">
+          <a href="#">Connect</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- main sections -->
+    <main>
+      <section class="panel panel-1">
+        <!-- GLOW + GRID OVERLAY -->
+
+        <div class="container-overlay">
+          <div id="hex-grid">
+            <div class="light"></div>
+            <div class="grid"></div>
+          </div>
+        </div>
+        <div class="content hero-section">
+          <video
+            src="https://blog.fastlearner.ai/wp-content/uploads/2025/10/mosaic-video.mp4"
+            muted
+            autoplay
+            loop
+            playsinline
+          ></video>
+          <!-- https://blog.fastlearner.ai/wp-content/uploads/2025/10/mosaic-video.mp4 -->
+        </div>
+      </section>
+      <section class="panel panel-2">
+        <!-- GLOW + GRID OVERLAY -->
+
+        <div class="container-overlay">
+          <div id="hex-grid">
+            <div class="light"></div>
+            <div class="grid"></div>
+          </div>
+        </div>
+        <h2>Section 2</h2>
+      </section>
+      <section class="panel panel-3">
+        <!-- GLOW + GRID OVERLAY -->
+
+        <div class="container-overlay">
+          <div id="hex-grid">
+            <div class="light"></div>
+            <div class="grid"></div>
+          </div>
+        </div>
+        <h2>Section 3</h2>
+      </section>
+      <section class="panel panel-4">
+        <!-- GLOW + GRID OVERLAY -->
+
+        <div class="container-overlay">
+          <div id="hex-grid">
+            <div class="light"></div>
+            <div class="grid"></div>
+          </div>
+        </div>
+        <h2>Section 4</h2>
+      </section>
+      <section class="panel panel-5">
+        <!-- GLOW + GRID OVERLAY -->
+
+        <div class="container-overlay">
+          <div id="hex-grid">
+            <div class="light"></div>
+            <div class="grid"></div>
+          </div>
+        </div>
+        <h2>Section 5</h2>
+      </section>
+      <section class="panel panel-6">
+        <!-- GLOW + GRID OVERLAY -->
+
+        <div class="container-overlay">
+          <div id="hex-grid">
+            <div class="light"></div>
+            <div class="grid"></div>
+          </div>
+        </div>
+        <h2>Section 6</h2>
+      </section>
+    </main>
+
+    <footer>
+      <p>Footer</p>
+    </footer>
+
     <script src="./index.js"></script>
   </body>
 </html>

@@ -38,10 +38,10 @@
   --color-background-color: rgb(255, 255, 255);
   --color-background-color-gradiant: ;
   --font-family-first: 'Armstrong', Sans-serif;
-  --font-family-Second: 'Helvetica', Sans-serif;
+  --font-family-second: 'Helvetica', Sans-serif;
 }
 body {
-  font-family: var(--font-family-Second);
+  font-family: var(--font-family-second);
   font-weight: 400;
   line-height: 1.2em;
   font-style: normal;
@@ -119,20 +119,18 @@ main {
 .mosaic-header .connect-btn a:hover {
   background-color: rgba(255, 255, 255, 0.15);
 }
-.mosaic-header .connect-btn a,
-.mosaic-header .nav-menu a,
+.mosaic-header .connect-btn,
+.mosaic-header .nav-menu,
 .mosaic-header .logo .mosaic-logo {
   position: relative;
   z-index: 1000;
-  opacity: 0;
   transform: translateY(-150px);
 }
 /* animation */
 
 body.loaded .mosaic-header .logo .mosaic-logo,
-body.loaded .mosaic-header .connect-btn a,
-body.loaded .mosaic-header .nav-menu a {
-  opacity: 1;
+body.loaded .mosaic-header .connect-btn,
+body.loaded .mosaic-header .nav-menu {
   transform: translateY(0);
 }
 /* End Header Section Style */
@@ -162,23 +160,30 @@ body.loaded .hero-section video {
 }
 /* Hero Section Style End*/
 
-/* Each section fills viewport */
-
+/* Panels Each section fills viewport */
+.panels {
+  position: relative;
+  width: 100%;
+}
 section.panel {
   position: relative;
-  height: 100vh;
   overflow: hidden;
+  color: #fff;
+  height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: #fff;
 }
 .panel .panel-container {
-  height: 100vh;
   position: relative;
   z-index: 9;
   max-width: 1600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 /* Gradient per section */
 .panel-1 {
@@ -400,9 +405,11 @@ section.panel {
 
 .ats-cards {
   display: flex;
-
   justify-content: center;
   gap: 20px;
+  padding-top: 40px;
+  position: relative;
+  height: 55vh;
 }
 
 .ats-card {
@@ -415,6 +422,10 @@ section.panel {
   -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
+  transform-origin: center bottom;
+  /* position: absolute; */
+  height: 320px;
+  width: 385px;
 }
 
 .ats-card:hover {
@@ -436,7 +447,19 @@ section.panel {
   line-height: 1.6;
   width: 345px;
 }
-
+/* The magic part — manual diagonal offsets */
+/* .card1 {
+  top: 120px;
+  left: -250px;
+}
+.card2 {
+  top: 100px;
+  left: -225px;
+}
+.card3 {
+  top: 80px;
+  left: -200px;
+} */
 /* Responsive */
 @media (max-width: 900px) {
   .ats-cards {
@@ -450,12 +473,40 @@ section.panel {
 }
 /* END Mosaic ATS Section Style */
 /* Teams Member Section Style*/
+
+.panel-container#teams {
+  padding: 160px 0;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+.teams-scroll-wrapper {
+  overflow: visible;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.teams-wrapper {
+  display: flex;
+  gap: 30px;
+  will-change: transform;
+  transform: translateX(0); /* Initial state */
+}
+.teams-horizontal-cards {
+  display: flex;
+  align-items: center;
+  /* height: 100%; */
+  /* padding-left: 45vw; */
+  /* overflow: visible; */
+}
 .teams-header {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 80px 0;
+  padding: 80px 0 0;
 }
 .teams-header .teams-title {
   font-size: 80px;
@@ -466,7 +517,7 @@ section.panel {
 .team-section {
   position: relative;
   width: 100%;
-  height: 100vh;
+  /* height: 100vh; */
   overflow: hidden;
   z-index: 6;
 }
@@ -481,6 +532,8 @@ section.panel {
   display: flex;
   gap: 2rem;
   padding: 2rem;
+  width: 100vw;
+  /* height: 100%; */
 }
 
 .team-card {
@@ -492,6 +545,7 @@ section.panel {
   justify-content: center;
   color: white;
   position: relative;
+  cursor: pointer;
 }
 .team-card .team-profile {
   width: 100%;
@@ -513,7 +567,89 @@ section.panel {
 .team-card .team-info .team-role {
   font-size: 18px;
   line-height: 1.2em;
-  font-family: var(--font-family-first);
+  font-family: var(--font-family-second);
+}
+.team-footer p a {
+  color: var(--color-fourth);
+  text-decoration: underline;
+}
+/* Popup */
+.team-popup-overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+}
+
+.team-popup-overlay:not(.hidden) {
+  display: flex;
+}
+
+.team-popup {
+  background: url('./images/gradient-bg-image-2.png') no-repeat;
+  background-size: cover;
+  background-position: center;
+  padding: 100px 30px;
+  border-radius: 12px;
+  max-width: 1600px;
+  width: 100%;
+  text-align: left;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+.team-popup-close {
+  position: absolute;
+  top: 90px;
+  right: 50px;
+  background: none;
+  border: none;
+  font-size: 26px;
+  cursor: pointer;
+  color: #fff;
+  z-index: 999;
+}
+
+.team-popup-content {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.team-popup-image-wrapper {
+  flex: 0 0 450px;
+}
+
+.team-popup-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  object-fit: contain;
+}
+
+.team-popup-text {
+  flex: 1;
+  width: 100%;
+  max-width: 1030px;
+}
+
+.team-popup-text h3 {
+  margin-bottom: 10px;
+  font-size: 22px;
+  font-weight: 600;
+  font-family: var(--font-family-second);
+}
+
+.team-popup-text p {
+  font-size: 15px;
+  line-height: 1.6;
+  white-space: pre-line;
+  font-family: var(--font-family-second);
+  font-weight: 400;
 }
 
 /* END - Teams Member Section Style */

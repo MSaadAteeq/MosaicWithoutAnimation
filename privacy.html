@@ -15,7 +15,8 @@
         max-width: 100%;
         margin: 0 auto;
         width: 100%;
-        padding: 250px 0px 0px;
+        padding: 50px 0px 0px;
+        height: 100vh;
       }
 
       .privacy-content h1 {
@@ -137,7 +138,7 @@
 
         <!-- Page Content -->
         <div class="content privacy-content panel-container">
-          <div class="privacy-wrapper">
+          <div class="privacy-wrapper scrolable-content">
             <h1>Privacy Policy</h1>
             <div class="section-divider"></div>
             <p class="muted"><em>Last Updated: [Month DD, YYYY]</em></p>
@@ -279,5 +280,19 @@
     </main>
 
     <script src="./index.js"></script>
+    <script>
+      gsap.registerPlugin(ScrollTrigger)
+
+      ScrollTrigger.create({
+        trigger: '.panel',
+        start: 'top top',
+        end: () =>
+          '+=' +
+          document.querySelector('.panel-1 .scrollable-content').scrollHeight,
+        pin: true,
+        scrub: true,
+        markers: false,
+      })
+    </script>
   </body>
 </html>

@@ -117,21 +117,22 @@ document.addEventListener('DOMContentLoaded', () => {
   })
   gsap.registerPlugin(ScrollTrigger)
 
-  // Optional: starting absolute stacked look
-  gsap.set('.card1', { x: -250, y: 120, position: 'absolute' })
-  gsap.set('.card2', { x: -225, y: 100, position: 'absolute' })
-  gsap.set('.card3', { x: -200, y: 80, position: 'absolute' })
+  // gsap.set('.card1', { x: -250, y: 120, position: 'absolute' })
+  // gsap.set('.card2', { x: -225, y: 100, position: 'absolute' })
+  // gsap.set('.card3', { x: -200, y: 80, position: 'absolute' })
 
   // Animate from below upward + fade-in + align into layout
   gsap.fromTo(
     '.ats-card',
     {
-      y: 150, // start below the viewport
-      opacity: 0, // start invisible
-      scale: 0.9, // slightly smaller
+      x: 0,
+      y: 150,
+      opacity: 0,
+      scale: 0.9,
     },
     {
-      y: 0, // move up to natural layout position
+      x: 0,
+      y: 0,
       opacity: 1,
       scale: 1,
       duration: 1.2,
@@ -139,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
       stagger: 0.25,
       scrollTrigger: {
         trigger: '.ats-cards',
-        start: 'top 85%', // start animating when section enters view
+        start: 'top 85%',
         toggleActions: 'play none none reverse',
       },
       onStart: () => {
@@ -193,6 +194,8 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 
   // Horizontal scroll animation for team cards
+  gsap.registerPlugin(ScrollTrigger)
+
   const horizontalSection = document.querySelector('#horizontal-scroll')
   const teamWrapper = document.querySelector('.team-wrapper')
 
@@ -393,7 +396,7 @@ document.addEventListener('DOMContentLoaded', function () {
     loop: true,
     effect: 'slide',
     speed: 800,
-    slidesPerView: 1.2,
+    slidesPerView: 1,
     centeredSlides: true,
     spaceBetween: 30,
     grabCursor: true,

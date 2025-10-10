@@ -185,6 +185,17 @@ section.panel {
   justify-content: center;
   align-items: center;
 }
+.horizontal {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 /* Gradient per section */
 .panel-1 {
   background: url('./images/gradient-bg-image.png') center center;
@@ -448,7 +459,7 @@ section.panel {
   width: 345px;
 }
 /* The magic part — manual diagonal offsets */
-/* .card1 {
+.card1 {
   top: 120px;
   left: -250px;
 }
@@ -459,7 +470,7 @@ section.panel {
 .card3 {
   top: 80px;
   left: -200px;
-} */
+}
 /* Responsive */
 @media (max-width: 900px) {
   .ats-cards {
@@ -478,6 +489,7 @@ section.panel {
   padding: 160px 0;
   width: 100% !important;
   max-width: 100% !important;
+  z-index: 9;
 }
 .teams-scroll-wrapper {
   overflow: visible;

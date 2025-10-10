@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
         start: 'top top',
         end: () => `+=${teamWrapper.scrollWidth + startX}`,
         pin: true,
-        scrub: 1,
+        scrub: true,
         anticipatePin: 1,
         invalidateOnRefresh: true,
         markers: false,
@@ -233,6 +233,26 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   })
   // Vertical Scroll Animation GSAP
+  const panels = gsap.utils.toArray('.panel:not(#teams)')
+
+  ScrollTrigger.create({
+    trigger: '.main-container',
+    start: 'top top',
+    end: () => `+=${panels.length * window.innerHeight}`,
+    snap: 1 / (panels.length - 1),
+    scrub: 1,
+  })
+
+  panels.forEach((panel) => {
+    ScrollTrigger.create({
+      trigger: panel,
+      start: 'top top',
+      end: 'bottom top',
+      pin: true,
+      pinSpacing: false,
+      scrub: true,
+    })
+  })
   // gsap.utils.toArray('.panel').forEach((sections) => {
   //   ScrollTrigger.create({
   //     trigger: sections,
@@ -240,7 +260,8 @@ document.addEventListener('DOMContentLoaded', () => {
   //     end: '+=100vh',
   //     pin: true,
   //     pinSpacing: true,
-  //     srub: 1,
+  //     srub: true,
+  //     markers: true,
   //     snap: {
   //       snapTo: 1 / (gsap.utils.toArray('.panel-container').length - 1),
   //       duration: { min: 0.3, max: 1 },

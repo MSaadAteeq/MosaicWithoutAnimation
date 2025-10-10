@@ -103,18 +103,18 @@ document.addEventListener('DOMContentLoaded', () => {
       toggleActions: 'play none none reverse',
     },
   })
-  gsap.from('.ats-container .ats-cards', {
-    y: 150,
-    opacity: 0,
-    duration: 1,
-    delay: 0.5,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '.panel-2',
-      start: 'top 80%',
-      toggleActions: 'play none none reverse',
-    },
-  })
+  // gsap.from('.ats-container .ats-cards', {
+  //   y: 150,
+  //   opacity: 0,
+  //   duration: 1,
+  //   delay: 0.5,
+  //   ease: 'power3.out',
+  //   scrollTrigger: {
+  //     trigger: '.panel-2',
+  //     start: 'top 80%',
+  //     toggleActions: 'play none none reverse',
+  //   },
+  // })
   gsap.registerPlugin(ScrollTrigger)
 
   // gsap.set('.card1', { x: -250, y: 120, position: 'absolute' })
@@ -392,8 +392,12 @@ window.addEventListener('load', async () => {
 })
 
 document.addEventListener('DOMContentLoaded', function () {
+  const slidesCount = document.querySelectorAll(
+    '.blogSwiper .swiper-slide'
+  ).length
+
   const swiper = new Swiper('.blogSwiper', {
-    loop: true,
+    loop: slidesCount > 2, // enable loop only if more than 2 slides
     effect: 'slide',
     speed: 800,
     slidesPerView: 1.2,
@@ -404,7 +408,6 @@ document.addEventListener('DOMContentLoaded', function () {
       delay: 5000,
       disableOnInteraction: false,
     },
-
     navigation: {
       nextEl: '.blog-button-next',
       prevEl: '.blog-button-prev',

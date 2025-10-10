@@ -31,8 +31,7 @@
         flex-direction: row !important;
         flex-wrap: wrap;
         gap: 60px;
-        width: 100%;
-        height: 100vh;
+        width: auto !important;
         padding-top: 150px;
       }
       .contact-details,
@@ -56,6 +55,8 @@
         background: rgba(255, 255, 255, 0);
         padding: 50px 30px;
         border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
       }
       .form-inputs-container {
         display: flex;
@@ -120,6 +121,7 @@
         display: flex;
         flex-direction: row;
         gap: 10px;
+        margin-bottom: 20px;
       }
       .contact-details .contact-detail .contact-details-CTA li a {
         font-size: 20px;
@@ -137,13 +139,31 @@
       .contact-details .contact-detail-map img {
         width: 100%;
         height: 325px;
+        border-radius: 20px;
+      }
+      @media screen and (max-width: 1200px) {
+        .contact-section {
+          gap: 30px;
+        }
+        .contact-details,
+        .contact-form {
+          width: calc(50% - 15px);
+        }
+      }
+      @media screen and (max-width: 1024px) {
+        .contact-section {
+          flex-direction: column-reverse !important;
+        }
+        .contact-details,
+        .contact-form {
+          width: 100%;
+        }
       }
     </style>
   </head>
   <body>
     <!-- Loader -->
     <div class="loader-overlay">
-      <!-- panels for stagger -->
       <div class="reveal-panels">
         <div class="reveal-panel"></div>
         <div class="reveal-panel"></div>
@@ -183,9 +203,9 @@
         </div>
         <!-- Center: Navigation -->
         <nav class="nav-menu">
-          <a href="#">Team</a>
+          <a href="/teams.html">Team</a>
           <a href="#">Careers</a>
-          <a href="#">News</a>
+          <a href="/news.html">News</a>
         </nav>
         <!-- Right: Button -->
         <div class="connect-btn">
@@ -298,17 +318,19 @@
         </div>
         <div class="footer-inner">
           <div class="footer-left">
-            <img
-              src="./images/footer-site-logo.svg"
-              alt="Mosaic"
-              class="footer-logo"
-            />
+            <a href="/index.html">
+              <img
+                src="./images/footer-site-logo.svg"
+                alt="Mosaic"
+                class="footer-logo"
+              />
+            </a>
           </div>
 
           <nav class="footer-nav">
-            <a href="#">Mosaic</a>
-            <a href="#">Team</a>
-            <a href="#">News</a>
+            <a href="/index.html">Mosaic</a>
+            <a href="/teams.html">Team</a>
+            <a href="/news.html">News</a>
           </nav>
 
           <div class="footer-contact">
@@ -321,7 +343,7 @@
               Floor New York, NY 10014
             </address>
             <a class="footer-link" href="#" target="_blank" rel="noopener"
-              >LinkedIn <img src="images/Vector.svg" alt=""
+              >LinkedIn <img src="./images/linkeding-icon.svg" alt=""
             /></a>
           </div>
         </div>
@@ -329,11 +351,15 @@
         <div class="footer-bottom">
           <ul class="footer-legal">
             <li>© 2025 Mosaic. All Rights Reserved.</li>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms of Use</a></li>
-            <li><a href="#">Disclosure Statements</a></li>
-            <li><a href="#">Site Legal</a></li>
-            <li><a href="#">Compliance Disclaimers</a></li>
+            <li><a href="/privacy.html">Privacy Policy</a></li>
+            <li><a href="/Terms of Use.html">Terms of Use</a></li>
+            <li>
+              <a href="/Disclosure Statements.html">Disclosure Statements</a>
+            </li>
+            <li><a href="/site-legal.html">Site Legal</a></li>
+            <li>
+              <a href="/Compliance Disclaimers.html">Compliance Disclaimers</a>
+            </li>
           </ul>
         </div>
       </section>

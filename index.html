@@ -16,15 +16,6 @@
       rel="stylesheet"
       href="https://unpkg.com/lenis@1.3.11/dist/lenis.css"
     />
-    <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
-    <!-- lenis cdn -->
-    <script src="https://unpkg.com/lenis@1.3.11/dist/lenis.min.js"></script>
-    <!-- gsap -->
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-    <!-- scroll trigger  -->
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js"></script>
 
     <style></style>
   </head>
@@ -71,9 +62,9 @@
         </div>
         <!-- Center: Navigation -->
         <nav class="nav-menu">
-          <a href="#">Team</a>
+          <a href="/teams.html">Team</a>
           <a href="#">Careers</a>
-          <a href="#">News</a>
+          <a href="/news.html">News</a>
         </nav>
         <!-- Right: Button -->
         <div class="connect-btn">
@@ -122,7 +113,7 @@
 
           <div class="ats-cards">
             <div class="ats-card card1">
-              <img src="./images/ats-cards-icon.svg" alt="Icon 1" />
+              <img src="./images/ats-cards-icon-2.svg" alt="Icon 1" />
               <p>
                 New market interaction model powered by first of its kind
                 scoring and rating system MERIT .
@@ -130,7 +121,7 @@
             </div>
 
             <div class="ats-card card2">
-              <img src="./images/ats-cards-icon-2.svg" alt="Icon 2" />
+              <img src="./images/comunity-Icon.svg" alt="Icon 2" />
               <p>
                 Community built for investors, brokers, and risk providers to
                 share value.
@@ -322,6 +313,9 @@
             <img src="./images/arrow-right-icon.svg" alt="arrow-right-icon" />
           </button>
         </div>
+        <div class="center-align-button">
+          <a class="button" href="/news.html">View All News</a>
+        </div>
       </section>
       <section class="panel panel-5">
         <!-- GLOW + GRID OVERLAY -->
@@ -380,6 +374,15 @@
     </main>
 
     <script src="./index.js"></script>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+    <!-- lenis cdn -->
+    <script src="https://unpkg.com/lenis@1.3.11/dist/lenis.min.js"></script>
+    <!-- gsap -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <!-- scroll trigger  -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js"></script>
 
     <script>
       // Initialize a new Lenis instance for smooth scrolling
@@ -397,6 +400,7 @@
       // Disable lag smoothing in GSAP to prevent any delay in scroll animations
       gsap.ticker.lagSmoothing(0)
     </script>
+    <!-- Team Data -->
     <script>
       // === TEAM DATA ===
       const teamMembers = [

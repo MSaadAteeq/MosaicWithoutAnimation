@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
       toggleActions: 'play none none reverse',
     },
   })
-  gsap.from('.ats-container .ats-subtitle', {
+  gsap.from('.ats-container .ats-plat', {
     y: 120,
     opacity: 0,
     duration: 1,
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
       toggleActions: 'play none none reverse',
     },
   })
-  gsap.from('.ats-container .ats-subdescription', {
+  gsap.from('.ats-container .ats-cards', {
     y: 150,
     opacity: 0,
     duration: 1,
@@ -122,37 +122,37 @@ document.addEventListener('DOMContentLoaded', () => {
   // gsap.set('.card3', { x: -200, y: 80, position: 'absolute' })
 
   // Animate from below upward + fade-in + align into layout
-  gsap.fromTo(
-    '.ats-card',
-    {
-      x: 0,
-      y: 150,
-      opacity: 0,
-      scale: 0.9,
-    },
-    {
-      x: 0,
-      y: 0,
-      opacity: 1,
-      scale: 1,
-      duration: 1.2,
-      ease: 'power3.out',
-      stagger: 0.25,
-      scrollTrigger: {
-        trigger: '.ats-cards',
-        start: 'top 85%',
-        toggleActions: 'play none none reverse',
-      },
-      onStart: () => {
-        // Keep the absolute look at the start
-        gsap.set('.ats-card', { position: 'absolute' })
-      },
-      onComplete: () => {
-        // Reset position for natural flex layout
-        gsap.set('.ats-card', { clearProps: 'position,top,left,transform' })
-      },
-    }
-  )
+  // gsap.fromTo(
+  //   '.ats-card',
+  //   {
+  //     x: 0,
+  //     y: 150,
+  //     opacity: 0,
+  //     scale: 0.9,
+  //   },
+  //   {
+  //     x: 0,
+  //     y: 0,
+  //     opacity: 1,
+  //     scale: 1,
+  //     duration: 1.2,
+  //     ease: 'power3.out',
+  //     stagger: 0.25,
+  //     scrollTrigger: {
+  //       trigger: '.ats-cards',
+  //       start: 'top 85%',
+  //       toggleActions: 'play none none reverse',
+  //     },
+  //     onStart: () => {
+  //       // Keep the absolute look at the start
+  //       gsap.set('.ats-card', { position: 'absolute' })
+  //     },
+  //     onComplete: () => {
+  //       // Reset position for natural flex layout
+  //       gsap.set('.ats-card', { clearProps: 'position,top,left,transform' })
+  //     },
+  //   }
+  // )
 
   // Animation for Platform Panel-3
   gsap.from('.teams-header .teams-title', {
@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
   })
 
-  gsap.from('.teams-header .teams-footer', {
+  gsap.from('.teams-scroll-wrapper .team-footer', {
     y: 150,
     opacity: 0,
     duration: 1,
@@ -236,12 +236,12 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   })
   // Vertical Scroll Animation GSAP
-  const panels = gsap.utils.toArray('.panel')
+  const panels = gsap.utils.toArray('section')
 
   // Pin each section vertically
   panels.forEach((panel) => {
     // Skip horizontal one, it’s already pinned via timeline
-    if (panel.id === 'teams') return
+    if (panel.id === 'horizontal-scroll') return
 
     ScrollTrigger.create({
       trigger: panel,
@@ -256,7 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Optional smooth snap between vertical sections
   ScrollTrigger.create({
-    trigger: '.main-container',
+    trigger: 'main',
     start: 'top top',
     end: () => `+=${(panels.length - 1) * window.innerHeight}`,
     snap: {
@@ -396,7 +396,7 @@ document.addEventListener('DOMContentLoaded', function () {
     loop: true,
     effect: 'slide',
     speed: 800,
-    slidesPerView: 1,
+    slidesPerView: 1.2,
     centeredSlides: true,
     spaceBetween: 30,
     grabCursor: true,

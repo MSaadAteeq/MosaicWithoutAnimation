@@ -184,6 +184,8 @@ section.panel {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  margin: 0 auto;
 }
 .horizontal {
   position: relative;
@@ -222,6 +224,7 @@ section.panel {
   background: url('./images/gradient-bg-image.png') center center;
   background-repeat: no-repeat;
   background-size: cover;
+  gap: 171px;
 }
 .panel-6 {
   background: linear-gradient(135deg, #00b09b, #96c93d);
@@ -889,7 +892,6 @@ section.panel {
   gap: 20px;
   width: 100%;
   max-width: 1600px;
-  margin-top: auto;
   z-index: 5;
 }
 .footer-logo {
@@ -933,10 +935,8 @@ section.panel {
 }
 
 .footer-bottom {
-  margin: 30px auto 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-  padding-top: 12px;
-  margin-top: auto;
+  margin: 0 auto;
+  /* border-top: 1px solid rgba(255, 255, 255, 0.12); */
   z-index: 5;
 }
 .footer-legal {
@@ -944,7 +944,8 @@ section.panel {
   justify-content: center;
   flex-wrap: wrap;
   gap: 18px;
-  font-size: 12px;
+  font-size: 16px;
+  line-height: 1.2em;
 }
 .footer-legal li {
   list-style: none;

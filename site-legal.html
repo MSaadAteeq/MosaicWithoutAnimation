@@ -8,64 +8,58 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <style>
-       
-.disclosure-content {
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: 140px 24px 160px;
-  position: relative;
-  z-index: 2;
-}
+      .disclosure-content {
+        padding: 250px 0px 0px;
+      }
 
-.disclosure-wrapper {
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 32px 40px 40px;
-}
+      .disclosure-wrapper {
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 32px 40px 40px;
+      }
 
-h1 {
-  font-family: 'Armstrong', sans-serif;
-  font-size: 44px;
-  line-height: 1.1;
-  margin: 0 0 10px 0;
-  color: #ffffff;
-}
+      h1 {
+        font-family: 'Armstrong', sans-serif;
+        font-size: 44px;
+        line-height: 1.1;
+        margin: 0 0 10px 0;
+        color: #ffffff;
+      }
 
-.section-divider {
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.1),
-    rgba(255, 255, 255, 0.25),
-    rgba(255, 255, 255, 0.1)
-  );
-  margin: 20px 0;
-}
+      .section-divider {
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.1),
+          rgba(255, 255, 255, 0.25),
+          rgba(255, 255, 255, 0.1)
+        );
+        margin: 20px 0;
+      }
 
-p {
-  font-size: 15px;
-  line-height: 1.9;
-  color: rgba(255, 255, 255, 0.9);
-  margin: 8px 0 14px;
-}
+      p {
+        font-size: 15px;
+        line-height: 1.9;
+        color: rgba(255, 255, 255, 0.9);
+        margin: 8px 0 14px;
+      }
 
-h2 {
-  font-size: 20px;
-  font-weight: 700;
-  color: #ffffff;
-  margin-bottom: 18px;
-  margin-top: 60px;
-  line-height: 1.4;
-}
+      h2 {
+        font-size: 20px;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 18px;
+        margin-top: 60px;
+        line-height: 1.4;
+      }
 
-.disclosure-section {
-  margin-bottom: 60px;
-}
+      .disclosure-section {
+        margin-bottom: 60px;
+      }
 
-.muted {
-  color: rgba(255, 255, 255, 0.6);
-}
-
+      .muted {
+        color: rgba(255, 255, 255, 0.6);
+      }
     </style>
   </head>
   <body class="privacy-page">
@@ -81,9 +75,17 @@ h2 {
       </div>
       <div class="logo-stage">
         <div class="logo">
-          <img src="./images/mos-icon.svg" alt="MOS Icon" class="icon" />
+          <img
+            src="./images/IntroLogo-Loader.svg"
+            alt="MOS Icon"
+            class="icon"
+          />
           <span class="logowrap">
-            <img src="./images/mos-logo.svg" alt="MOS Logo" class="wordmark" />
+            <img
+              src="./images/IntroLogo-Loader-horizontal.svg"
+              alt="MOS Logo"
+              class="wordmark"
+            />
           </span>
         </div>
       </div>
@@ -93,7 +95,13 @@ h2 {
       <div class="header-container">
         <!-- Left: Logo -->
         <div class="logo">
-          <img src="./images/logo.svg" class="mosaic-logo" alt="Mosaic Logo" />
+          <a href="index.html">
+            <img
+              src="./images/site-logo-header.svg"
+              class="mosaic-logo"
+              alt="Mosaic Logo"
+            />
+          </a>
         </div>
         <!-- Center: Navigation -->
         <nav class="nav-menu">
@@ -103,66 +111,122 @@ h2 {
         </nav>
         <!-- Right: Button -->
         <div class="connect-btn">
-          <a href="#">Connect</a>
+          <a href="/contact.html">Connect</a>
         </div>
       </div>
     </header>
 
     <!-- main sections -->
-    <main>
+    <main class="panels main-container">
       <section class="panel panel-1">
         <!-- GLOW + GRID OVERLAY -->
 
         <div class="container-overlay">
-          <div id="hex-grid">
+          <div class="hex-grid">
             <div class="light"></div>
             <div class="grid"></div>
           </div>
         </div>
 
         <!-- Page Content -->
-        <div class="content disclosure-content">
-            <div class="disclosure-wrapper">
-              <h1>Site Legal</h1>
-              <div class="section-divider"></div>
-              <p class="muted"><em>Effective Date: [Month DD, YYYY]</em></p>
-        
+        <div class="content disclosure-content panel-container">
+          <div class="disclosure-wrapper">
+            <h1>Site Legal</h1>
+            <div class="section-divider"></div>
+            <p class="muted"><em>Effective Date: [Month DD, YYYY]</em></p>
+
+            <p>
+              This website [yourdomain.com] is operated by [Your Company Name],
+              located at [Business Address or City, Country]. By accessing this
+              site, you acknowledge and agree that all legal matters will be
+              governed by the laws of [Your Jurisdiction].
+            </p>
+
+            <!-- Section 1 -->
+            <div class="disclosure-section">
+              <h2>Copyright Notice</h2>
               <p>
-                This website [yourdomain.com] is operated by [Your Company Name], located at [Business Address or City, Country]. By accessing this site, you acknowledge and agree that all legal matters will be governed by the laws of [Your Jurisdiction].
+                All site content—including text, graphics, logos, and design—is
+                the intellectual property of [Your Company Name] unless
+                otherwise stated.
               </p>
-        
-              <!-- Section 1 -->
-              <div class="disclosure-section">
-                <h2>Copyright Notice</h2>
-                <p>
-                    All site content—including text, graphics, logos, and design—is the intellectual property of [Your Company Name] unless otherwise stated.
-                </p>
-              </div>
-        
-              <!-- Section 2 -->
-              <div class="disclosure-section">
-                <h2>Legal Use</h2>
-                <p>
-                    Unauthorized reproduction or redistribution of materials on this site may violate copyright, trademark, and other laws.
-                </p>
-              </div>
-        
-              <!-- Section 3 -->
-              <div class="disclosure-section">
-                <h2>Legal Contact</h2>
-                <p>
-                    For any legal concerns, please contact [legal@yourdomain.com]
-                </p>
-              </div>
+            </div>
+
+            <!-- Section 2 -->
+            <div class="disclosure-section">
+              <h2>Legal Use</h2>
+              <p>
+                Unauthorized reproduction or redistribution of materials on this
+                site may violate copyright, trademark, and other laws.
+              </p>
+            </div>
+
+            <!-- Section 3 -->
+            <div class="disclosure-section">
+              <h2>Legal Contact</h2>
+              <p>
+                For any legal concerns, please contact [legal@yourdomain.com]
+              </p>
             </div>
           </div>
-          
-       
+        </div>
       </section>
-    
+      <section class="panel panel-5">
+        <!-- GLOW + GRID OVERLAY -->
+
+        <div class="container-overlay">
+          <div class="hex-grid">
+            <div class="light"></div>
+            <div class="grid"></div>
+          </div>
+        </div>
+        <div class="footer-inner">
+          <div class="footer-left">
+            <img
+              src="./images/footer-site-logo.svg"
+              alt="Mosaic"
+              class="footer-logo"
+            />
+          </div>
+
+          <nav class="footer-nav">
+            <a href="#">Mosaic</a>
+            <a href="#">Team</a>
+            <a href="#">News</a>
+          </nav>
+
+          <div class="footer-contact">
+            <h4>Connect</h4>
+            <a href="tel:+1234567890">+1 2345 67890</a>
+            <a href="mailto:info@mosaicats.com">info@mosaicats.com</a>
+            <address>
+              Mosaic Platforms, Inc.<br />
+              875 Washington Street, 4th<br />
+              Floor New York, NY 10014
+            </address>
+            <a class="footer-link" href="#" target="_blank" rel="noopener"
+              >LinkedIn <img src="./images/linkeding-icon.svg" alt=""
+            /></a>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <ul class="footer-legal">
+            <li>© 2025 Mosaic. All Rights Reserved.</li>
+            <li><a href="/privacy.html">Privacy Policy</a></li>
+            <li><a href="/Terms of Use.html">Terms of Use</a></li>
+            <li>
+              <a href="/Disclosure Statements.html">Disclosure Statements</a>
+            </li>
+            <li><a href="/site-legal.html">Site Legal</a></li>
+            <li>
+              <a href="/Compliance Disclaimers.html">Compliance Disclaimers</a>
+            </li>
+          </ul>
+        </div>
+      </section>
     </main>
 
-   
     <script src="./index.js"></script>
   </body>
 </html>

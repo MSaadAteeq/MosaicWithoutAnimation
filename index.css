@@ -143,7 +143,6 @@ body.loaded .mosaic-header .nav-menu {
 .hero-section video {
   opacity: 0;
   transform: translateY(450px) scale(0.2);
-  width: 100%;
   max-width: 1600px;
   margin: 0 auto;
   height: 720px;

@@ -233,25 +233,35 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   })
   // Vertical Scroll Animation GSAP
-  const panels = gsap.utils.toArray('.panel:not(#teams)')
+  const panels = gsap.utils.toArray('.panel')
 
-  ScrollTrigger.create({
-    trigger: '.main-container',
-    start: 'top top',
-    end: () => `+=${panels.length * window.innerHeight}`,
-    snap: 1 / (panels.length - 1),
-    scrub: 1,
-  })
-
+  // Pin each section vertically
   panels.forEach((panel) => {
+    // Skip horizontal one, it’s already pinned via timeline
+    if (panel.id === 'teams') return
+
     ScrollTrigger.create({
       trigger: panel,
       start: 'top top',
       end: 'bottom top',
       pin: true,
-      pinSpacing: false,
       scrub: true,
+      pinSpacing: false,
+      anticipatePin: 1,
     })
+  })
+
+  // Optional smooth snap between vertical sections
+  ScrollTrigger.create({
+    trigger: '.main-container',
+    start: 'top top',
+    end: () => `+=${(panels.length - 1) * window.innerHeight}`,
+    snap: {
+      snapTo: 1 / (panels.length - 1),
+      duration: { min: 0.3, max: 0.8 },
+      ease: 'power1.inOut',
+    },
+    scrub: 1,
   })
   // gsap.utils.toArray('.panel').forEach((sections) => {
   //   ScrollTrigger.create({

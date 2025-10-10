@@ -63,18 +63,18 @@ animateGlow()
 // === GSAP ScrollTrigger for Section Transitions ===
 gsap.registerPlugin(ScrollTrigger)
 
-gsap.utils.toArray('.content h2').forEach((heading) => {
-  gsap.from(heading, {
-    y: 80,
-    opacity: 0,
-    duration: 1,
-    scrollTrigger: {
-      trigger: heading,
-      start: 'top 80%',
-      toggleActions: 'play none none reverse',
-    },
-  })
-})
+// gsap.utils.toArray('.content h2').forEach((heading) => {
+//   gsap.from(heading, {
+//     y: 80,
+//     opacity: 0,
+//     duration: 1,
+//     scrollTrigger: {
+//       trigger: heading,
+//       start: 'top 80%',
+//       toggleActions: 'play none none reverse',
+//     },
+//   })
+// })
 /* ---------------------- Loader Animation ---------------------- */
 window.addEventListener('load', async () => {
   const loader = document.querySelector('.loader-overlay')

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mosaic</title>
+    <link rel="stylesheet" href="./index.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        .privacy-content {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 140px 24px 160px;
+  color: #eaeef9;
+  position: relative;
+  z-index: 2;
+}
+
+.privacy-content .privacy-wrapper {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 32px 40px 40px;
+}
+
+.privacy-content h1 {
+  font-family: 'Armstrong', sans-serif;
+  font-size: 44px;
+  line-height: 1.1;
+  margin: 0 0 10px 0;
+  color: #ffffff;
+}
+
+.privacy-content .section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.1), rgba(255,255,255,0.25), rgba(255,255,255,0.1));
+  margin: 20px 0;
+}
+
+.privacy-content p,
+.privacy-content li {
+  font-size: 15px;
+  line-height: 1.9;
+  color: rgba(255,255,255,0.9);
+}
+
+.privacy-content h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 18px;
+  margin-top: 60px;
+  line-height: 1.4;
+}
+
+.privacy-content ul {
+  margin: 8px 0 14px 20px;
+  padding: 0;
+}
+
+.privacy-content li {
+  list-style: disc;
+  margin: 6px 0;
+}
+
+/* Add spacing between sections */
+.privacy-section {
+  margin-bottom: 0px;
+}
+
+    </style>
+  </head>
+  <body class="privacy-page">
+    <!-- Loader -->
+    <div class="loader-overlay">
+      <!-- panels for stagger -->
+      <div class="reveal-panels">
+        <div class="reveal-panel"></div>
+        <div class="reveal-panel"></div>
+        <div class="reveal-panel"></div>
+        <div class="reveal-panel"></div>
+        <div class="reveal-panel"></div>
+      </div>
+      <div class="logo-stage">
+        <div class="logo">
+          <img src="./images/mos-icon.svg" alt="MOS Icon" class="icon" />
+          <span class="logowrap">
+            <img src="./images/mos-logo.svg" alt="MOS Logo" class="wordmark" />
+          </span>
+        </div>
+      </div>
+    </div>
+    <!-- Header Section -->
+    <header class="mosaic-header">
+      <div class="header-container">
+        <!-- Left: Logo -->
+        <div class="logo">
+          <img src="./images/logo.svg" class="mosaic-logo" alt="Mosaic Logo" />
+        </div>
+        <!-- Center: Navigation -->
+        <nav class="nav-menu">
+          <a href="#">Team</a>
+          <a href="#">Careers</a>
+          <a href="#">News</a>
+        </nav>
+        <!-- Right: Button -->
+        <div class="connect-btn">
+          <a href="#">Connect</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- main sections -->
+    <main>
+      <section class="panel panel-1">
+        <!-- GLOW + GRID OVERLAY -->
+
+        <div class="container-overlay">
+          <div id="hex-grid">
+            <div class="light"></div>
+            <div class="grid"></div>
+          </div>
+        </div>
+
+        <!-- Page Content -->
+        <div class="content privacy-content">
+            <div class="privacy-wrapper">
+              <h1>Terms of Use</h1>
+              <div class="section-divider"></div>
+              <p class="muted"><em>Effective Date: [Month DD, YYYY]</em></p>
+              <p>
+                Welcome to [Your Company Name]. By accessing or using this website, you agree to the following terms and conditions.
+              </p>
+          
+              <!-- Section 1 -->
+              <div class="privacy-section">
+                <h2>Use of Site</h2>
+                <p>You agree to use this site for lawful purposes only and not to violate any applicable local, national, or international laws.</p>
+              </div>
+          
+              <!-- Section 2 -->
+              <div class="privacy-section">
+                <h2>Intellectual Property</h2>
+               <p>All content, trademarks, logos, and materials are owned or licensed by [Your Company Name]. Unauthorized use is strictly prohibited.</p>
+              </div>
+          
+              <!-- Section 3 -->
+              <div class="privacy-section">
+                <h2>User Conduct</h2>
+                <p>
+                    Users must not attempt to disrupt or interfere with the website’s security, functionality, or servers.
+                </p>
+              </div>
+          
+              <!-- Section 4 -->
+              <div class="privacy-section">
+                <h2>Limitation of Liability</h2>
+                <p>
+                    [Your Company Name] is not responsible for any direct, indirect, or consequential damages resulting from the use or inability to use this website.
+              </div>
+          
+              <!-- Section 5 -->
+              <div class="privacy-section">
+                <h2>Modifications</h2>
+                <p>
+                    We reserve the right to update or modify these Terms at any time. Changes take effect immediately upon posting.
+                </p>
+              </div>
+          
+
+            </div>
+          </div>
+          
+       
+      </section>
+    
+    </main>
+
+   
+    <script src="./index.js"></script>
+  </body>
+</html>

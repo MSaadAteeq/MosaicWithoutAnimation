@@ -162,7 +162,7 @@ body.loaded .hero-section video {
 /* Each section fills viewport */
 section.panel {
   position: relative;
-  height: 100vh;
+  /* height: 100vh; */
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -204,6 +204,8 @@ section.panel {
   position: absolute;
   top: 0;
   left: 0;
+  pointer-events: none;
+  z-index: 0;
 }
 #hex-grid {
   height: 100vh;
@@ -330,3 +332,4 @@ section.panel {
     gap: 10px;
   }
 }
+

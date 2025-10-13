@@ -8,6 +8,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <style>
+      .panel .panel-container {
+        align-items: flex-start !important;
+      }
       .disclosure-content {
         max-width: 1600px;
         margin: 0 auto;
@@ -17,9 +20,7 @@
       }
 
       .disclosure-wrapper {
-        max-width: 100%;
-        margin: 0 auto;
-        padding: 250px 0px 0px;
+        width: 100%;
       }
 
       h1 {
@@ -64,6 +65,11 @@
       .muted {
         color: rgba(255, 255, 255, 0.6);
       }
+      @media screen and (max-width: 990px) {
+        .disclosure-wrapper {
+          padding: 0 30px;
+        }
+      }
     </style>
   </head>
   <body class="privacy-page">
@@ -107,6 +113,12 @@
             />
           </a>
         </div>
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
         <!-- Center: Navigation -->
         <nav class="nav-menu">
           <a href="/teams.html">Team</a>
@@ -115,8 +127,17 @@
         </nav>
         <!-- Right: Button -->
         <div class="connect-btn">
-          <a href="/contact.html">Connect</a>
+          <a href="contact.html">Connect</a>
         </div>
+      </div>
+      <!-- Mobile Navigation Overlay -->
+      <div class="mobile-nav-overlay">
+        <nav class="mobile-nav-menu">
+          <a href="/teams.html">Team</a>
+          <a href="#">Careers</a>
+          <a href="/news.html">News</a>
+          <a href="contact.html" class="mobile-connect-btn">Connect</a>
+        </nav>
       </div>
     </header>
 

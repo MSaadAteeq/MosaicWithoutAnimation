@@ -9,12 +9,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <style>
       .privacy-content {
-        padding: 250px 0px 0px;
+        padding: 160px 0px 0px;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
       }
       .privacy-wrapper {
-        margin: 0 auto;
-
-        /* padding: 250px 0px 0px; */
+        width: 100%;
       }
 
       .privacy-content h1 {
@@ -66,6 +66,11 @@
       .privacy-section {
         margin-bottom: 0px;
       }
+      @media screen and (max-width: 991px) {
+        .privacy-wrapper {
+          padding: 0px 30px;
+        }
+      }
     </style>
   </head>
   <body class="privacy-page">
@@ -101,13 +106,20 @@
       <div class="header-container">
         <!-- Left: Logo -->
         <div class="logo">
-          <a href="/index.html">
+          <a href="index.html">
             <img
               src="./images/site-logo-header.svg"
               class="mosaic-logo"
               alt="Mosaic Logo"
-          /></a>
+            />
+          </a>
         </div>
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
         <!-- Center: Navigation -->
         <nav class="nav-menu">
           <a href="/teams.html">Team</a>
@@ -116,8 +128,17 @@
         </nav>
         <!-- Right: Button -->
         <div class="connect-btn">
-          <a href="/contact.html">Connect</a>
+          <a href="contact.html">Connect</a>
         </div>
+      </div>
+      <!-- Mobile Navigation Overlay -->
+      <div class="mobile-nav-overlay">
+        <nav class="mobile-nav-menu">
+          <a href="/teams.html">Team</a>
+          <a href="#">Careers</a>
+          <a href="/news.html">News</a>
+          <a href="contact.html" class="mobile-connect-btn">Connect</a>
+        </nav>
       </div>
     </header>
 

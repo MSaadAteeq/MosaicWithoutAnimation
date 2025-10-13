@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
     duration: 1,
     ease: 'power3.out',
     scrollTrigger: {
-      trigger: '.panel-2',
+      trigger: '.panel',
       start: 'top 80%',
       toggleActions: 'play none none reverse',
     },
@@ -86,16 +86,28 @@ document.addEventListener('DOMContentLoaded', () => {
     delay: 0.2,
     ease: 'power3.out',
     scrollTrigger: {
-      trigger: '.panel-2',
+      trigger: '.panel',
       start: 'top 80%',
       toggleActions: 'play none none reverse',
     },
   })
   gsap.from('.ats-container .ats-plat', {
     y: 120,
-    opacity: 0,
+    opacity: 1,
     duration: 1,
     delay: 0.3,
+    ease: 'power3.out',
+    scrollTrigger: {
+      trigger: '.panel',
+      start: 'top 80%',
+      toggleActions: 'play none none reverse',
+    },
+  })
+  gsap.from('.ats-container .ats-cards', {
+    y: 150,
+    opacity: 0,
+    duration: 1,
+    delay: 0.5,
     ease: 'power3.out',
     scrollTrigger: {
       trigger: '.panel-2',
@@ -103,18 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
       toggleActions: 'play none none reverse',
     },
   })
-  // gsap.from('.ats-container .ats-cards', {
-  //   y: 150,
-  //   opacity: 0,
-  //   duration: 1,
-  //   delay: 0.5,
-  //   ease: 'power3.out',
-  //   scrollTrigger: {
-  //     trigger: '.panel-2',
-  //     start: 'top 80%',
-  //     toggleActions: 'play none none reverse',
-  //   },
-  // })
   gsap.registerPlugin(ScrollTrigger)
 
   // gsap.set('.card1', { x: -250, y: 120, position: 'absolute' })
@@ -155,43 +155,43 @@ document.addEventListener('DOMContentLoaded', () => {
   // )
 
   // Animation for Platform Panel-3
-  gsap.from('.teams-header .teams-title', {
-    y: 100,
-    opacity: 0,
-    duration: 1,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '.panel-2',
-      start: 'top 80%',
-      toggleActions: 'play none none reverse',
-    },
-  })
+  // gsap.from('.teams-header .teams-title', {
+  //   y: 100,
+  //   opacity: 0,
+  //   duration: 1,
+  //   ease: 'power3.out',
+  //   scrollTrigger: {
+  //     trigger: '.panel',
+  //     start: 'top 80%',
+  //     toggleActions: 'play none none reverse',
+  //   },
+  // })
 
-  gsap.from('.teams-header .teams-description', {
-    y: 150,
-    opacity: 0,
-    duration: 1,
-    delay: 0.2,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '.panel-2',
-      start: 'top 80%',
-      toggleActions: 'play none none reverse',
-    },
-  })
+  // gsap.from('.teams-header .teams-description', {
+  //   y: 150,
+  //   opacity: 0,
+  //   duration: 1,
+  //   delay: 0.2,
+  //   ease: 'power3.out',
+  //   scrollTrigger: {
+  //     trigger: '.panel',
+  //     start: 'top 80%',
+  //     toggleActions: 'play none none reverse',
+  //   },
+  // })
 
-  gsap.from('.teams-scroll-wrapper .team-footer', {
-    y: 150,
-    opacity: 0,
-    duration: 1,
-    delay: 1,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '.panel-2',
-      start: 'top 80%',
-      toggleActions: 'play none none reverse',
-    },
-  })
+  // gsap.from('.teams-scroll-wrapper .team-footer', {
+  //   y: 150,
+  //   opacity: 0,
+  //   duration: 1,
+  //   delay: 1,
+  //   ease: 'power3.out',
+  //   scrollTrigger: {
+  //     trigger: '.panel',
+  //     start: 'top 80%',
+  //     toggleActions: 'play none none reverse',
+  //   },
+  // })
 
   // Horizontal scroll animation for team cards
   gsap.registerPlugin(ScrollTrigger)
@@ -226,11 +226,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Teams inner cards
   document.querySelectorAll('.team-card').forEach((cards) => {
     gsap.from(cards, {
-      x: 250,
+      x: 0,
       duration: 0.6,
       scrollTrigger: {
         trigger: cards,
-        start: 'top bottom',
         toggleActions: 'play none none reverse',
       },
     })
@@ -439,7 +438,7 @@ document.addEventListener('DOMContentLoaded', function () {
     mobileMenuToggle.addEventListener('click', function () {
       mobileMenuToggle.classList.toggle('active')
       mobileNavOverlay.classList.toggle('active')
-      
+
       // Prevent body scroll when menu is open
       if (mobileNavOverlay.classList.contains('active')) {
         document.body.style.overflow = 'hidden'
@@ -449,7 +448,7 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 
     // Close menu when clicking on nav links
-    mobileNavLinks.forEach(link => {
+    mobileNavLinks.forEach((link) => {
       link.addEventListener('click', function () {
         mobileMenuToggle.classList.remove('active')
         mobileNavOverlay.classList.remove('active')

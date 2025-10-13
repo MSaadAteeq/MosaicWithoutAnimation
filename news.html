@@ -109,7 +109,11 @@
       }
 
       /* --- Responsive --- */
-      @media (max-width: 900px) {
+      @media (max-width: 991px) {
+        .news-card a {
+          flex-direction: column;
+          height: 100%;
+        }
         .news-card {
           flex-direction: column;
           align-items: center;
@@ -174,6 +178,12 @@
             />
           </a>
         </div>
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
         <!-- Center: Navigation -->
         <nav class="nav-menu">
           <a href="/teams.html">Team</a>
@@ -182,8 +192,17 @@
         </nav>
         <!-- Right: Button -->
         <div class="connect-btn">
-          <a href="/contact.html">Connect</a>
+          <a href="contact.html">Connect</a>
         </div>
+      </div>
+      <!-- Mobile Navigation Overlay -->
+      <div class="mobile-nav-overlay">
+        <nav class="mobile-nav-menu">
+          <a href="/teams.html">Team</a>
+          <a href="#">Careers</a>
+          <a href="/news.html">News</a>
+          <a href="contact.html" class="mobile-connect-btn">Connect</a>
+        </nav>
       </div>
     </header>
 

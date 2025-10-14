@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
       trigger: 'main',
       start: 'top 50%',
       end: 'bottom 80%',
-      markers: true,
+      // markers: true,
       onUpdate: (self) => {
         clearTimeout(scrollTimeout)
         scrollTimeout = setTimeout(() => {
@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function () {
           scrub: true,
           anticipatePin: 1,
           invalidateOnRefresh: true,
-          markers: true,
+          // markers: true,
         },
       }
     )

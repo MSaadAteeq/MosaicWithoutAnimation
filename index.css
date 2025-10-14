@@ -316,7 +316,6 @@ body.loaded .mosaic-header .nav-menu {
   transform: translateY(450px) scale(0.2);
   max-width: 1600px;
   margin: 0 auto;
-  height: 720px;
   display: block;
   transform-origin: bottom center;
   transition: opacity 1s ease, transform 1s ease;
@@ -340,6 +339,7 @@ section.panel {
   overflow: hidden;
   color: #fff;
   min-height: 100vh;
+  height: 100vh;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -360,13 +360,14 @@ section.panel {
   align-items: center;
   width: 100%;
   margin: 0 auto;
+  padding: 160px 10px;
 }
 .horizontal {
   position: relative;
   overflow: hidden;
   color: #fff;
   height: 100vh;
-  width: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -376,6 +377,7 @@ section.panel {
   overflow: hidden;
   position: relative;
   height: 100vh;
+  min-height: 100vh;
 }
 
 /* Gradient per section */
@@ -1176,16 +1178,15 @@ section.panel {
 /* ========================================
    RESPONSIVE DESIGN - MOBILE FIRST
    ======================================== */
-
+@media (min-width: 1440px) {
+  .hero-section video {
+    height: 720px !important;
+  }
+}
 /* Large Screens (1200px+) */
 @media (min-width: 1200px) {
-  .ats-title,
-  .teams-title,
-  .news-title {
-    font-size: 90px;
-  }
   .hero-section video {
-    height: 800px;
+    height: 520px;
   }
 }
 

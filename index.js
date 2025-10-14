@@ -199,29 +199,33 @@ document.addEventListener('DOMContentLoaded', () => {
   const horizontalSection = document.querySelector('#horizontal-scroll')
   const teamWrapper = document.querySelector('.team-wrapper')
 
-  // Calculate the starting position (center of viewport minus header)
-  const startX = (window.innerWidth - 600) / 2 // 600 is header width
-
-  gsap.fromTo(
-    teamWrapper,
-    {
-      x: startX, // Start from center
-    },
-    {
-      x: () => -(teamWrapper.scrollWidth - window.innerWidth + 600),
-      ease: 'none',
-      scrollTrigger: {
-        trigger: horizontalSection,
-        start: 'top top',
-        end: () => `+=${teamWrapper.scrollWidth + startX}`,
-        pin: true,
-        scrub: true,
-        anticipatePin: 1,
-        invalidateOnRefresh: true,
-        markers: false,
-      },
+  if (horizontalSection && teamWrapper) {
+    // Calculate scroll distance
+    const getScrollAmount = () => {
+      return -(teamWrapper.scrollWidth - window.innerWidth + 100)
     }
-  )
+
+    gsap.fromTo(
+      teamWrapper,
+      {
+        x: 50,
+      },
+      {
+        x: getScrollAmount,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: horizontalSection,
+          start: 'top top', // Start when panel-3 reaches top
+          end: () => `+=${teamWrapper.scrollWidth * 1.2}`, // Adjust scroll distance
+          pin: true,
+          scrub: 1,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          markers: true, // Remove this in production
+        },
+      }
+    )
+  }
 
   // Teams inner cards
   document.querySelectorAll('.team-card').forEach((cards) => {
@@ -262,6 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
       snapTo: 1 / (panels.length - 1),
       duration: { min: 0.3, max: 0.8 },
       ease: 'power1.inOut',
+      delay: 0.1,
     },
     scrub: 1,
   })

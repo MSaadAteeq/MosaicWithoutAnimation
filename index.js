@@ -61,234 +61,152 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 })
 
-// Horizontall Scroll Animation GSAP
-document.addEventListener('DOMContentLoaded', () => {
-  gsap.registerPlugin(ScrollTrigger)
-  ScrollTrigger.normalizeScroll(true)
+// Scroll Animations GSAP
+document.addEventListener('DOMContentLoaded', function () {
+  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
-  // Animation for Platform Panel-2
-  gsap.from('.ats-container .ats-title', {
-    y: 100,
-    opacity: 0,
-    duration: 1,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '.panel',
-      start: 'top 80%',
-      toggleActions: 'play none none reverse',
-    },
-  })
-
-  gsap.from('.ats-container .ats-description', {
-    y: 150,
-    opacity: 0,
-    duration: 1,
-    delay: 0.2,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '.panel',
-      start: 'top 80%',
-      toggleActions: 'play none none reverse',
-    },
-  })
-  gsap.from('.ats-container .ats-plat', {
-    y: 120,
-    opacity: 1,
-    duration: 1,
-    delay: 0.3,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '.panel',
-      start: 'top 80%',
-      toggleActions: 'play none none reverse',
-    },
-  })
-  gsap.from('.ats-container .ats-cards', {
-    y: 150,
-    opacity: 0,
-    duration: 1,
-    delay: 0.5,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '.panel-2',
-      start: 'top 80%',
-      toggleActions: 'play none none reverse',
-    },
-  })
-  gsap.registerPlugin(ScrollTrigger)
-
-  // gsap.set('.card1', { x: -250, y: 120, position: 'absolute' })
-  // gsap.set('.card2', { x: -225, y: 100, position: 'absolute' })
-  // gsap.set('.card3', { x: -200, y: 80, position: 'absolute' })
-
-  // Animate from below upward + fade-in + align into layout
-  // gsap.fromTo(
-  //   '.ats-card',
-  //   {
-  //     x: 0,
-  //     y: 150,
-  //     opacity: 0,
-  //     scale: 0.9,
-  //   },
-  //   {
-  //     x: 0,
-  //     y: 0,
-  //     opacity: 1,
-  //     scale: 1,
-  //     duration: 1.2,
-  //     ease: 'power3.out',
-  //     stagger: 0.25,
-  //     scrollTrigger: {
-  //       trigger: '.ats-cards',
-  //       start: 'top 85%',
-  //       toggleActions: 'play none none reverse',
-  //     },
-  //     onStart: () => {
-  //       // Keep the absolute look at the start
-  //       gsap.set('.ats-card', { position: 'absolute' })
-  //     },
-  //     onComplete: () => {
-  //       // Reset position for natural flex layout
-  //       gsap.set('.ats-card', { clearProps: 'position,top,left,transform' })
-  //     },
-  //   }
-  // )
-
-  // Animation for Platform Panel-3
-  // gsap.from('.teams-header .teams-title', {
-  //   y: 100,
-  //   opacity: 0,
-  //   duration: 1,
-  //   ease: 'power3.out',
-  //   scrollTrigger: {
-  //     trigger: '.panel',
-  //     start: 'top 80%',
-  //     toggleActions: 'play none none reverse',
-  //   },
-  // })
-
-  // gsap.from('.teams-header .teams-description', {
-  //   y: 150,
-  //   opacity: 0,
-  //   duration: 1,
-  //   delay: 0.2,
-  //   ease: 'power3.out',
-  //   scrollTrigger: {
-  //     trigger: '.panel',
-  //     start: 'top 80%',
-  //     toggleActions: 'play none none reverse',
-  //   },
-  // })
-
-  // gsap.from('.teams-scroll-wrapper .team-footer', {
-  //   y: 150,
-  //   opacity: 0,
-  //   duration: 1,
-  //   delay: 1,
-  //   ease: 'power3.out',
-  //   scrollTrigger: {
-  //     trigger: '.panel',
-  //     start: 'top 80%',
-  //     toggleActions: 'play none none reverse',
-  //   },
-  // })
-
-  // Horizontal scroll animation for team cards
-  gsap.registerPlugin(ScrollTrigger)
-
+  // 🔹 All vertical panels
+  const panels = gsap.utils.toArray('.panel')
   const horizontalSection = document.querySelector('#horizontal-scroll')
-  const teamWrapper = document.querySelector('.team-wrapper')
 
-  // Calculate the starting position (center of viewport minus header)
-  const startX = (window.innerWidth - 600) / 2 // 600 is header width
+  // 🔹 Horizontal scroll animation (you already have this working)
+  createHorizontalScroll(horizontalSection)
 
-  gsap.fromTo(
-    teamWrapper,
-    {
-      x: startX, // Start from center
-    },
-    {
-      x: () => -(teamWrapper.scrollWidth - window.innerWidth + 600),
-      ease: 'none',
-      scrollTrigger: {
-        trigger: horizontalSection,
-        start: 'top top',
-        end: () => `+=${teamWrapper.scrollWidth + startX}`,
-        pin: true,
-        scrub: true,
-        anticipatePin: 1,
-        invalidateOnRefresh: true,
-        markers: false,
-      },
-    }
-  )
+  // 🔹 Global scroll snapping for vertical panels
+  setupVerticalSnapScroll(panels, horizontalSection)
 
-  // Teams inner cards
-  document.querySelectorAll('.team-card').forEach((cards) => {
-    gsap.from(cards, {
-      x: 0,
-      duration: 0.6,
-      scrollTrigger: {
-        trigger: cards,
-        toggleActions: 'play none none reverse',
-      },
-    })
-  })
-  // Vertical Scroll Animation GSAP
-  const panels = gsap.utils.toArray('section')
+  // 🔹 Background grid switching
+  setupGridBackgroundTransitions()
 
-  // Pin each section vertically
-  panels.forEach((panel) => {
-    // Skip horizontal one, it’s already pinned via timeline
-    if (panel.id === 'horizontal-scroll') return
+  function setupVerticalSnapScroll(panels, horizontalSection) {
+    let scrollTimeout
 
     ScrollTrigger.create({
-      trigger: panel,
-      start: 'top top',
-      end: 'bottom top',
-      pin: true,
-      scrub: true,
-      pinSpacing: false,
-      anticipatePin: 1,
+      trigger: 'main',
+      start: 'top 50%',
+      end: 'bottom 80%',
+      markers: true,
+      onUpdate: (self) => {
+        clearTimeout(scrollTimeout)
+        scrollTimeout = setTimeout(() => {
+          // Disable snapping inside the horizontal section
+          if (!ScrollTrigger.isInViewport(horizontalSection, 0.5)) {
+            snapToClosestPanel(panels)
+          }
+        }, 120)
+      },
     })
-  })
+  }
 
-  // Optional smooth snap between vertical sections
-  ScrollTrigger.create({
-    trigger: 'main',
-    start: 'top top',
-    end: () => `+=${(panels.length - 1) * window.innerHeight}`,
-    snap: {
-      snapTo: 1 / (panels.length - 1),
-      duration: { min: 0.3, max: 0.8 },
-      ease: 'power1.inOut',
-    },
-    scrub: 1,
-  })
-  // gsap.utils.toArray('.panel').forEach((sections) => {
-  //   ScrollTrigger.create({
-  //     trigger: sections,
-  //     start: 'top top',
-  //     end: '+=100vh',
-  //     pin: true,
-  //     pinSpacing: true,
-  //     srub: true,
-  //     markers: true,
-  //     snap: {
-  //       snapTo: 1 / (gsap.utils.toArray('.panel-container').length - 1),
-  //       duration: { min: 0.3, max: 1 },
-  //       delay: 0.1,
-  //       ease: 'power1.inOut',
-  //     },
-  //   })
-  // })
+  function snapToClosestPanel(panels) {
+    const scrollY = window.scrollY
+    const positions = panels.map((p) => p.offsetTop)
+    const closest = positions.reduce((prev, curr) =>
+      Math.abs(curr - scrollY) < Math.abs(prev - scrollY) ? curr : prev
+    )
 
-  // Refresh on window resize to recalculate center position
-  window.addEventListener('resize', () => {
-    ScrollTrigger.refresh()
-  })
+    gsap.to(window, {
+      scrollTo: { y: closest, autoKill: false },
+      duration: 0.8,
+      ease: 'power2.inOut',
+    })
+  }
+
+  function setupGridBackgroundTransitions() {
+    const grid1 = document.querySelector('.hex-grid .grid')
+    const grid2 = document.querySelector('.hex-grid .grid-2')
+    const teamsGrid = document.querySelector('.teams-container-overlay .grid')
+
+    const mappings = [
+      { trigger: '.panel-1', show: grid1, hide: grid2, teamsGrid: false },
+      { trigger: '.panel-2', show: grid2, hide: grid1, teamsGrid: false },
+      { trigger: '.panel-3', show: grid1, hide: grid2, teamsGrid: true },
+      { trigger: '.panel-4', show: grid2, hide: grid1, teamsGrid: false },
+      { trigger: '.panel-5', show: grid1, hide: grid2, teamsGrid: false },
+    ]
+
+    mappings.forEach(({ trigger, show, hide, teamsGrid: showTeamsGrid }) => {
+      ScrollTrigger.create({
+        trigger,
+        start: 'top center',
+        end: 'bottom center',
+        onEnter: () => {
+          if (showTeamsGrid) {
+            // Hide main overlay, show teams overlay
+            switchBackground(null, grid1)
+            switchBackground(null, grid2)
+            gsap.to(teamsGrid, {
+              opacity: 1,
+              duration: 0.6,
+              ease: 'power2.out',
+            })
+          } else {
+            // Show main overlay, hide teams overlay
+            switchBackground(show, hide)
+            gsap.to(teamsGrid, {
+              opacity: 0,
+              duration: 0.3,
+              ease: 'power2.inOut',
+            })
+          }
+        },
+        onEnterBack: () => {
+          if (showTeamsGrid) {
+            // Hide main overlay, show teams overlay
+            switchBackground(null, grid1)
+            switchBackground(null, grid2)
+            gsap.to(teamsGrid, {
+              opacity: 1,
+              duration: 0.6,
+              ease: 'power2.out',
+            })
+          } else {
+            // Show main overlay, hide teams overlay
+            switchBackground(show, hide)
+            gsap.to(teamsGrid, {
+              opacity: 0,
+              duration: 0.3,
+              ease: 'power2.inOut',
+            })
+          }
+        },
+      })
+    })
+
+    function switchBackground(showBg, hideBg) {
+      gsap
+        .timeline()
+        .to(hideBg, { opacity: 0, duration: 0.5, ease: 'power2.inOut' })
+        .to(showBg, { opacity: 1, duration: 0.6, ease: 'power2.out' }, '-=0.3')
+    }
+  }
+
+  function createHorizontalScroll(section) {
+    const teamWrapper = section.querySelector('.team-wrapper')
+    if (!section || !teamWrapper) return
+
+    const startX = (window.innerWidth - 600) / 2
+
+    gsap.fromTo(
+      teamWrapper,
+      { x: 0 },
+      {
+        x: () => -(teamWrapper.scrollWidth - window.innerWidth + 600),
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top top',
+          end: () => `+=${teamWrapper.scrollWidth + startX}` - 160,
+          pin: true,
+          scrub: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          markers: true,
+        },
+      }
+    )
+  }
 })
-
 // gsap.to(popupOverlay, { autoAlpha: 1, duration: 0.4, display: 'flex' })
 
 // gsap.to(popupOverlay, {
@@ -378,6 +296,7 @@ window.addEventListener('load', async () => {
         opacity: 0,
         scale: 0.2,
         transformOrigin: 'bottom center',
+        delay: 0.5,
       },
       {
         y: 0,

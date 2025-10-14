@@ -68,6 +68,8 @@ html {
 html,
 body {
   scroll-behavior: smooth;
+  height: 100%;
+  overflow-x: hidden;
 }
 
 body.loaded {
@@ -333,12 +335,13 @@ body.loaded .hero-section video {
 /* ========== PANELS ========== */
 .panels {
   position: relative;
-  width: 100%;
+  overflow-x: hidden;
 }
 
 section.panel {
   overflow: hidden;
   color: #fff;
+  height: 100vh;
   min-height: 100vh;
   width: 100%;
   display: flex;
@@ -346,6 +349,8 @@ section.panel {
   justify-content: center;
   align-items: center;
   position: relative;
+  scroll-snap-align: start; /* optional, fallback for browsers without JS */
+
   /* scroll-snap-align: start;
   scroll-snap-stop: always; */
 }
@@ -365,6 +370,7 @@ section.panel {
   position: relative;
   overflow: hidden;
   color: #fff;
+  min-height: 100vh;
   height: 100vh;
   width: 100%;
   display: flex;
@@ -375,7 +381,18 @@ section.panel {
 #horizontal-scroll {
   overflow: hidden;
   position: relative;
-  height: 100vh;
+}
+
+.horizontal .panel-container {
+  position: relative;
+  z-index: 9;
+  max-width: 1600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
 }
 
 /* Gradient per section */
@@ -416,12 +433,26 @@ section.panel {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   position: fixed;
   top: 0;
   left: 0;
   overflow: hidden;
+  z-index: 1;
+}
+/* Teams-specific overlay - positioned relative to horizontal section */
+.teams-container-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .hex-grid {
@@ -431,29 +462,34 @@ section.panel {
   overflow: hidden;
 }
 
-.hex-grid .grid {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: url('./images/Tiles-grid-bg-image.svg') center center;
-  background-repeat: repeat;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  z-index: 2;
-}
-
+.hex-grid .grid,
 .hex-grid .grid-2 {
   position: absolute;
   top: 0;
   left: 0;
-  background: url('./images/Tiles-grid-bg-image-2.svg') center center;
   background-repeat: repeat;
   width: 100%;
   height: 100%;
   background-size: cover;
   z-index: 2;
+  opacity: 0; /* Start hidden */
+  transition: opacity 0.8s ease;
 }
+
+.hex-grid .grid {
+  background: url('./images/Tiles-grid-bg-image.svg') center center;
+  background-repeat: repeat;
+
+  background-size: cover;
+}
+
+.hex-grid .grid-2 {
+  background: url('./images/Tiles-grid-bg-image-2.svg') center center;
+  background-repeat: repeat;
+
+  background-size: cover;
+}
+
 .hex-grid .light {
   position: absolute;
   top: 50%;
@@ -618,7 +654,7 @@ section.panel {
   transition: all 0.3s ease;
   transform-origin: center bottom;
   height: auto;
-  min-height: 280px;
+  min-height: 310px;
 
   width: 100%;
   max-width: 385px;
@@ -684,16 +720,16 @@ section.panel {
 /* Teams Member Section Style*/
 
 /* ========== TEAMS SECTION ========== */
+
 .panel-container#teams {
   padding: 160px 0;
   width: 100% !important;
   max-width: 100% !important;
-  z-index: 9;
 }
 
 .teams-scroll-wrapper {
   overflow: hidden;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -1062,7 +1098,7 @@ section.panel {
 .footer-inner {
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 18% 66% 16%;
+  grid-template-columns: 18% 60% 16%;
   align-items: start;
   gap: 20px;
   width: 100%;
@@ -1185,7 +1221,7 @@ section.panel {
     font-size: 90px;
   }
   .hero-section video {
-    height: 800px;
+    height: 520px;
   }
 }
 

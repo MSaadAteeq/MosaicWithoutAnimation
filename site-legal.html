@@ -5,9 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mosaic</title>
     <link rel="stylesheet" href="./index.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- lenis cdn -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/lenis@1.3.11/dist/lenis.css"
+    />
+
     <style>
+      body.single-page section.panel {
+        overflow: visible;
+        color: #fff;
+        min-height: 100vh;
+        height: auto; /* Allow natural height */
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+      }
+
+      /* Content pages - panel-1 should allow scrolling */
+      body.single-page .panel {
+        min-height: 100vh;
+        height: auto;
+      }
+      /* Content pages specific */
+      body.single-page .panel .panel-container {
+        height: auto;
+        min-height: 100vh;
+        padding: 160px 40px 80px;
+        z-index: 9;
+      }
+      .panel-container {
+        max-width: 1600p;
+        margin: 0 auto;
+      }
+      .privacy-content {
+        padding: 160px 0px 0px;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+      }
+
       .disclosure-content {
         padding: 250px 0px 0px;
       }
@@ -19,7 +56,7 @@
       }
 
       h1 {
-        font-family: 'Armstrong', sans-serif;
+        font-family: "Armstrong", sans-serif;
         font-size: 44px;
         line-height: 1.1;
         margin: 0 0 10px 0;
@@ -62,7 +99,7 @@
       }
     </style>
   </head>
-  <body class="privacy-page">
+  <body class="single-page">
     <!-- Loader -->
     <div class="loader-overlay">
       <!-- panels for stagger -->
@@ -233,11 +270,11 @@
             <li><a href="/privacy.html">Privacy Policy</a></li>
             <li><a href="/Terms of Use.html">Terms of Use</a></li>
             <li>
-              <a href="/Disclosure Statements.html">Disclosure Statements</a>
+              <a href="/disclosure-statements.html">Disclosure Statements</a>
             </li>
             <li><a href="/site-legal.html">Site Legal</a></li>
             <li>
-              <a href="/Compliance Disclaimers.html">Compliance Disclaimers</a>
+              <a href="/compliance-disclaimer.html">Compliance Disclaimers</a>
             </li>
           </ul>
         </div>
@@ -245,5 +282,29 @@
     </main>
 
     <script src="./index.js"></script>
+    <!-- lenis cdn -->
+    <script src="https://unpkg.com/lenis@1.3.11/dist/lenis.min.js"></script>
+    <!-- gsap -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <!-- scroll trigger  -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js"></script>
+
+    <script>
+      // Initialize a new Lenis instance for smooth scrolling
+      const lenis = new Lenis();
+
+      // Synchronize Lenis scrolling with GSAP's ScrollTrigger plugin
+      lenis.on("scroll", ScrollTrigger.update);
+
+      // Add Lenis's requestAnimationFrame (raf) method to GSAP's ticker
+      // This ensures Lenis's smooth scroll animation updates on each GSAP tick
+      gsap.ticker.add((time) => {
+        lenis.raf(time * 1000); // Convert time from seconds to milliseconds
+      });
+
+      // Disable lag smoothing in GSAP to prevent any delay in scroll animations
+      gsap.ticker.lagSmoothing(0);
+    </script>
   </body>
 </html>

@@ -4,349 +4,380 @@
 //   light.style.left = `${e.clientX}px`
 //   light.style.top = `${e.clientY}px`
 // })
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.hex-grid').forEach((grid) => {
-    const light = grid.querySelector('.light')
-    let mouse = { x: 0, y: 0 }
-    let lightPos = { x: 0, y: 0 }
-    let trails = []
-    const trailCount = 10 // number of trailing glows
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".hex-grid").forEach((grid) => {
+    const light = grid.querySelector(".light");
+    let mouse = { x: 0, y: 0 };
+    let lightPos = { x: 0, y: 0 };
+    let trails = [];
+    const trailCount = 10; // number of trailing glows
 
     // Create trail elements
     for (let i = 0; i < trailCount; i++) {
-      const trail = document.createElement('div')
-      trail.classList.add('trail')
-      grid.appendChild(trail)
-      trails.push({ el: trail, x: 0, y: 0 })
+      const trail = document.createElement("div");
+      trail.classList.add("trail");
+      grid.appendChild(trail);
+      trails.push({ el: trail, x: 0, y: 0 });
     }
 
     // Track mouse movement
-    grid.addEventListener('mousemove', (e) => {
-      mouse.x = e.clientX
-      mouse.y = e.clientY
-    })
+    grid.addEventListener("mousemove", (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
 
     // Smoothly animate the light & trail
     function animateGlow() {
       // interpolate the main glow position
-      lightPos.x += (mouse.x - lightPos.x) * 0.15
-      lightPos.y += (mouse.y - lightPos.y) * 0.15
+      lightPos.x += (mouse.x - lightPos.x) * 0.15;
+      lightPos.y += (mouse.y - lightPos.y) * 0.15;
 
-      light.style.left = `${lightPos.x}px`
-      light.style.top = `${lightPos.y}px`
+      light.style.left = `${lightPos.x}px`;
+      light.style.top = `${lightPos.y}px`;
 
       // make the first trail follow the main glow closely
-      let prevX = lightPos.x
-      let prevY = lightPos.y
+      let prevX = lightPos.x;
+      let prevY = lightPos.y;
 
       trails.forEach((t, i) => {
-        const speed = 0.25 - i * 0.015 // smaller difference for smoother blend
-        t.x += (prevX - t.x) * speed
-        t.y += (prevY - t.y) * speed
+        const speed = 0.25 - i * 0.015; // smaller difference for smoother blend
+        t.x += (prevX - t.x) * speed;
+        t.y += (prevY - t.y) * speed;
 
         // No offset subtraction — center trail exactly on main glow
-        t.el.style.left = `${t.x}px`
-        t.el.style.top = `${t.y}px`
-        t.el.style.transform = `translate(-50%, -50%) scale(${1 - i * 0.05})`
-        t.el.style.opacity = 0.5 - i * 0.04
+        t.el.style.left = `${t.x}px`;
+        t.el.style.top = `${t.y}px`;
+        t.el.style.transform = `translate(-50%, -50%) scale(${1 - i * 0.05})`;
+        t.el.style.opacity = 0.5 - i * 0.04;
 
-        prevX = t.x
-        prevY = t.y
-      })
+        prevX = t.x;
+        prevY = t.y;
+      });
 
-      requestAnimationFrame(animateGlow)
+      requestAnimationFrame(animateGlow);
     }
 
-    animateGlow()
-  })
-})
+    animateGlow();
+  });
+});
 
 // Video Play Button Functionality
-document.addEventListener('DOMContentLoaded', () => {
-  const video = document.querySelector('.hero-section video')
-  const playButton = document.querySelector('.video-play-button')
+document.addEventListener("DOMContentLoaded", () => {
+  const video = document.querySelector(".hero-section video");
+  const playButton = document.querySelector(".video-play-button");
 
   if (video && playButton) {
     // Initially pause the video (in case autoplay started it)
-    video.pause()
+    video.pause();
 
     // Show play button
-    playButton.style.display = 'flex'
+    playButton.style.display = "flex";
 
     // Play button click handler
-    playButton.addEventListener('click', () => {
+    playButton.addEventListener("click", () => {
       if (video.paused) {
-        video.play()
-        playButton.style.opacity = '0'
-        playButton.style.pointerEvents = 'none'
+        video.play();
+        playButton.style.opacity = "0";
+        playButton.style.pointerEvents = "none";
       } else {
-        video.pause()
-        playButton.style.opacity = '1'
-        playButton.style.pointerEvents = 'auto'
+        video.pause();
+        playButton.style.opacity = "1";
+        playButton.style.pointerEvents = "auto";
       }
-    })
+    });
 
     // Video click handler (optional - allows clicking video to pause)
-    video.addEventListener('click', () => {
+    video.addEventListener("click", () => {
       if (!video.paused) {
-        video.pause()
-        playButton.style.opacity = '1'
-        playButton.style.pointerEvents = 'auto'
+        video.pause();
+        playButton.style.opacity = "1";
+        playButton.style.pointerEvents = "auto";
       }
-    })
+    });
 
     // Show play button when video ends
-    video.addEventListener('ended', () => {
-      playButton.style.opacity = '1'
-      playButton.style.pointerEvents = 'auto'
-    })
+    video.addEventListener("ended", () => {
+      playButton.style.opacity = "1";
+      playButton.style.pointerEvents = "auto";
+    });
 
     // Optional: Show play button on pause
-    video.addEventListener('pause', () => {
-      playButton.style.opacity = '1'
-      playButton.style.pointerEvents = 'auto'
-    })
+    video.addEventListener("pause", () => {
+      playButton.style.opacity = "1";
+      playButton.style.pointerEvents = "auto";
+    });
 
     // Hide play button when video is playing
-    video.addEventListener('play', () => {
-      playButton.style.opacity = '0'
-      playButton.style.pointerEvents = 'none'
-    })
+    video.addEventListener("play", () => {
+      playButton.style.opacity = "0";
+      playButton.style.pointerEvents = "none";
+    });
   }
-})
+});
 
 // Horizontall Scroll Animation GSAP
-document.addEventListener('DOMContentLoaded', () => {
-  gsap.registerPlugin(ScrollTrigger)
-  ScrollTrigger.normalizeScroll(true)
+document.addEventListener("DOMContentLoaded", () => {
+  gsap.registerPlugin(ScrollTrigger);
+  ScrollTrigger.normalizeScroll(true);
+  const isHomePage = document.querySelector("#horizontal-scroll") !== null;
+  // Clear any existing ScrollTriggers
+  ScrollTrigger.getAll().forEach((st) => st.kill());
 
-  // Animation for Platform Panel-2
-  gsap.from('.ats-container .ats-title', {
-    y: 100,
-    opacity: 0,
-    duration: 1,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '.panel',
-      start: 'top 80%',
-      toggleActions: 'play none none reverse',
-    },
-  })
+  const isContentPage =
+    document.body.classList.contains("privacy-page") ||
+    document.body.classList.contains("terms-page") ||
+    document.body.classList.contains("content-page");
 
-  gsap.from('.ats-container .ats-description', {
-    y: 150,
-    opacity: 0,
-    duration: 1,
-    delay: 0.2,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '.panel',
-      start: 'top 80%',
-      toggleActions: 'play none none reverse',
-    },
-  })
-  gsap.from('.ats-container .ats-plat', {
-    y: 120,
-    opacity: 1,
-    duration: 1,
-    delay: 0.3,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '.panel',
-      start: 'top 80%',
-      toggleActions: 'play none none reverse',
-    },
-  })
-  gsap.from('.ats-container .ats-cards', {
-    y: 150,
-    opacity: 0,
-    duration: 1,
-    delay: 0.5,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '.panel-2',
-      start: 'top 80%',
-      toggleActions: 'play none none reverse',
-    },
-  })
-  gsap.registerPlugin(ScrollTrigger)
+  // ===== HOMEPAGE SCROLL LOGIC =====
+  if (isHomePage) {
+    console.log("Home page detected - Applying full scroll animations");
 
-  // gsap.set('.card1', { x: -250, y: 120, position: 'absolute' })
-  // gsap.set('.card2', { x: -225, y: 100, position: 'absolute' })
-  // gsap.set('.card3', { x: -200, y: 80, position: 'absolute' })
+    // Animation for Platform Panel-2
+    gsap.from(".ats-container .ats-title", {
+      y: 100,
+      opacity: 0,
+      duration: 1,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: ".panel",
+        start: "top 80%",
+        toggleActions: "play none none reverse",
+      },
+    });
 
-  // Animate from below upward + fade-in + align into layout
-  // gsap.fromTo(
-  //   '.ats-card',
-  //   {
-  //     x: 0,
-  //     y: 150,
-  //     opacity: 0,
-  //     scale: 0.9,
-  //   },
-  //   {
-  //     x: 0,
-  //     y: 0,
-  //     opacity: 1,
-  //     scale: 1,
-  //     duration: 1.2,
-  //     ease: 'power3.out',
-  //     stagger: 0.25,
-  //     scrollTrigger: {
-  //       trigger: '.ats-cards',
-  //       start: 'top 85%',
-  //       toggleActions: 'play none none reverse',
-  //     },
-  //     onStart: () => {
-  //       // Keep the absolute look at the start
-  //       gsap.set('.ats-card', { position: 'absolute' })
-  //     },
-  //     onComplete: () => {
-  //       // Reset position for natural flex layout
-  //       gsap.set('.ats-card', { clearProps: 'position,top,left,transform' })
-  //     },
-  //   }
-  // )
+    gsap.from(".ats-container .ats-description", {
+      y: 150,
+      opacity: 0,
+      duration: 1,
+      delay: 0.2,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: ".panel",
+        start: "top 80%",
+        toggleActions: "play none none reverse",
+      },
+    });
+    gsap.from(".ats-container .ats-plat", {
+      y: 120,
+      opacity: 1,
+      duration: 1,
+      delay: 0.3,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: ".panel",
+        start: "top 80%",
+        toggleActions: "play none none reverse",
+      },
+    });
+    gsap.from(".ats-container .ats-cards", {
+      y: 150,
+      opacity: 0,
+      duration: 1,
+      delay: 0.5,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: ".panel-2",
+        start: "top 80%",
+        toggleActions: "play none none reverse",
+      },
+    });
+    gsap.registerPlugin(ScrollTrigger);
 
-  // Animation for Platform Panel-3
-  // gsap.from('.teams-header .teams-title', {
-  //   y: 100,
-  //   opacity: 0,
-  //   duration: 1,
-  //   ease: 'power3.out',
-  //   scrollTrigger: {
-  //     trigger: '.panel',
-  //     start: 'top 80%',
-  //     toggleActions: 'play none none reverse',
-  //   },
-  // })
+    // gsap.set('.card1', { x: -250, y: 120, position: 'absolute' })
+    // gsap.set('.card2', { x: -225, y: 100, position: 'absolute' })
+    // gsap.set('.card3', { x: -200, y: 80, position: 'absolute' })
 
-  // gsap.from('.teams-header .teams-description', {
-  //   y: 150,
-  //   opacity: 0,
-  //   duration: 1,
-  //   delay: 0.2,
-  //   ease: 'power3.out',
-  //   scrollTrigger: {
-  //     trigger: '.panel',
-  //     start: 'top 80%',
-  //     toggleActions: 'play none none reverse',
-  //   },
-  // })
+    // Animate from below upward + fade-in + align into layout
+    // gsap.fromTo(
+    //   '.ats-card',
+    //   {
+    //     x: 0,
+    //     y: 150,
+    //     opacity: 0,
+    //     scale: 0.9,
+    //   },
+    //   {
+    //     x: 0,
+    //     y: 0,
+    //     opacity: 1,
+    //     scale: 1,
+    //     duration: 1.2,
+    //     ease: 'power3.out',
+    //     stagger: 0.25,
+    //     scrollTrigger: {
+    //       trigger: '.ats-cards',
+    //       start: 'top 85%',
+    //       toggleActions: 'play none none reverse',
+    //     },
+    //     onStart: () => {
+    //       // Keep the absolute look at the start
+    //       gsap.set('.ats-card', { position: 'absolute' })
+    //     },
+    //     onComplete: () => {
+    //       // Reset position for natural flex layout
+    //       gsap.set('.ats-card', { clearProps: 'position,top,left,transform' })
+    //     },
+    //   }
+    // )
 
-  // gsap.from('.teams-scroll-wrapper .team-footer', {
-  //   y: 150,
-  //   opacity: 0,
-  //   duration: 1,
-  //   delay: 1,
-  //   ease: 'power3.out',
-  //   scrollTrigger: {
-  //     trigger: '.panel',
-  //     start: 'top 80%',
-  //     toggleActions: 'play none none reverse',
-  //   },
-  // })
+    // Animation for Platform Panel-3
+    // gsap.from('.teams-header .teams-title', {
+    //   y: 100,
+    //   opacity: 0,
+    //   duration: 1,
+    //   ease: 'power3.out',
+    //   scrollTrigger: {
+    //     trigger: '.panel',
+    //     start: 'top 80%',
+    //     toggleActions: 'play none none reverse',
+    //   },
+    // })
 
-  // Horizontal scroll animation for team cards
-  gsap.registerPlugin(ScrollTrigger)
+    // gsap.from('.teams-header .teams-description', {
+    //   y: 150,
+    //   opacity: 0,
+    //   duration: 1,
+    //   delay: 0.2,
+    //   ease: 'power3.out',
+    //   scrollTrigger: {
+    //     trigger: '.panel',
+    //     start: 'top 80%',
+    //     toggleActions: 'play none none reverse',
+    //   },
+    // })
 
-  const horizontalSection = document.querySelector('#horizontal-scroll')
-  const teamWrapper = document.querySelector('.team-wrapper')
+    // gsap.from('.teams-scroll-wrapper .team-footer', {
+    //   y: 150,
+    //   opacity: 0,
+    //   duration: 1,
+    //   delay: 1,
+    //   ease: 'power3.out',
+    //   scrollTrigger: {
+    //     trigger: '.panel',
+    //     start: 'top 80%',
+    //     toggleActions: 'play none none reverse',
+    //   },
+    // })
 
-  if (horizontalSection && teamWrapper) {
-    // Calculate scroll distance
-    const getScrollAmount = () => {
-      return -(teamWrapper.scrollWidth - window.innerWidth + 100)
+    // Horizontal scroll animation for team cards
+    gsap.registerPlugin(ScrollTrigger);
+
+    const horizontalSection = document.querySelector("#horizontal-scroll");
+    const teamWrapper = document.querySelector(".team-wrapper");
+
+    if (horizontalSection && teamWrapper) {
+      // Calculate scroll distance
+      const getScrollAmount = () => {
+        return -(teamWrapper.scrollWidth - window.innerWidth + 100);
+      };
+
+      gsap.fromTo(
+        teamWrapper,
+        {
+          x: 50,
+        },
+        {
+          x: getScrollAmount,
+          ease: "none",
+          scrollTrigger: {
+            trigger: horizontalSection,
+            start: "top top",
+            end: () => `+=${teamWrapper.scrollWidth * 1.6}`, // Adjust scroll distance
+            pin: true,
+            scrub: 1,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+            markers: true,
+          },
+        }
+      );
     }
 
-    gsap.fromTo(
-      teamWrapper,
-      {
-        x: 50,
-      },
-      {
-        x: getScrollAmount,
-        ease: 'none',
+    // Teams inner cards
+    document.querySelectorAll(".team-card").forEach((cards) => {
+      gsap.from(cards, {
+        x: 0,
+        duration: 0.6,
         scrollTrigger: {
-          trigger: horizontalSection,
-          start: 'top top',
-          end: () => `+=${teamWrapper.scrollWidth * 1.2}`, // Adjust scroll distance
-          pin: true,
-          scrub: 1,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-          markers: false,
+          trigger: cards,
+          toggleActions: "play none none reverse",
         },
-      }
-    )
+      });
+    });
+    // Vertical Scroll Animation GSAP
+    const panels = gsap.utils.toArray("section");
+
+    // Pin each section vertically
+    panels.forEach((panel) => {
+      // Skip horizontal one, it’s already pinned via timeline
+      if (panel.id === "horizontal-scroll") return;
+
+      ScrollTrigger.create({
+        trigger: panel,
+        start: "top top",
+        end: "bottom top",
+        pin: true,
+        scrub: true,
+        pinSpacing: false,
+        anticipatePin: 1,
+      });
+    });
+
+    // Optional smooth snap between vertical sections
+    ScrollTrigger.create({
+      trigger: "main",
+      start: "top top",
+      end: () => `+=${(panels.length - 1) * window.innerHeight}`,
+      snap: {
+        snapTo: 1 / (panels.length - 1),
+        duration: { min: 0.3, max: 0.8 },
+        ease: "power1.inOut",
+        delay: 0.1,
+      },
+      scrub: 1,
+    });
+    // gsap.utils.toArray('.panel').forEach((sections) => {
+    //   ScrollTrigger.create({
+    //     trigger: sections,
+    //     start: 'top top',
+    //     end: '+=100vh',
+    //     pin: true,
+    //     pinSpacing: true,
+    //     srub: true,
+    //     markers: true,
+    //     snap: {
+    //       snapTo: 1 / (gsap.utils.toArray('.panel-container').length - 1),
+    //       duration: { min: 0.3, max: 1 },
+    //       delay: 0.1,
+    //       ease: 'power1.inOut',
+    //     },
+    //   })
+    // })
+  }
+  // ===== CONTENT PAGES SCROLL LOGIC =====
+  if (isContentPage) {
+    console.log("Content page detected - Applying simple scroll");
+
+    // NO pinning for content pages - just normal scroll
+    // Only add fade-in animation for content if desired
+    gsap.from(".privacy-content", {
+      opacity: 0,
+      y: 50,
+      duration: 0.8,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: ".privacy-content",
+        start: "top 90%",
+        toggleActions: "play none none none",
+      },
+    });
   }
 
-  // Teams inner cards
-  document.querySelectorAll('.team-card').forEach((cards) => {
-    gsap.from(cards, {
-      x: 0,
-      duration: 0.6,
-      scrollTrigger: {
-        trigger: cards,
-        toggleActions: 'play none none reverse',
-      },
-    })
-  })
-  // Vertical Scroll Animation GSAP
-  const panels = gsap.utils.toArray('section')
-
-  // Pin each section vertically
-  panels.forEach((panel) => {
-    // Skip horizontal one, it’s already pinned via timeline
-    if (panel.id === 'horizontal-scroll') return
-
-    ScrollTrigger.create({
-      trigger: panel,
-      start: 'top top',
-      end: 'bottom top',
-      pin: true,
-      scrub: true,
-      pinSpacing: false,
-      anticipatePin: 1,
-    })
-  })
-
-  // Optional smooth snap between vertical sections
-  ScrollTrigger.create({
-    trigger: 'main',
-    start: 'top top',
-    end: () => `+=${(panels.length - 1) * window.innerHeight}`,
-    snap: {
-      snapTo: 1 / (panels.length - 1),
-      duration: { min: 0.3, max: 0.8 },
-      ease: 'power1.inOut',
-      delay: 0.1,
-    },
-    scrub: 1,
-  })
-  // gsap.utils.toArray('.panel').forEach((sections) => {
-  //   ScrollTrigger.create({
-  //     trigger: sections,
-  //     start: 'top top',
-  //     end: '+=100vh',
-  //     pin: true,
-  //     pinSpacing: true,
-  //     srub: true,
-  //     markers: true,
-  //     snap: {
-  //       snapTo: 1 / (gsap.utils.toArray('.panel-container').length - 1),
-  //       duration: { min: 0.3, max: 1 },
-  //       delay: 0.1,
-  //       ease: 'power1.inOut',
-  //     },
-  //   })
-  // })
-
   // Refresh on window resize to recalculate center position
-  window.addEventListener('resize', () => {
-    ScrollTrigger.refresh()
-  })
-})
+  window.addEventListener("resize", () => {
+    ScrollTrigger.refresh();
+  });
+});
 
 // gsap.to(popupOverlay, { autoAlpha: 1, duration: 0.4, display: 'flex' })
 
@@ -357,55 +388,57 @@ document.addEventListener('DOMContentLoaded', () => {
 // })
 
 /* ---------------------- Loader Animation ---------------------- */
-window.addEventListener('load', async () => {
-  const loader = document.querySelector('.loader-overlay')
-  const logo = document.querySelector('.logo')
-  const icon = document.querySelector('.icon')
-  const wrap = document.querySelector('.logowrap')
-  const wordmark = document.querySelector('.wordmark')
-  const panels = document.querySelectorAll('.reveal-panel')
-  const headerLogo = document.querySelector('.mosaic-header .logo .mosaic-logo')
-  const headerMenu = document.querySelector('.mosaic-header .nav-menu')
-  const headerContact = document.querySelector('.mosaic-header .connect-btn')
-  const video = document.querySelector('.hero-section video')
-  const playButton = document.querySelector('.video-play-button')
+window.addEventListener("load", async () => {
+  const loader = document.querySelector(".loader-overlay");
+  const logo = document.querySelector(".logo");
+  const icon = document.querySelector(".icon");
+  const wrap = document.querySelector(".logowrap");
+  const wordmark = document.querySelector(".wordmark");
+  const panels = document.querySelectorAll(".reveal-panel");
+  const headerLogo = document.querySelector(
+    ".mosaic-header .logo .mosaic-logo"
+  );
+  const headerMenu = document.querySelector(".mosaic-header .nav-menu");
+  const headerContact = document.querySelector(".mosaic-header .connect-btn");
+  const video = document.querySelector(".hero-section video");
+  const playButton = document.querySelector(".video-play-button");
 
   // Ensure images load
   const waitForImage = (img) =>
     img.complete && img.naturalWidth > 0
       ? Promise.resolve()
-      : new Promise((res) => img.addEventListener('load', res, { once: true }))
+      : new Promise((res) => img.addEventListener("load", res, { once: true }));
 
-  await Promise.all([waitForImage(icon), waitForImage(wordmark)])
+  await Promise.all([waitForImage(icon), waitForImage(wordmark)]);
 
-  gsap.set(icon, { y: 100, opacity: 0, scale: 0.9, filter: 'blur(4px)' })
-  gsap.set(wrap, { width: 0 })
-  gsap.set(wordmark, { opacity: 0, clipPath: 'inset(0% 100% 0% 0%)' })
-  gsap.set(logo, { opacity: 1 })
-  gsap.set(panels, { scaleX: 1, transformOrigin: 'right center' })
-  gsap.set([headerLogo, headerMenu, headerContact], { y: -150 })
-  gsap.set(video, { opacity: 0 }) // start hidden
-  gsap.set(playButton, { opacity: 0, scale: 0.5 })
+  gsap.set(icon, { y: 100, opacity: 0, scale: 0.9, filter: "blur(4px)" });
+  gsap.set(wrap, { width: 0 });
+  gsap.set(wordmark, { opacity: 0, clipPath: "inset(0% 100% 0% 0%)" });
+  gsap.set(logo, { opacity: 1 });
+  gsap.set(panels, { scaleX: 1, transformOrigin: "right center" });
+  gsap.set([headerLogo, headerMenu, headerContact], { y: -150 });
+  gsap.set(video, { opacity: 0 }); // start hidden
+  gsap.set(playButton, { opacity: 0, scale: 0.5 });
 
-  const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
+  const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
   // Logo animation first
   tl.to(icon, {
     y: 0,
     opacity: 1,
     scale: 1,
-    filter: 'blur(0px)',
+    filter: "blur(0px)",
     duration: 1.2,
   })
     .to(
       wrap,
       { width: wordmark.getBoundingClientRect().width, duration: 0.7 },
-      '-=0.5'
+      "-=0.5"
     )
     .to(
       wordmark,
-      { clipPath: 'inset(0% 0% 0% 0%)', opacity: 1, duration: 0.7 },
-      '<'
+      { clipPath: "inset(0% 0% 0% 0%)", opacity: 1, duration: 0.7 },
+      "<"
     )
     .to(logo, { opacity: 0, duration: 0.8, delay: 1 })
 
@@ -413,22 +446,22 @@ window.addEventListener('load', async () => {
     .to(panels, {
       scaleY: 0,
       duration: 1,
-      ease: 'power4.inOut',
-      transformOrigin: 'bottom center',
-      stagger: { each: 0.15, from: 'end' },
+      ease: "power4.inOut",
+      transformOrigin: "bottom center",
+      stagger: { each: 0.15, from: "end" },
     })
-    .set(loader, { display: 'none' })
-    .call(() => document.body.classList.add('loaded'))
+    .set(loader, { display: "none" })
+    .call(() => document.body.classList.add("loaded"))
 
     // Page content animation (after loader)
     // Header slide down
-    .to(headerLogo, { y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.5')
-    .to(headerContact, { y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.5')
+    .to(headerLogo, { y: 0, duration: 0.8, ease: "power3.out" }, "-=0.5")
+    .to(headerContact, { y: 0, duration: 0.8, ease: "power3.out" }, "-=0.5")
 
     .to(
       headerMenu,
-      { y: 0, duration: 0.8, ease: 'power3.out', stagger: 0.1 },
-      '-=0.5'
+      { y: 0, duration: 0.8, ease: "power3.out", stagger: 0.1 },
+      "-=0.5"
     )
     // Video slide-up + scale-in
     .fromTo(
@@ -437,16 +470,16 @@ window.addEventListener('load', async () => {
         y: 150, // start lower
         opacity: 0,
         scale: 0.2,
-        transformOrigin: 'bottom center',
+        transformOrigin: "bottom center",
       },
       {
         y: 0,
         opacity: 1,
         scale: 1,
         duration: 1.6,
-        ease: 'power4.out',
+        ease: "power4.out",
       },
-      '-=0.3' // overlap slightly with header
+      "-=0.3" // overlap slightly with header
     )
     // Play button fade in and scale
     .to(
@@ -456,20 +489,20 @@ window.addEventListener('load', async () => {
         scale: 1,
         duration: 0.5,
         delay: 1.2,
-        ease: 'back.out(1.7)',
+        ease: "back.out(1.7)",
       },
-      '-=0.8'
-    )
-})
+      "-=0.8"
+    );
+});
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener("DOMContentLoaded", function () {
   const slidesCount = document.querySelectorAll(
-    '.blogSwiper .swiper-slide'
-  ).length
+    ".blogSwiper .swiper-slide"
+  ).length;
 
-  const swiper = new Swiper('.blogSwiper', {
+  const swiper = new Swiper(".blogSwiper", {
     loop: slidesCount > 2, // enable loop only if more than 2 slides
-    effect: 'slide',
+    effect: "slide",
     speed: 800,
     slidesPerView: 1.2,
     centeredSlides: true,
@@ -480,8 +513,8 @@ document.addEventListener('DOMContentLoaded', function () {
       disableOnInteraction: false,
     },
     navigation: {
-      nextEl: '.blog-button-next',
-      prevEl: '.blog-button-prev',
+      nextEl: ".blog-button-next",
+      prevEl: ".blog-button-prev",
     },
     breakpoints: {
       640: {
@@ -497,53 +530,53 @@ document.addEventListener('DOMContentLoaded', function () {
         spaceBetween: 40,
       },
     },
-  })
-})
+  });
+});
 
 // Mobile Navigation Toggle
-document.addEventListener('DOMContentLoaded', function () {
-  const mobileMenuToggle = document.querySelector('.mobile-menu-toggle')
-  const mobileNavOverlay = document.querySelector('.mobile-nav-overlay')
-  const mobileNavLinks = document.querySelectorAll('.mobile-nav-menu a')
+document.addEventListener("DOMContentLoaded", function () {
+  const mobileMenuToggle = document.querySelector(".mobile-menu-toggle");
+  const mobileNavOverlay = document.querySelector(".mobile-nav-overlay");
+  const mobileNavLinks = document.querySelectorAll(".mobile-nav-menu a");
 
   if (mobileMenuToggle && mobileNavOverlay) {
-    mobileMenuToggle.addEventListener('click', function () {
-      mobileMenuToggle.classList.toggle('active')
-      mobileNavOverlay.classList.toggle('active')
+    mobileMenuToggle.addEventListener("click", function () {
+      mobileMenuToggle.classList.toggle("active");
+      mobileNavOverlay.classList.toggle("active");
 
       // Prevent body scroll when menu is open
-      if (mobileNavOverlay.classList.contains('active')) {
-        document.body.style.overflow = 'hidden'
+      if (mobileNavOverlay.classList.contains("active")) {
+        document.body.style.overflow = "hidden";
       } else {
-        document.body.style.overflow = ''
+        document.body.style.overflow = "";
       }
-    })
+    });
 
     // Close menu when clicking on nav links
     mobileNavLinks.forEach((link) => {
-      link.addEventListener('click', function () {
-        mobileMenuToggle.classList.remove('active')
-        mobileNavOverlay.classList.remove('active')
-        document.body.style.overflow = ''
-      })
-    })
+      link.addEventListener("click", function () {
+        mobileMenuToggle.classList.remove("active");
+        mobileNavOverlay.classList.remove("active");
+        document.body.style.overflow = "";
+      });
+    });
 
     // Close menu when clicking outside
-    mobileNavOverlay.addEventListener('click', function (e) {
+    mobileNavOverlay.addEventListener("click", function (e) {
       if (e.target === mobileNavOverlay) {
-        mobileMenuToggle.classList.remove('active')
-        mobileNavOverlay.classList.remove('active')
-        document.body.style.overflow = ''
+        mobileMenuToggle.classList.remove("active");
+        mobileNavOverlay.classList.remove("active");
+        document.body.style.overflow = "";
       }
-    })
+    });
 
     // Close menu on escape key
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && mobileNavOverlay.classList.contains('active')) {
-        mobileMenuToggle.classList.remove('active')
-        mobileNavOverlay.classList.remove('active')
-        document.body.style.overflow = ''
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && mobileNavOverlay.classList.contains("active")) {
+        mobileMenuToggle.classList.remove("active");
+        mobileNavOverlay.classList.remove("active");
+        document.body.style.overflow = "";
       }
-    })
+    });
   }
-})
+});

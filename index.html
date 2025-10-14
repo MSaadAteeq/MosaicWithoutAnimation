@@ -338,12 +338,12 @@
       <section class="panel panel-5">
         <!-- GLOW + GRID OVERLAY -->
 
-        <!-- <div class="container-overlay">
+        <div class="container-overlay">
           <div class="hex-grid">
             <div class="light"></div>
             <div class="grid"></div>
           </div>
-        </div> -->
+        </div>
         <div class="footer-inner">
           <div class="footer-left">
             <img
@@ -380,11 +380,11 @@
             <li><a href="/privacy.html">Privacy Policy</a></li>
             <li><a href="/Terms of Use.html">Terms of Use</a></li>
             <li>
-              <a href="/Disclosure Statements.html">Disclosure Statements</a>
+              <a href="/disclosure-statements.html">Disclosure Statements</a>
             </li>
             <li><a href="/site-legal.html">Site Legal</a></li>
             <li>
-              <a href="/Compliance Disclaimers.html">Compliance Disclaimers</a>
+              <a href="/compliance-disclaimer.html">Compliance Disclaimers</a>
             </li>
           </ul>
         </div>
@@ -404,51 +404,51 @@
 
     <script>
       // Initialize a new Lenis instance for smooth scrolling
-      const lenis = new Lenis()
+      const lenis = new Lenis();
 
       // Synchronize Lenis scrolling with GSAP's ScrollTrigger plugin
-      lenis.on('scroll', ScrollTrigger.update)
+      lenis.on("scroll", ScrollTrigger.update);
 
       // Add Lenis's requestAnimationFrame (raf) method to GSAP's ticker
       // This ensures Lenis's smooth scroll animation updates on each GSAP tick
       gsap.ticker.add((time) => {
-        lenis.raf(time * 1000) // Convert time from seconds to milliseconds
-      })
+        lenis.raf(time * 1000); // Convert time from seconds to milliseconds
+      });
 
       // Disable lag smoothing in GSAP to prevent any delay in scroll animations
-      gsap.ticker.lagSmoothing(0)
+      gsap.ticker.lagSmoothing(0);
     </script>
     <!-- Team Data -->
     <script>
       // === TEAM DATA ===
       const teamMembers = [
         {
-          name: 'John Cosenza',
-          role: 'Co-Founder Mosaic Platforms',
-          image: './images/John-Cosenza-Team-Member.png',
+          name: "John Cosenza",
+          role: "Co-Founder Mosaic Platforms",
+          image: "./images/John-Cosenza-Team-Member.png",
         },
         {
-          name: 'Joe Wald',
-          role: 'Co-Founder Mosaic Platforms',
-          image: './images/Joe-Wald-Team-Member-2.png',
+          name: "Joe Wald",
+          role: "Co-Founder Mosaic Platforms",
+          image: "./images/Joe-Wald-Team-Member-2.png",
         },
         {
-          name: 'Shelley Eleby',
-          role: 'Chief Marketing Officer',
-          image: './images/Shelly-Eleby-Team-Member-3.png',
+          name: "Shelley Eleby",
+          role: "Chief Marketing Officer",
+          image: "./images/Shelly-Eleby-Team-Member-3.png",
         },
 
         {
-          name: 'Robert Weiss',
-          role: 'Head of Technical Operations',
-          image: './images/Robert-Weiss-Team-Member-5.png',
+          name: "Robert Weiss",
+          role: "Head of Technical Operations",
+          image: "./images/Robert-Weiss-Team-Member-5.png",
         },
-      ]
+      ];
 
       // === MESSAGES DATA ===
       const messages = [
         {
-          personName: 'John Cosenza',
+          personName: "John Cosenza",
           personMessage: `John Cosenza is a forward-thinking executive with over 25 years of experience in global markets. He is widely recognized for his deep expertise in agency and risk trading, electronic product innovation, and market structure. Throughout his career, he has built and scaled platform businesses that help clients achieve their performance objectives.
 
 He previously served as Head of Electronic Trading for the Americas and Global Co-Head of Product, Research, and Development at Goldman Sachs. There, he led the firm’s electronic trading franchise and oversaw the growth of its U.S. equity ATS from #11 to #2—establishing it as one of the largest market centers globally. He also sponsored key strategic investments and served on the boards of IEX, BIDS Trading, and Purestream ATS.
@@ -458,7 +458,7 @@ Prior to Goldman Sachs, John was Head of Electronic Trading and a member of the 
 With deep operating experience across global banks, fintech platforms, and agency brokers, John brings a unique ability to align strategic vision with execution. He is known for his leadership, his ability to synthesize the big picture while commanding the details, and a consistent track record of building high-performing teams across distribution, product, and engineering.`,
         },
         {
-          personName: 'Joe Wald',
+          personName: "Joe Wald",
           personMessage: `Joe Wald is a recognized leader in electronic trading with over 30 years of experience driving innovation, building successful businesses, and delivering value for shareholders, clients, and team members.
 
 Most recently, Joe served as the Global Head of Electronic Trading at Bank of Montreal (BMO), where he was responsible for defining and executing the firm’s electronic trading vision and strategy. Before joining BMO, Joe was the Co-Founder and CEO of Clearpool Group, a pioneer in algorithmic trading as a service. Under his leadership, Clearpool transformed the electronic trading landscape before being successfully acquired by BMO.
@@ -468,7 +468,7 @@ Prior to Clearpool, Joe was EVP at GAIN Capital, overseeing the institutional el
 With a strong track record of innovation and leadership, Joe has been at the forefront of electronic trading evolution, consistently delivering cutting-edge solutions that enhance market transparency, liquidity, and efficiency.`,
         },
         {
-          personName: 'Shelley Eleby',
+          personName: "Shelley Eleby",
           personMessage: `Shelley Eleby is the Chief Marketing Officer at Mosaic Platforms, Inc., where she leads growth through strategic marketing and business development. With a strong passion for technology, data, and product innovation, Shelley has built a career at the intersection of FinTech and AdTech.
 
 Before joining Mosaic, she served as Managing Director and Head of Marketing for Electronic Trading at BMO Capital Markets, following BMO’s acquisition of Clearpool Group, where she was Chief Marketing Officer. Prior to returning to finance, Shelley held senior roles in marketing and client services in the AdTech industry. 
@@ -476,64 +476,64 @@ Before joining Mosaic, she served as Managing Director and Head of Marketing for
 Known for her strategic mindset and product-centric, data-driven approach, Shelley has successfully developed and executed brand, media, content, sales enablement, and event strategies that deliver measurable client impact and business results.`,
         },
         {
-          personName: 'Robert Weiss',
+          personName: "Robert Weiss",
           personMessage: `RJ Weiss is the Head of Technical Operations at Mosaic Platforms, Inc., where he oversees the performance, efficiency, and integrity of the firm’s ATS software. With more than 18 years of experience in financial technology, RJ brings deep expertise in product management, sales, and technical operations.
 
 Before joining Mosaic, RJ spent a decade at ITG and Virtu Financial, managing product and sales within the Workflow Technology division. Earlier in his career, he spent eight years at Eze Castle Software, ultimately serving as a Business Consultant Team Manager.
  
 RJ holds a bachelor’s degree in Geography and Geographical Information Systems from Middlebury College.`,
         },
-      ]
+      ];
 
       // === DOM REFERENCES ===
-      const teamWrapper = document.querySelector('.team-wrapper')
-      const popupOverlay = document.querySelector('.team-popup-overlay')
-      const popupImg = document.querySelector('.popup-image')
-      const popupName = document.querySelector('.popup-name')
-      const popupMsg = document.querySelector('.popup-message')
-      const popupClose = document.querySelector('.team-popup-close')
+      const teamWrapper = document.querySelector(".team-wrapper");
+      const popupOverlay = document.querySelector(".team-popup-overlay");
+      const popupImg = document.querySelector(".popup-image");
+      const popupName = document.querySelector(".popup-name");
+      const popupMsg = document.querySelector(".popup-message");
+      const popupClose = document.querySelector(".team-popup-close");
 
       // === DYNAMIC CARD CREATION ===
       if (teamWrapper) {
         teamMembers.forEach((member) => {
-          const card = document.createElement('div')
-          card.className = 'team-card'
+          const card = document.createElement("div");
+          card.className = "team-card";
           card.innerHTML = `
       <img src="${member.image}" alt="${member.name}" class="team-profile" />
       <div class="team-info">
         <h3 class="team-name">${member.name}</h3>
         <p class="team-role">${member.role}</p>
       </div>
-    `
+    `;
 
           // ✅ Click Event to Open Popup with Specific Data
-          card.addEventListener('click', () => {
+          card.addEventListener("click", () => {
             const personData = messages.find(
               (msg) => msg.personName === member.name
-            )
+            );
 
-            popupImg.src = member.image
-            popupName.textContent = member.name
+            popupImg.src = member.image;
+            popupName.textContent = member.name;
             popupMsg.textContent = personData
               ? personData.personMessage
-              : 'No additional information available.'
-            popupOverlay.classList.remove('hidden')
-          })
+              : "No additional information available.";
+            popupOverlay.classList.remove("hidden");
+          });
 
-          teamWrapper.appendChild(card)
-        })
+          teamWrapper.appendChild(card);
+        });
       }
 
       // === CLOSE POPUP ===
-      popupClose.addEventListener('click', () => {
-        popupOverlay.classList.add('hidden')
-      })
+      popupClose.addEventListener("click", () => {
+        popupOverlay.classList.add("hidden");
+      });
 
-      popupOverlay.addEventListener('click', (e) => {
+      popupOverlay.addEventListener("click", (e) => {
         if (e.target === popupOverlay) {
-          popupOverlay.classList.add('hidden')
+          popupOverlay.classList.add("hidden");
         }
-      })
+      });
     </script>
   </body>
 </html>

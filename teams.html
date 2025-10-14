@@ -11,6 +11,38 @@
       href="https://unpkg.com/lenis@1.3.11/dist/lenis.css"
     />
     <style>
+      body.single-page section.panel {
+        overflow: visible;
+        color: #fff;
+        min-height: 100vh;
+        height: auto; /* Allow natural height */
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+      }
+
+      /* Content pages - panel-1 should allow scrolling */
+      body.single-page .panel {
+        min-height: 100vh;
+        height: auto;
+      }
+      /* Content pages specific */
+      body.single-page .panel .panel-container {
+        height: auto;
+        min-height: 100vh;
+        padding: 160px 40px 80px;
+        z-index: 9;
+      }
+      .panel-container {
+        max-width: 1600px;
+        margin: 0 auto;
+      }
+      .privacy-content {
+        padding: 160px 0px 0px;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+      }
       .panel-container.team-members {
         padding: 250px 0 0;
       }
@@ -86,6 +118,10 @@
         line-height: 1.3;
       }
 
+      body.single-page section.panel.panel-5 {
+        justify-content: center;
+      }
+
       @media (max-width: 991px) {
         .panel .panel-container .team-section {
           width: 90% !important;
@@ -111,7 +147,7 @@
       }
     </style>
   </head>
-  <body class="privacy-page">
+  <body class="single-page">
     <!-- Loader -->
     <div class="loader-overlay">
       <!-- panels for stagger -->
@@ -384,11 +420,11 @@
             <li><a href="/privacy.html">Privacy Policy</a></li>
             <li><a href="/Terms of Use.html">Terms of Use</a></li>
             <li>
-              <a href="/Disclosure Statements.html">Disclosure Statements</a>
+              <a href="/disclosure-statements.html">Disclosure Statements</a>
             </li>
             <li><a href="/site-legal.html">Site Legal</a></li>
             <li>
-              <a href="/Compliance Disclaimers.html">Compliance Disclaimers</a>
+              <a href="/compliance-disclaimer.html">Compliance Disclaimers</a>
             </li>
           </ul>
         </div>
@@ -408,19 +444,19 @@
 
     <script>
       // Initialize a new Lenis instance for smooth scrolling
-      const lenis = new Lenis()
+      const lenis = new Lenis();
 
       // Synchronize Lenis scrolling with GSAP's ScrollTrigger plugin
-      lenis.on('scroll', ScrollTrigger.update)
+      lenis.on("scroll", ScrollTrigger.update);
 
       // Add Lenis's requestAnimationFrame (raf) method to GSAP's ticker
       // This ensures Lenis's smooth scroll animation updates on each GSAP tick
       gsap.ticker.add((time) => {
-        lenis.raf(time * 1000) // Convert time from seconds to milliseconds
-      })
+        lenis.raf(time * 1000); // Convert time from seconds to milliseconds
+      });
 
       // Disable lag smoothing in GSAP to prevent any delay in scroll animations
-      gsap.ticker.lagSmoothing(0)
+      gsap.ticker.lagSmoothing(0);
     </script>
   </body>
 </html>

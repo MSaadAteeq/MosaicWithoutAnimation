@@ -6,24 +6,24 @@
 
 /* Font Style 1 */
 @font-face {
-  font-family: 'Armstrong';
-  src: url('./fonts/armstrong-ttf/ArmstrongRegular.ttf'),
-    url('./fonts/armstrong-ttf/ArmstrongRegular.woff'),
-    url('./fonts/armstrong-ttf/ArmstrongRegular.woff2'),
-    url('./fonts/armstrong-ttf/ArmstrongRegular.svg'),
-    url('./fonts/armstrong-ttf/ArmstrongRegular.eot');
+  font-family: "Armstrong";
+  src: url("./fonts/armstrong-ttf/ArmstrongRegular.ttf"),
+    url("./fonts/armstrong-ttf/ArmstrongRegular.woff"),
+    url("./fonts/armstrong-ttf/ArmstrongRegular.woff2"),
+    url("./fonts/armstrong-ttf/ArmstrongRegular.svg"),
+    url("./fonts/armstrong-ttf/ArmstrongRegular.eot");
   font-style: normal;
   font-weight: normal;
 }
 
 /* Font Style 2 */
 @font-face {
-  font-family: 'Helvetica';
-  src: url('./fonts/helvetica-ttf/Helvetica.ttf'),
-    url('./fonts/helvetica-ttf/Helvetica.woff'),
-    url('./fonts/helvetica-ttf/Helvetica.woff2'),
-    url('./fonts/helvetica-ttf/Helvetica.svg'),
-    url('./fonts/helvetica-ttf/Helvetica.eot');
+  font-family: "Helvetica";
+  src: url("./fonts/helvetica-ttf/Helvetica.ttf"),
+    url("./fonts/helvetica-ttf/Helvetica.woff"),
+    url("./fonts/helvetica-ttf/Helvetica.woff2"),
+    url("./fonts/helvetica-ttf/Helvetica.svg"),
+    url("./fonts/helvetica-ttf/Helvetica.eot");
   font-style: normal;
   font-weight: normal;
 }
@@ -38,8 +38,8 @@
   --color-link-color: rgba(255, 255, 255, 1);
   --color-background-color: rgb(255, 255, 255);
   --color-background-color-gradiant: ;
-  --font-family-first: 'Armstrong', Sans-serif;
-  --font-family-second: 'Helvetica', Sans-serif;
+  --font-family-first: "Armstrong", Sans-serif;
+  --font-family-second: "Helvetica", Sans-serif;
 }
 
 body {
@@ -334,23 +334,20 @@ body.loaded .hero-section video {
   position: relative;
   width: 100%;
 }
-
-section.panel {
+body:not(.single-page) section.panel {
   overflow: hidden;
   color: #fff;
-  min-height: 100vh;
   height: 100vh;
+  min-height: 100vh;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
-  /* scroll-snap-align: start;
-  scroll-snap-stop: always; */
 }
 
-.panel .panel-container {
+body:not(.single-page) .panel .panel-container {
   position: relative;
   z-index: 9;
   max-width: 1600px;
@@ -360,6 +357,7 @@ section.panel {
   align-items: center;
   width: 100%;
   margin: 0 auto;
+  height: 100%;
 }
 .horizontal {
   position: relative;
@@ -381,32 +379,32 @@ section.panel {
 
 /* Gradient per section */
 .panel-1 {
-  background: url('./images/gradient-bg-image.png') center center;
+  background: url("./images/gradient-bg-image.png") center center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .panel-2 {
-  background: url('./images/gradient-bg-image-2.png') center center;
+  background: url("./images/gradient-bg-image-2.png") center center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .panel-3 {
-  background: url('./images/gradient-bg-image.png') center center;
+  background: url("./images/gradient-bg-image.png") center center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .panel-4 {
-  background: url('./images/gradient-bg-image-2.png') center center;
+  background: url("./images/gradient-bg-image-2.png") center center;
   background-repeat: no-repeat;
   background-size: cover;
   gap: 20px;
 }
 
 .panel-5 {
-  background: url('./images/gradient-bg-image.png') center center;
+  background: url("./images/gradient-bg-image.png") center center;
   background-repeat: no-repeat;
   background-size: cover;
   gap: 171px;
@@ -436,7 +434,7 @@ section.panel {
   position: absolute;
   top: 0;
   left: 0;
-  background: url('./images/Tiles-grid-bg-image.svg') center center;
+  background: url("./images/Tiles-grid-bg-image.svg") center center;
   background-repeat: repeat;
   width: 100%;
   height: 100%;
@@ -448,7 +446,7 @@ section.panel {
   position: absolute;
   top: 0;
   left: 0;
-  background: url('./images/Tiles-grid-bg-image-2.svg') center center;
+  background: url("./images/Tiles-grid-bg-image-2.svg") center center;
   background-repeat: repeat;
   width: 100%;
   height: 100%;
@@ -816,7 +814,7 @@ section.panel {
 }
 
 .team-popup {
-  background: url('./images/gradient-bg-image-2.png') no-repeat;
+  background: url("./images/gradient-bg-image-2.png") no-repeat;
   background-size: cover;
   background-position: center;
   padding: clamp(2rem, 5vw, 6.25rem) clamp(1rem, 3vw, 1.875rem);
@@ -1163,7 +1161,7 @@ section.panel {
 }
 
 .footer-legal li + li::before {
-  content: '|';
+  content: "|";
   position: absolute;
   left: 4px;
   color: rgba(255, 255, 255, 0.6);
@@ -2179,7 +2177,7 @@ a:focus,
 }
 
 .video-play-button::after {
-  content: '';
+  content: "";
   width: 0;
   height: 0;
   border-style: solid;

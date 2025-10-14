@@ -61,6 +61,60 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 })
 
+// Video Play Button Functionality
+document.addEventListener('DOMContentLoaded', () => {
+  const video = document.querySelector('.hero-section video')
+  const playButton = document.querySelector('.video-play-button')
+
+  if (video && playButton) {
+    // Initially pause the video (in case autoplay started it)
+    video.pause()
+
+    // Show play button
+    playButton.style.display = 'flex'
+
+    // Play button click handler
+    playButton.addEventListener('click', () => {
+      if (video.paused) {
+        video.play()
+        playButton.style.opacity = '0'
+        playButton.style.pointerEvents = 'none'
+      } else {
+        video.pause()
+        playButton.style.opacity = '1'
+        playButton.style.pointerEvents = 'auto'
+      }
+    })
+
+    // Video click handler (optional - allows clicking video to pause)
+    video.addEventListener('click', () => {
+      if (!video.paused) {
+        video.pause()
+        playButton.style.opacity = '1'
+        playButton.style.pointerEvents = 'auto'
+      }
+    })
+
+    // Show play button when video ends
+    video.addEventListener('ended', () => {
+      playButton.style.opacity = '1'
+      playButton.style.pointerEvents = 'auto'
+    })
+
+    // Optional: Show play button on pause
+    video.addEventListener('pause', () => {
+      playButton.style.opacity = '1'
+      playButton.style.pointerEvents = 'auto'
+    })
+
+    // Hide play button when video is playing
+    video.addEventListener('play', () => {
+      playButton.style.opacity = '0'
+      playButton.style.pointerEvents = 'none'
+    })
+  }
+})
+
 // Horizontall Scroll Animation GSAP
 document.addEventListener('DOMContentLoaded', () => {
   gsap.registerPlugin(ScrollTrigger)
@@ -215,13 +269,13 @@ document.addEventListener('DOMContentLoaded', () => {
         ease: 'none',
         scrollTrigger: {
           trigger: horizontalSection,
-          start: 'top top', // Start when panel-3 reaches top
+          start: 'top top',
           end: () => `+=${teamWrapper.scrollWidth * 1.2}`, // Adjust scroll distance
           pin: true,
           scrub: 1,
           anticipatePin: 1,
           invalidateOnRefresh: true,
-          markers: true, // Remove this in production
+          markers: false,
         },
       }
     )
@@ -312,10 +366,10 @@ window.addEventListener('load', async () => {
   const panels = document.querySelectorAll('.reveal-panel')
   const headerLogo = document.querySelector('.mosaic-header .logo .mosaic-logo')
   const headerMenu = document.querySelector('.mosaic-header .nav-menu')
-
   const headerContact = document.querySelector('.mosaic-header .connect-btn')
-
   const video = document.querySelector('.hero-section video')
+  const playButton = document.querySelector('.video-play-button')
+
   // Ensure images load
   const waitForImage = (img) =>
     img.complete && img.naturalWidth > 0
@@ -331,6 +385,7 @@ window.addEventListener('load', async () => {
   gsap.set(panels, { scaleX: 1, transformOrigin: 'right center' })
   gsap.set([headerLogo, headerMenu, headerContact], { y: -150 })
   gsap.set(video, { opacity: 0 }) // start hidden
+  gsap.set(playButton, { opacity: 0, scale: 0.5 })
 
   const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
 
@@ -392,6 +447,18 @@ window.addEventListener('load', async () => {
         ease: 'power4.out',
       },
       '-=0.3' // overlap slightly with header
+    )
+    // Play button fade in and scale
+    .to(
+      playButton,
+      {
+        opacity: 1,
+        scale: 1,
+        duration: 0.5,
+        delay: 1.2,
+        ease: 'back.out(1.7)',
+      },
+      '-=0.8'
     )
 })
 

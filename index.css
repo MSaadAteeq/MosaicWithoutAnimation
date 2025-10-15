@@ -708,6 +708,8 @@ body:not(.single-page) .panel .panel-container {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  position: relative;
+  z-index: 9;
   gap: 0;
 }
 
@@ -783,12 +785,14 @@ body:not(.single-page) .panel .panel-container {
   line-height: 1.2;
   font-family: var(--font-family-first);
   margin-bottom: 0.5rem;
+  font-weight: 500;
 }
 
 .team-card .team-info .team-role {
   font-size: clamp(0.9rem, 2.5vw, 1.125rem);
   line-height: 1.2;
   font-family: var(--font-family-second);
+  font-weight: 300;
 }
 
 .team-footer {

@@ -61,60 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 })
 
-// Video Play Button Functionality
-document.addEventListener('DOMContentLoaded', () => {
-  const video = document.querySelector('.hero-section video')
-  const playButton = document.querySelector('.video-play-button')
-
-  if (video && playButton) {
-    // Initially pause the video (in case autoplay started it)
-    video.pause()
-
-    // Show play button
-    playButton.style.display = 'flex'
-
-    // Play button click handler
-    playButton.addEventListener('click', () => {
-      if (video.paused) {
-        video.play()
-        playButton.style.opacity = '0'
-        playButton.style.pointerEvents = 'none'
-      } else {
-        video.pause()
-        playButton.style.opacity = '1'
-        playButton.style.pointerEvents = 'auto'
-      }
-    })
-
-    // Video click handler (optional - allows clicking video to pause)
-    video.addEventListener('click', () => {
-      if (!video.paused) {
-        video.pause()
-        playButton.style.opacity = '1'
-        playButton.style.pointerEvents = 'auto'
-      }
-    })
-
-    // Show play button when video ends
-    video.addEventListener('ended', () => {
-      playButton.style.opacity = '1'
-      playButton.style.pointerEvents = 'auto'
-    })
-
-    // Optional: Show play button on pause
-    video.addEventListener('pause', () => {
-      playButton.style.opacity = '1'
-      playButton.style.pointerEvents = 'auto'
-    })
-
-    // Hide play button when video is playing
-    video.addEventListener('play', () => {
-      playButton.style.opacity = '0'
-      playButton.style.pointerEvents = 'none'
-    })
-  }
-})
-
 // Horizontall Scroll Animation GSAP
 document.addEventListener('DOMContentLoaded', () => {
   gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
@@ -131,49 +77,113 @@ document.addEventListener('DOMContentLoaded', () => {
   // ===== HOMEPAGE SCROLL LOGIC =====
   if (isHomePage) {
     console.log('Home page detected - Applying full scroll animations')
+    // Video play/pause functionality
+    const video = document.querySelector('.hero-section video')
+    let videoPlayPromise = null
+    if (video) {
+      // Remove autoplay attribute and set muted for better control
+      video.removeAttribute('autoplay')
+      video.muted = true // Ensure muted for autoplay policies
+      // Initialize video as paused
+      video.pause()
+
+      // Enhanced ScrollTrigger for video with better visibility detection
+      ScrollTrigger.create({
+        trigger: '.panel-1',
+        start: 'top top',
+        end: 'bottom top',
+        onEnter: () => {
+          // console.log('Entering video section from top')
+          playVideoSafely(video)
+        },
+        onLeave: () => {
+          // console.log('Leaving video section downward')
+          video.pause()
+        },
+        onEnterBack: () => {
+          // console.log('Entering back to video section from bottom')
+          playVideoSafely(video)
+        },
+        onLeaveBack: () => {
+          // console.log('Leaving back from video section upward')
+          playVideoSafely(video)
+        },
+        onUpdate: (self) => {
+          // Additional check for when user is within the panel-1 section
+          const isVideoInView = self.progress > 0 && self.progress < 1
+          if (isVideoInView && video.paused) {
+            playVideoSafely(video)
+          } else if (!isVideoInView && !video.paused) {
+            video.pause()
+          }
+        },
+      })
+
+      // Helper function to safely play video with error handling
+      function playVideoSafely(videoElement) {
+        if (videoElement.paused) {
+          // Cancel any existing play promise
+          if (videoPlayPromise) {
+            videoPlayPromise
+              .catch(() => {})
+              .finally(() => {
+                videoPlayPromise = videoElement.play().catch((e) => {
+                  console.log('Video play failed:', e)
+                  return null
+                })
+              })
+          } else {
+            videoPlayPromise = videoElement.play().catch((e) => {
+              console.log('Video play failed:', e)
+              return null
+            })
+          }
+        }
+      }
+
+      // Also add manual play/pause for better control
+      const videoContainer = document.querySelector('.video-container')
+      const playButton = document.querySelector('.video-play-button')
+
+      if (playButton && videoContainer) {
+        playButton.addEventListener('click', () => {
+          if (video.paused) {
+            playVideoSafely(video)
+            playButton.style.opacity = '0'
+          } else {
+            video.pause()
+            playButton.style.opacity = '1'
+          }
+        })
+
+        video.addEventListener('click', () => {
+          if (video.paused) {
+            playVideoSafely(video)
+            playButton.style.opacity = '0'
+          } else {
+            video.pause()
+            playButton.style.opacity = '1'
+          }
+        })
+
+        video.addEventListener('play', () => {
+          playButton.style.opacity = '0'
+        })
+
+        video.addEventListener('pause', () => {
+          playButton.style.opacity = '1'
+        })
+
+        // Initial state - show play button since video starts paused
+        playButton.style.opacity = '1'
+      }
+    }
 
     // Animation for Platform Panel-2
-    gsap.from('.ats-container .ats-title', {
+    gsap.from('.panel-2 .ats-title', {
       y: 100,
       opacity: 0,
       duration: 1,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: '.panel',
-        start: 'top 80%',
-        toggleActions: 'play none none reverse',
-      },
-    })
-
-    gsap.from('.ats-container .ats-description', {
-      y: 150,
-      opacity: 0,
-      duration: 1,
-      delay: 0.2,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: '.panel',
-        start: 'top 80%',
-        toggleActions: 'play none none reverse',
-      },
-    })
-    gsap.from('.ats-container .ats-plat', {
-      y: 120,
-      opacity: 1,
-      duration: 1,
-      delay: 0.3,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: '.panel',
-        start: 'top 80%',
-        toggleActions: 'play none none reverse',
-      },
-    })
-    gsap.from('.ats-container .ats-cards', {
-      y: 150,
-      opacity: 0,
-      duration: 1,
-      delay: 0.5,
       ease: 'power3.out',
       scrollTrigger: {
         trigger: '.panel-2',
@@ -181,154 +191,226 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleActions: 'play none none reverse',
       },
     })
+    gsap.from('.panel-2 .ats-description', {
+      y: 150,
+      opacity: 0,
+      duration: 1,
+      delay: 0.2,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.panel-2',
+        start: 'top 80%',
+        toggleActions: 'play none none reverse',
+      },
+    })
+    gsap.from('.panel-2 .ats-plat', {
+      y: 120,
+      opacity: 1,
+      duration: 1,
+      delay: 0.3,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.panel-2',
+        start: 'top 80%',
+        toggleActions: 'play none none reverse',
+      },
+    })
+    // Cards animation - 3D stacked to horizontally spread
+    const cards = gsap.utils.toArray('.panel-2 .ats-card')
 
-    // gsap.set('.card1', { x: -250, y: 120, position: 'absolute' })
-    // gsap.set('.card2', { x: -225, y: 100, position: 'absolute' })
-    // gsap.set('.card3', { x: -200, y: 80, position: 'absolute' })
+    // Add perspective to the container to prevent shrinking
+    gsap.set('.panel-2 .ats-cards', {
+      perspective: 1200,
+      transformStyle: 'preserve-3d',
+    })
 
-    // Animate from below upward + fade-in + align into layout
-    // gsap.fromTo(
-    //   '.ats-card',
-    //   {
-    //     x: 0,
-    //     y: 150,
-    //     opacity: 0,
-    //     scale: 0.9,
-    //   },
-    //   {
-    //     x: 0,
-    //     y: 0,
-    //     opacity: 1,
-    //     scale: 1,
-    //     duration: 1.2,
-    //     ease: 'power3.out',
-    //     stagger: 0.25,
-    //     scrollTrigger: {
-    //       trigger: '.ats-cards',
-    //       start: 'top 85%',
-    //       toggleActions: 'play none none reverse',
-    //     },
-    //     onStart: () => {
-    //       // Keep the absolute look at the start
-    //       gsap.set('.ats-card', { position: 'absolute' })
-    //     },
-    //     onComplete: () => {
-    //       // Reset position for natural flex layout
-    //       gsap.set('.ats-card', { clearProps: 'position,top,left,transform' })
-    //     },
-    //   }
-    // )
+    // Set initial 3D stacked state with preserved scale
+    gsap.set(cards, {
+      transformOrigin: 'center center',
+      transformStyle: 'preserve-3d',
+      // y: 150,
+      opacity: 0.9,
+      scale: 1, // Ensure scale is maintained
+    })
 
-    // Animation for Platform Panel-3
-    // gsap.from('.teams-header .teams-title', {
-    //   y: 100,
-    //   opacity: 0,
-    //   duration: 1,
-    //   ease: 'power3.out',
-    //   scrollTrigger: {
-    //     trigger: '.panel',
-    //     start: 'top 80%',
-    //     toggleActions: 'play none none reverse',
-    //   },
-    // })
+    // Stagger the cards in a stacked formation with less extreme rotations
+    gsap.set(cards[0], {
+      x: 280,
+      y: 150,
+      z: -50,
+      rotationY: -65, // Reduced from -70
+      rotationX: -3,
+      rotationZ: 3, // Reduced from 5
+      opacity: 0.9,
+    })
 
-    // gsap.from('.teams-header .teams-description', {
-    //   y: 150,
-    //   opacity: 0,
-    //   duration: 1,
-    //   delay: 0.2,
-    //   ease: 'power3.out',
-    //   scrollTrigger: {
-    //     trigger: '.panel',
-    //     start: 'top 80%',
-    //     toggleActions: 'play none none reverse',
-    //   },
-    // })
+    gsap.set(cards[1], {
+      x: 0,
+      y: 150,
+      z: 0, // Changed from -900 to prevent extreme depth
+      rotationY: -65, // Reduced from -70
+      rotationX: -3,
+      rotationZ: 3, // Reduced from 5
+      opacity: 0.9,
+    })
 
-    // gsap.from('.teams-scroll-wrapper .team-footer', {
-    //   y: 150,
-    //   opacity: 0,
-    //   duration: 1,
-    //   delay: 1,
-    //   ease: 'power3.out',
-    //   scrollTrigger: {
-    //     trigger: '.panel',
-    //     start: 'top 80%',
-    //     toggleActions: 'play none none reverse',
-    //   },
-    // })
+    gsap.set(cards[2], {
+      x: -250,
+      y: 150,
+      z: 50,
+      rotationY: -65, // Reduced from -70
+      rotationX: -3,
+      rotationZ: 3, // Reduced from 5
+      opacity: 0.9,
+    })
 
-    // Horizontal scroll animation for team cards
-    const horizontalSection = document.querySelector('#horizontal-scroll')
-    const teamWrapper = document.querySelector('.team-wrapper')
-
-    // Calculate the starting position (center of viewport minus header)
-    const startX = (window.innerWidth - 600) / 2 // 600 is header width
-
+    // Animate from stacked to normal positions
     gsap.fromTo(
-      teamWrapper,
+      cards,
       {
-        x: 50, // Start from center
+        // Start state is already set above
       },
       {
-        x: () => -(teamWrapper.scrollWidth - window.innerWidth + 600),
-        ease: 'none',
+        // End state - cards spread to natural flex positions
+        x: 0,
+        y: 0,
+        z: 0,
+        rotationX: 0,
+        rotationY: 0,
+        rotationZ: 0,
+        opacity: 1,
+        duration: 0.5, // Reduced from 1000 (which was 1000 seconds!)
+        delay: 0.5,
+        ease: 'power3.out',
+        stagger: {
+          each: 0.2,
+          from: 'center',
+        },
         scrollTrigger: {
-          trigger: horizontalSection,
-          start: 'top top',
-          end: () => `+=${teamWrapper.scrollWidth + startX - 150}`,
-          pin: true,
-          scrub: true,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
+          trigger: '.panel-2 .ats-cards',
           markers: false,
+          start: 'top 85%',
+          toggleActions: 'play none none reverse',
+        },
+        onComplete: function () {
+          // Reset to natural flex layout after animation
+          gsap.set(cards, {
+            clearProps: 'all',
+          })
         },
       }
     )
 
-    // Teams inner cards
-    document.querySelectorAll('.team-card').forEach((cards) => {
-      gsap.from(cards, {
+    // Animation for Platform Panel-3
+    gsap.from('.panel-3 .teams-title', {
+      y: 100,
+      opacity: 0,
+      duration: 1,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.panel-3',
+        start: 'top 80%',
+        toggleActions: 'play none none reverse',
+      },
+    })
+
+    gsap.from('.panel-3 .teams-description', {
+      y: 150,
+      opacity: 0,
+      duration: 1,
+      delay: 0.2,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.panel-3',
+        start: 'top 80%',
+        toggleActions: 'play none none reverse',
+      },
+    })
+
+    gsap.from('.panel-3.teams-scroll-wrapper .team-footer', {
+      y: 150,
+      opacity: 0,
+      duration: 1,
+      delay: 1,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.panel-3',
+        start: 'top 80%',
+        toggleActions: 'play none none reverse',
+      },
+    })
+    // ===== HORIZONTAL SCROLL FOR PANEL-3 =====
+    const horizontalSection = document.querySelector('#horizontal-scroll')
+    const teamWrapper = document.querySelector('.team-wrapper')
+
+    if (horizontalSection && teamWrapper) {
+      // CRITICAL FIX: Trigger on panel-3, not on horizontal-scroll container
+      gsap.fromTo(
+        teamWrapper,
+        {
+          x: 50,
+        },
+        {
+          x: () => -(teamWrapper.scrollWidth - window.innerWidth + 600),
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '.panel-3', // Trigger specifically on panel-3
+            start: 'top top', // Start when panel-3 reaches viewport top
+            end: () => `+=${teamWrapper.scrollWidth}`,
+            pin: '.panel-3', // Pin panel-3 during horizontal scroll
+            scrub: 1,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+            markers: true, // Keep enabled for debugging
+            id: 'horizontal-scroll',
+          },
+        }
+      )
+    }
+
+    // Team cards inner animation
+    document.querySelectorAll('.team-card').forEach((card) => {
+      gsap.from(card, {
         x: 0,
         duration: 0.6,
         scrollTrigger: {
-          trigger: cards,
+          trigger: card,
           toggleActions: 'play none none reverse',
         },
       })
     })
-    // Vertical Scroll Animation GSAP
-    const panels = gsap.utils.toArray('section')
 
-    // Pin each section vertically
-    panels.forEach((panel) => {
-      // Skip horizontal one, it’s already pinned via timeline
-      if (panel.id === 'horizontal-scroll') return
+    // ===== VERTICAL PANEL PINNING =====
+    const panels = gsap.utils.toArray('.panel')
+
+    panels.forEach((panel, index) => {
+      // Skip panel-3 since it's pinned by horizontal scroll
+      if (panel.classList.contains('panel-3')) return
 
       ScrollTrigger.create({
         trigger: panel,
         start: 'top top',
         end: 'bottom top',
         pin: true,
-        scrub: true,
         pinSpacing: false,
         anticipatePin: 1,
+        markers: true, // Keep for debugging
       })
     })
 
-    // Optional smooth snap between vertical sections
+    // ===== SMOOTH SNAPPING BETWEEN SECTIONS =====
     ScrollTrigger.create({
       trigger: 'main',
       start: 'top top',
-      end: () => `+=${(panels.length - 1) * window.innerHeight}`,
+      end: () => `+=${panels.length * window.innerHeight}`,
       snap: {
-        snapTo: 1 / (panels.length - 1),
+        snapTo: 1 / panels.length,
         duration: { min: 0.3, max: 0.8 },
         ease: 'power1.inOut',
         delay: 0.1,
       },
-      scrub: 1,
     })
+
     // gsap.utils.toArray('.panel').forEach((sections) => {
     //   ScrollTrigger.create({
     //     trigger: sections,

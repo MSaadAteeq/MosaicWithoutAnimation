@@ -370,11 +370,7 @@ body:not(.single-page) .panel .panel-container {
   height: 100%;
 }
 .horizontal {
-  position: relative;
-  overflow: hidden;
   color: #fff;
-  height: 100vh;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;

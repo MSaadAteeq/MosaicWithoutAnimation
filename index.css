@@ -547,9 +547,6 @@ body:not(.single-page) .panel .panel-container {
 }
 
 /* ========== ATS SECTION ========== */
-body:not(.single-page) .panel.panel-2 .panel-container {
-  justify-content: flex-start;
-}
 
 .ats-container {
   max-width: 1600px;
@@ -2035,6 +2032,9 @@ a:focus,
 }
 
 @media (max-width: 992px) {
+  body:not(.single-page) .panel.panel-2 .panel-container {
+    justify-content: flex-start;
+  }
   .hex-grid .grid,
   .hex-grid .grid-2 {
     background-size: 100%;

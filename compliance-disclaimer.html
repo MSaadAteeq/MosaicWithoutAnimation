@@ -59,7 +59,7 @@
       }
 
       h1 {
-        font-family: "Armstrong", sans-serif;
+        font-family: 'Armstrong', sans-serif;
         font-size: 44px;
         line-height: 1.1;
         margin: 0 0 10px 0;
@@ -273,7 +273,7 @@
           <ul class="footer-legal">
             <li>© 2025 Mosaic. All Rights Reserved.</li>
             <li><a href="/privacy.html">Privacy Policy</a></li>
-            <li><a href="/Terms of Use.html">Terms of Use</a></li>
+            <li><a href="/terms-of-use.html">Terms of Use</a></li>
             <li>
               <a href="/disclosure-statements.html">Disclosure Statements</a>
             </li>
@@ -297,19 +297,19 @@
 
     <script>
       // Initialize a new Lenis instance for smooth scrolling
-      const lenis = new Lenis();
+      const lenis = new Lenis()
 
       // Synchronize Lenis scrolling with GSAP's ScrollTrigger plugin
-      lenis.on("scroll", ScrollTrigger.update);
+      lenis.on('scroll', ScrollTrigger.update)
 
       // Add Lenis's requestAnimationFrame (raf) method to GSAP's ticker
       // This ensures Lenis's smooth scroll animation updates on each GSAP tick
       gsap.ticker.add((time) => {
-        lenis.raf(time * 1000); // Convert time from seconds to milliseconds
-      });
+        lenis.raf(time * 1000) // Convert time from seconds to milliseconds
+      })
 
       // Disable lag smoothing in GSAP to prevent any delay in scroll animations
-      gsap.ticker.lagSmoothing(0);
+      gsap.ticker.lagSmoothing(0)
     </script>
   </body>
 </html>

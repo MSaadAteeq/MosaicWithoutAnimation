@@ -73,7 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.contains('privacy-page') ||
     document.body.classList.contains('terms-page') ||
     document.body.classList.contains('content-page')
-
+  // Helper function to check if mobile
+  const isMobile = () => window.innerWidth <= 991
   // ===== HOMEPAGE SCROLL LOGIC =====
   if (isHomePage) {
     console.log('Home page detected - Applying full scroll animations')
@@ -83,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (video) {
       // Remove autoplay attribute and set muted for better control
       video.removeAttribute('autoplay')
-      video.muted = true // Ensure muted for autoplay policies
+      video.muted = true
       // Initialize video as paused
       video.pause()
 
@@ -95,6 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
         onEnter: () => {
           // console.log('Entering video section from top')
           playVideoSafely(video)
+          video.muted = true
         },
         onLeave: () => {
           // console.log('Leaving video section downward')
@@ -103,6 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
         onEnterBack: () => {
           // console.log('Entering back to video section from bottom')
           playVideoSafely(video)
+          video.muted = true
         },
         onLeaveBack: () => {
           // console.log('Leaving back from video section upward')
@@ -115,6 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
             playVideoSafely(video)
           } else if (!isVideoInView && !video.paused) {
             video.pause()
+            video.muted = true
           }
         },
       })
@@ -129,6 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
               .finally(() => {
                 videoPlayPromise = videoElement.play().catch((e) => {
                   console.log('Video play failed:', e)
+                  video.muted = true
                   return null
                 })
               })
@@ -342,8 +347,30 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===== HORIZONTAL SCROLL FOR PANEL-3 =====
     const horizontalSection = document.querySelector('#horizontal-scroll')
     const teamWrapper = document.querySelector('.team-wrapper')
-
-    if (horizontalSection && teamWrapper) {
+    if (isMobile()) {
+      gsap.fromTo(
+        teamWrapper,
+        {
+          x: 700,
+        },
+        {
+          x: () => -teamWrapper.scrollWidth,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '.panel-3', // Trigger specifically on panel-3
+            start: 'top top', // Start when panel-3 reaches viewport top
+            end: () => `+=${teamWrapper.scrollWidth} - ${window.innerWidth}`,
+            pin: '.panel-3', // Pin panel-3 during horizontal scroll
+            scrub: 1,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+            markers: false, // Keep enabled for debugging
+            id: 'horizontal-scroll',
+          },
+        }
+      )
+    }
+    if (horizontalSection && teamWrapper && !isMobile()) {
       // CRITICAL FIX: Trigger on panel-3, not on horizontal-scroll container
       gsap.fromTo(
         teamWrapper,
@@ -361,7 +388,7 @@ document.addEventListener('DOMContentLoaded', () => {
             scrub: 1,
             anticipatePin: 1,
             invalidateOnRefresh: true,
-            markers: true, // Keep enabled for debugging
+            markers: false, // Keep enabled for debugging
             id: 'horizontal-scroll',
           },
         }
@@ -394,7 +421,7 @@ document.addEventListener('DOMContentLoaded', () => {
         pin: true,
         pinSpacing: false,
         anticipatePin: 1,
-        markers: true, // Keep for debugging
+        markers: false, // Keep for debugging
       })
     })
 

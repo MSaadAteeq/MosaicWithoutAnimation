@@ -2088,16 +2088,6 @@ a:focus,
     order: 3;
     margin-top: 20px;
   }
-  #horizontal-scroll {
-    max-width: 100vw;
-  }
-  .team-wrapper {
-    width: fit-content;
-  }
-  .team-card {
-    min-width: 85vw; /* Adjust as needed */
-    margin-right: 15px;
-  }
 }
 
 @media (max-width: 768px) {
@@ -2141,10 +2131,10 @@ a:focus,
     height: 100% !important;
     min-height: 100vh;
   }
-  #horizontal-scroll {
+  /* #horizontal-scroll {
     height: 100% !important;
     min-height: 100vh;
-  }
+  } */
 
   .ats-cards {
     flex-direction: column;

@@ -60,7 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
     animateGlow()
   })
 })
-
 // Horizontall Scroll Animation GSAP
 document.addEventListener('DOMContentLoaded', () => {
   gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
@@ -75,6 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.contains('content-page')
   // Helper function to check if mobile
   const isMobile = () => window.innerWidth <= 991
+
   // ===== HOMEPAGE SCROLL LOGIC =====
   if (isHomePage) {
     console.log('Home page detected - Applying full scroll animations')
@@ -93,34 +93,37 @@ document.addEventListener('DOMContentLoaded', () => {
         trigger: '.panel-1',
         start: 'top top',
         end: 'bottom top',
+
         onEnter: () => {
           // console.log('Entering video section from top')
           playVideoSafely(video)
-          video.muted = true
+          video.muted = false
         },
         onLeave: () => {
           // console.log('Leaving video section downward')
           video.pause()
+          video.muted = true
         },
         onEnterBack: () => {
           // console.log('Entering back to video section from bottom')
           playVideoSafely(video)
-          video.muted = true
+          video.muted = false
         },
         onLeaveBack: () => {
           // console.log('Leaving back from video section upward')
           playVideoSafely(video)
+          video.muted = false
         },
-        onUpdate: (self) => {
-          // Additional check for when user is within the panel-1 section
-          const isVideoInView = self.progress > 0 && self.progress < 1
-          if (isVideoInView && video.paused) {
-            playVideoSafely(video)
-          } else if (!isVideoInView && !video.paused) {
-            video.pause()
-            video.muted = true
-          }
-        },
+        // onUpdate: (self) => {
+        //   // Additional check for when user is within the panel-1 section
+        //   const isVideoInView = self.progress > 0 && self.progress < 1
+        //   if (isVideoInView && video.paused) {
+        //     playVideoSafely(video)
+        //   } else if (!isVideoInView && !video.paused) {
+        //     video.pause()
+        //     video.muted = true
+        //   }
+        // },
       })
 
       // Helper function to safely play video with error handling
@@ -133,7 +136,6 @@ document.addEventListener('DOMContentLoaded', () => {
               .finally(() => {
                 videoPlayPromise = videoElement.play().catch((e) => {
                   console.log('Video play failed:', e)
-                  video.muted = true
                   return null
                 })
               })
@@ -332,7 +334,7 @@ document.addEventListener('DOMContentLoaded', () => {
       },
     })
 
-    gsap.from('.panel-3.teams-scroll-wrapper .team-footer', {
+    gsap.from('.panel-3   .teams-scroll-wrapper .team-footer', {
       y: 150,
       opacity: 0,
       duration: 1,
@@ -344,55 +346,111 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleActions: 'play none none reverse',
       },
     })
-    // ===== HORIZONTAL SCROLL FOR PANEL-3 =====
+
+    // ===== REFACTORED HORIZONTAL SCROLL FOR PANEL-3 =====
     const horizontalSection = document.querySelector('#horizontal-scroll')
     const teamWrapper = document.querySelector('.team-wrapper')
-    if (isMobile()) {
-      gsap.fromTo(
-        teamWrapper,
-        {
-          x: 700,
-        },
-        {
-          x: () => -teamWrapper.scrollWidth,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: '.panel-3', // Trigger specifically on panel-3
-            start: 'top top', // Start when panel-3 reaches viewport top
-            end: () => `+=${teamWrapper.scrollWidth} - ${window.innerWidth}`,
-            pin: '.panel-3', // Pin panel-3 during horizontal scroll
-            scrub: 1,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-            markers: false, // Keep enabled for debugging
-            id: 'horizontal-scroll',
-          },
+    const teamCards = document.querySelectorAll('.team-card')
+
+    if (teamWrapper && teamCards.length > 0) {
+      // Calculate the exact scroll distance needed
+      const calculateScrollDistance = () => {
+        const lastCard = teamCards[teamCards.length - 1]
+        const lastCardRect = lastCard.getBoundingClientRect()
+        const wrapperRect = teamWrapper.getBoundingClientRect()
+        const viewportWidth = window.innerWidth
+
+        // Calculate when last card completely enters the viewport
+        const scrollDistance = teamWrapper.scrollWidth - viewportWidth
+
+        // Add a small buffer to ensure the last card is fully visible
+        const buffer = 20
+
+        return scrollDistance + buffer
+      }
+
+      // Function to setup horizontal scroll
+      const setupHorizontalScroll = () => {
+        const scrollDistance = calculateScrollDistance()
+
+        // Clear any existing horizontal scroll triggers
+        ScrollTrigger.getAll().forEach((st) => {
+          if (st.vars && st.vars.id === 'horizontal-scroll') {
+            st.kill()
+          }
+        })
+
+        if (isMobile()) {
+          // Mobile horizontal scroll
+          gsap.fromTo(
+            teamWrapper,
+            {
+              x: 50,
+            },
+            {
+              x: () => -scrollDistance,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: '.panel-3',
+                start: 'top top',
+                end: () => `+=${scrollDistance}`,
+                pin: '.panel-3',
+                scrub: 1,
+                anticipatePin: 1,
+                invalidateOnRefresh: true,
+                markers: false,
+                id: 'horizontal-scroll',
+                onUpdate: (self) => {
+                  // Prevent overscrolling
+                  if (self.progress >= 0.99) {
+                    gsap.set(teamWrapper, { x: -scrollDistance })
+                  }
+                },
+              },
+            }
+          )
+        } else {
+          // Desktop horizontal scroll
+          gsap.fromTo(
+            teamWrapper,
+            {
+              x: 50,
+            },
+            {
+              x: () => -scrollDistance,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: '.panel-3',
+                start: 'top top',
+                end: () => `+=${scrollDistance}`,
+                pin: '.panel-3',
+                scrub: 1,
+                anticipatePin: 1,
+                invalidateOnRefresh: true,
+                markers: false,
+                id: 'horizontal-scroll',
+                onUpdate: (self) => {
+                  // Prevent overscrolling
+                  if (self.progress >= 0.99) {
+                    gsap.set(teamWrapper, { x: -scrollDistance })
+                  }
+                },
+              },
+            }
+          )
         }
-      )
-    }
-    if (horizontalSection && teamWrapper && !isMobile()) {
-      // CRITICAL FIX: Trigger on panel-3, not on horizontal-scroll container
-      gsap.fromTo(
-        teamWrapper,
-        {
-          x: 50,
-        },
-        {
-          x: () => -(teamWrapper.scrollWidth - window.innerWidth + 600),
-          ease: 'none',
-          scrollTrigger: {
-            trigger: '.panel-3', // Trigger specifically on panel-3
-            start: 'top top', // Start when panel-3 reaches viewport top
-            end: () => `+=${teamWrapper.scrollWidth}`,
-            pin: '.panel-3', // Pin panel-3 during horizontal scroll
-            scrub: 1,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-            markers: false, // Keep enabled for debugging
-            id: 'horizontal-scroll',
-          },
-        }
-      )
+      }
+
+      // Initial setup
+      setupHorizontalScroll()
+
+      // Recalculate on resize
+      window.addEventListener('resize', () => {
+        setTimeout(() => {
+          setupHorizontalScroll()
+          ScrollTrigger.refresh()
+        }, 100)
+      })
     }
 
     // Team cards inner animation
@@ -421,7 +479,7 @@ document.addEventListener('DOMContentLoaded', () => {
         pin: true,
         pinSpacing: false,
         anticipatePin: 1,
-        markers: false, // Keep for debugging
+        markers: false,
       })
     })
 
@@ -437,25 +495,8 @@ document.addEventListener('DOMContentLoaded', () => {
         delay: 0.1,
       },
     })
-
-    // gsap.utils.toArray('.panel').forEach((sections) => {
-    //   ScrollTrigger.create({
-    //     trigger: sections,
-    //     start: 'top top',
-    //     end: '+=100vh',
-    //     pin: true,
-    //     pinSpacing: true,
-    //     srub: true,
-    //     markers: true,
-    //     snap: {
-    //       snapTo: 1 / (gsap.utils.toArray('.panel-container').length - 1),
-    //       duration: { min: 0.3, max: 1 },
-    //       delay: 0.1,
-    //       ease: 'power1.inOut',
-    //     },
-    //   })
-    // })
   }
+
   // ===== CONTENT PAGES SCROLL LOGIC =====
   if (isContentPage) {
     console.log('Content page detected - Applying simple scroll')
@@ -588,7 +629,7 @@ window.addEventListener('load', async () => {
         opacity: 1,
         scale: 1,
         duration: 0.5,
-        delay: 1.2,
+        delay: 0.5,
         ease: 'back.out(1.7)',
       },
       '-=0.8'

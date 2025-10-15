@@ -78,7 +78,8 @@
         justify-content: center;
         border-radius: 12px;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
-        padding-top: 90px;
+        padding-top: 50px;
+        gap: 20px;
       }
 
       .team-member.reverse {
@@ -86,7 +87,8 @@
       }
 
       .member-image {
-        min-height: 280px;
+        height: 100%;
+        width: 520px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -94,9 +96,13 @@
         border-radius: 10px;
         padding: 20px;
       }
+      .member-image img {
+        width: 100%;
+        height: auto;
+      }
 
       .member-info {
-        flex: 1;
+        width: 1060px;
         text-align: left;
       }
 
@@ -143,6 +149,7 @@
         }
         .member-info {
           text-align: center;
+          width: 100% !important;
         }
       }
     </style>
@@ -444,19 +451,19 @@
 
     <script>
       // Initialize a new Lenis instance for smooth scrolling
-      const lenis = new Lenis();
+      const lenis = new Lenis()
 
       // Synchronize Lenis scrolling with GSAP's ScrollTrigger plugin
-      lenis.on("scroll", ScrollTrigger.update);
+      lenis.on('scroll', ScrollTrigger.update)
 
       // Add Lenis's requestAnimationFrame (raf) method to GSAP's ticker
       // This ensures Lenis's smooth scroll animation updates on each GSAP tick
       gsap.ticker.add((time) => {
-        lenis.raf(time * 1000); // Convert time from seconds to milliseconds
-      });
+        lenis.raf(time * 1000) // Convert time from seconds to milliseconds
+      })
 
       // Disable lag smoothing in GSAP to prevent any delay in scroll animations
-      gsap.ticker.lagSmoothing(0);
+      gsap.ticker.lagSmoothing(0)
     </script>
   </body>
 </html>

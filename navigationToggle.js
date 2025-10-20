@@ -1,3 +1,5 @@
+// eslint-disable-next-line no-unused-vars
+
 function navigationToggle() {
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle')
   const mobileNavOverlay = document.querySelector('.mobile-nav-overlay')

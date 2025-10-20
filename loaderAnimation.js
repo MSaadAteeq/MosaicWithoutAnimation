@@ -1,3 +1,5 @@
+// eslint-disable-next-line no-unused-vars
+
 async function loaderAnimation() {
     const loader = document.querySelector('.loader-overlay')
   const logo = document.querySelector('.logo')

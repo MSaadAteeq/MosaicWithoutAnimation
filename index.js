@@ -1,3 +1,5 @@
+// eslint-disable-next-line no-unused-vars
+
 import loaderAnimation from './loaderAnimation.js';
 import navigationToggle from './navigationToggle.js';
 import pointerAnimation from './pointerAnimation.js';
@@ -12,16 +14,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (isHome) {
     new Swiper('.blogSwiper', {
+      
       speed: 800,
-      slidesPerView: 1.2,
+      slidesPerView: 1.5,
       centeredSlides: true,
+      slidesOffsetBefore: 0,
+      slidesOffsetAfter: 0,
       spaceBetween: 30,
-      grabCursor: true,
-      // useCSS3D: true,
-      // useCSS3DTransform: true,
+      grabCursor: true, 
+      // loop: true,
+      useCSS3D: true,
+      useCSS3DTransform: true,
+      on: {
+        init(swiper) {
+          // remove initial left offset added by centeredSlides
+          swiper.setTranslate(0)
+        }
+      },
       
       // Full width
-      // width: '100vw',
+      // width: '100vw', 
       navigation: {
         nextEl: '.blog-button-next',
         prevEl: '.blog-button-prev',

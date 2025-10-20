@@ -1,3 +1,5 @@
+// eslint-disable-next-line no-unused-vars
+
 function pointerAnimation() {
     document.querySelectorAll('.hex-grid').forEach((grid) => {
         const light = grid.querySelector('.light')

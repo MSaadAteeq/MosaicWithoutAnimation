@@ -1,4 +1,6 @@
 
+// eslint-disable-next-line no-unused-vars
+
 gsap.registerPlugin(Observer);
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -25,15 +27,16 @@ document.addEventListener('DOMContentLoaded', () => {
             video.pause();
             video.muted = true;
 
-            // Show play button initially
+            // Show the play button initially (video is paused)
             playButton.style.opacity = '1';
 
-            // Manual play button functionality
+            // Manual play button functionality (toggle play/pause)
             playButton.addEventListener('click', () => {
                 if (video.paused) {
                     video.play();
                     video.muted = false;
-                    playButton.style.opacity = '0';
+                } else {
+                    video.pause();
                 }
             });
 
@@ -42,25 +45,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (video.paused) {
                     video.play();
                     video.muted = false;
-                    playButton.style.opacity = '0';
                 } else {
                     video.pause();
-                    playButton.style.opacity = '1';
                 }
             });
 
-            // Show play button when video ends or pauses
-            video.addEventListener('ended', () => {
-                playButton.style.opacity = '1';
+            // Sync button visibility with playback state
+            video.addEventListener('play', () => {
+                playButton.style.opacity = '0';
             });
 
             video.addEventListener('pause', () => {
                 playButton.style.opacity = '1';
             });
 
-            // Hide play button when video plays
-            video.addEventListener('play', () => {
-                playButton.style.opacity = '0';
+            video.addEventListener('ended', () => {
+                playButton.style.opacity = '1';
             });
         }
     }
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let fromTop = direction === -1,
             dFactor = fromTop ? -1 : 1,
             tl = gsap.timeline({
-                defaults: { duration: 1.25, ease: "power1.inOut" },
+                defaults: { duration: 2.25, ease: "power1.inOut" },
                 onComplete: () => animating = false
             });
         if (currentIndex >= 0) {
@@ -161,6 +161,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         gsap.set(sections[index], { autoAlpha: 1, zIndex: 1 });
+        // Toggle header visibility: show only on first section
+        document.body.classList.toggle('hide-header', index !== 0);
         tl.fromTo([outerWrappers[index], innerWrappers[index]], {
             yPercent: i => i ? -100 * dFactor : 100 * dFactor
         }, {

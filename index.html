@@ -5,24 +5,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mosaic</title>
-
-
-  <!-- lenis cdn -->
-  <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.11/dist/lenis.css" />
-
-
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
-  <!-- <link rel='stylesheet' href='https://codepen.io/GreenSock/pen/qEWKyrL.css'> -->
+  <link rel="stylesheet" href="./index.css" />
 
   <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
+  <!-- lenis cdn -->
+  <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.11/dist/lenis.css" />
 
-  <link rel="stylesheet" href="./index.css" />
+  <style></style>
 </head>
 
-<body class="home">
+<body>
   <!-- Loader -->
   <div class="loader-overlay">
     <!-- panels for stagger -->
@@ -81,332 +74,292 @@
 
   <!-- main sections -->
   <main class="panels main-container">
-    <section class="panel first panel-1" id="vertical-panel-1">
+    <section class="panel panel-1" id="vertical-panel-1">
       <!-- GLOW + GRID OVERLAY -->
 
+      <div class="container-overlay">
+        <div class="hex-grid">
+          <div class="light"></div>
+          <div class="grid"></div>
+        </div>
+      </div>
+      <div class="panel-container element-on-top hero-section">
+        <div class="video-container">
+          <!-- Play Button -->
+          <div class="video-play-button" aria-label="Play video"></div>
+          <!-- In the video section, replace the video element with this: -->
+          <video src="https://blog.fastlearner.ai/wp-content/uploads/2025/10/Test-video.mp4" loop playsinline
+            preload="metadata" muted></video>
+        </div>
+      </div>
+    </section>
+    <section class="panel panel-2 panel-1" id="vertical-panel-2">
+      <!-- GLOW + GRID OVERLAY -->
 
-      <div class="outer">
-        <div class="inner">
-          <div class="bg">
-            <div class="container-overlay">
-              <div class="hex-grid">
-                <div class="light"></div>
-                <div class="grid"></div>
-              </div>
-            </div>
-            <div class="panel-container hero-section">
-              <div class="video-container">
-                <!-- Play Button -->
-                <div class="video-play-button" aria-label="Play video"></div>
-                <!-- In the video section, replace the video element with this: -->
-                <video src="https://blog.fastlearner.ai/wp-content/uploads/2025/10/Test-video.mp4" loop playsinline
-                  preload="metadata" muted></video>
-              </div>
-            </div>
+      <div class="container-overlay">
+        <div class="hex-grid">
+          <div class="light"></div>
+          <div class="grid-2"></div>
+        </div>
+      </div>
+      <div class="panel-container element-on-top ats-container">
+        <h1 class="ats-title">Mosaic ATS</h1>
+        <p class="ats-description">
+          Mosaic transcends existing market matching models to deliver a
+          unified trading ecosystem.
+        </p>
+
+        <div class="ats-cards">
+          <div class="ats-card card1">
+            <img src="./images/ats-cards-icon-2.svg" alt="Icon 1" />
+            <p>
+              New market interaction model powered by first of its kind
+              scoring and rating system MERIT .
+            </p>
+          </div>
+
+          <div class="ats-card card2">
+            <img src="./images/comunity-Icon.svg" alt="Icon 2" />
+            <p>Community built for market participants to share value.</p>
+          </div>
+
+          <div class="ats-card card3">
+            <img src="./images/ats-cards-icon-3.svg" alt="Icon 3" />
+            <p>
+              Design centered on trading compatibility and footprint
+              confidentiality.
+            </p>
           </div>
         </div>
       </div>
     </section>
-    <section class="panel second panel-2" id="vertical-panel-2">
-      <!-- GLOW + GRID OVERLAY -->
+    <section class="horizontal panel-3 panel-1" id="horizontal-scroll">
+      <div class="panel-container element-on-top" id="teams">
+        <!-- GLOW + GRID OVERLAY -->
+        <div class="container-overlay">
+          <div class="hex-grid">
+            <div class="light"></div>
+            <div class="grid"></div>
+          </div>
+        </div>
+        <div class="teams-scroll-wrapper">
+          <div class="teams-header">
+            <h2 class="teams-title">Team</h2>
+            <p class="teams-description">
+              Mosaic Platforms was founded by experienced industry
+              practitioners and uniquely qualified operators.
+            </p>
+          </div>
 
-
-      <div class="outer">
-        <div class="inner">
-          <div class="bg">
-            <div class="container-overlay">
-              <div class="hex-grid">
-                <div class="light"></div>
-                <div class="grid-2"></div>
-              </div>
+          <div class="teams-cards teams-horizontal-cards">
+            <div class="team-container">
+              <div class="team-wrapper"></div>
             </div>
-            <div class="panel-container ats-container">
-              <h1 class="ats-title">Mosaic ATS</h1>
-              <p class="ats-description">
-                Mosaic transcends existing market matching models to deliver a
-                unified trading ecosystem.
-              </p>
-
-              <div class="ats-cards">
-                <div class="ats-card card1">
-                  <img src="./images/ats-cards-icon-2.svg" alt="Icon 1" />
-                  <p>
-                    New market interaction model powered by first of its kind
-                    scoring and rating system MERIT .
-                  </p>
+          </div>
+          <!-- Team Popup -->
+          <div class="team-popup-overlay hidden">
+            <div class="team-popup">
+              <button class="team-popup-close">&times;</button>
+              <div class="team-popup-content">
+                <div class="team-popup-image-wrapper">
+                  <img class="popup-image" src="" alt="" />
                 </div>
-
-                <div class="ats-card card2">
-                  <img src="./images/comunity-Icon.svg" alt="Icon 2" />
-                  <p>Community built for market participants to share value.</p>
-                </div>
-
-                <div class="ats-card card3">
-                  <img src="./images/ats-cards-icon-3.svg" alt="Icon 3" />
-                  <p>
-                    Design centered on trading compatibility and footprint
-                    confidentiality.
-                  </p>
+                <div class="team-popup-text">
+                  <h3 class="popup-name"></h3>
+                  <p class="popup-message"></p>
                 </div>
               </div>
             </div>
+          </div>
+          <div class="team-footer">
+            <p>
+              Interested in joining our team?
+              <a href="/teams.html">Click Here</a>
+            </p>
           </div>
         </div>
       </div>
     </section>
-
-
-    <section class="horizontal third panel-3">
-      <div class="outer">
-        <div class="inner">
-          <div class="bg">
-            <div class="panel-container" id="teams">
-              <!-- GLOW + GRID OVERLAY -->
-              <div class="container-overlay">
-                <div class="hex-grid">
-                  <div class="light"></div>
-                  <div class="grid"></div>
-                </div>
-              </div>
-              <div class="teams-scroll-wrapper">
-                <div class="teams-header">
-                  <h2 class="teams-title">Team</h2>
-                  <p class="teams-description">
-                    Mosaic Platforms was founded by experienced industry
-                    practitioners and uniquely qualified operators.
-                  </p>
-                </div>
-
-                <div class="teams-cards teams-horizontal-cards">
-                  <div class="team-container">
-                    <div class="team-wrapper"></div>
-                  </div>
-                </div>
-                <!-- Team Popup -->
-                <div class="team-popup-overlay hidden">
-                  <div class="team-popup">
-                    <button class="team-popup-close">&times;</button>
-                    <div class="team-popup-content">
-                      <div class="team-popup-image-wrapper">
-                        <img class="popup-image" src="" alt="" />
-                      </div>
-                      <div class="team-popup-text">
-                        <h3 class="popup-name"></h3>
-                        <p class="popup-message"></p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="team-footer">
-                  <p>
-                    Interested in joining our team?
-                    <a href="/teams.html">Click Here</a>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+    <section class="panel panel-4 panel-1" id="vertical-panel-4">
+      <!-- GLOW + GRID OVERLAY -->
+      <div class="container-overlay">
+        <div class="hex-grid">
+          <div class="light"></div>
+          <div class="grid-2"></div>
         </div>
       </div>
-    </section>
-    <section class="panel fourth panel-4" id="vertical-panel-4">
-      <!-- GLOW + GRID OVERLAY -->
-
-      <div class="outer">
-        <div class="inner">
-          <div class="bg swiper-bg">
-            <div class="container-overlay">
-              <div class="hex-grid">
-                <div class="light"></div>
-                <div class="grid-2"></div>
+      <div class="news-container">
+        <h2 class="news-title">News</h2>
+        <p class="news-description">Stay in the loop on what we are up to.</p>
+      </div>
+      <div class="swiper blogSwiper">
+        <div class="swiper-wrapper">
+          <!-- Slide 1 -->
+          <div class="swiper-slide">
+            <div class="blog-card">
+              <div class="blog-img">
+                <img src="images/Thumbnail.png" alt="Chart" />
+              </div>
+              <div class="blog-content">
+                <div class="blog-tags">
+                  <span class="tag">Featured</span>
+                  <span class="tag">Trending</span>
+                </div>
+                <h3 class="blog-title">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </h3>
+                <p class="blog-desc">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Maecenas pellentesque dignissim dictum.
+                </p>
+                <div class="blog-meta">
+                  <span class="author">Lorem Ipsum</span>
+                  <span class="date">Sept 23, 2025</span>
+                </div>
               </div>
             </div>
-            <div class="news-container">
-              <h2 class="news-title">News</h2>
-              <p class="news-description">Stay in the loop on what we are up to.</p>
-            </div>
-            <div class="swiper blogSwiper">
-              <div class="swiper-wrapper">
-                <!-- Slide 1 -->
-                <div class="swiper-slide">
-                  <div class="blog-card">
-                    <div class="blog-img">
-                      <a href="./news-inner.html"><img src="images/Thumbnail.png" alt="Chart" /></a>
-                    </div>
-                    <div class="blog-content">
-                      <div class="blog-tags">
-                        <span class="tag">Featured</span>
-                        <span class="tag">Trending</span>
-                      </div>
-                      <h3 class="blog-title">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      </h3>
-                      <p class="blog-desc">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Maecenas pellentesque dignissim dictum.
-                      </p>
-                      <div class="blog-meta">
-                        <span class="author">Lorem Ipsum</span>
-                        <span class="date">Sept 23, 2025</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+          </div>
 
-                <!-- Slide 2 -->
-                <div class="swiper-slide">
-                  <div class="blog-card">
-                    <div class="blog-img">
-                      <a href="./news-inner.html"><img src="images/Thumbnail3.png" alt="Stock" /></a>
-                    </div>
-                    <div class="blog-content">
-                      <div class="blog-tags">
-                        <span class="tag">Featured</span>
-                        <span class="tag">News</span>
-                      </div>
-                      <h3 class="blog-title">
-                        Praesent commodo cursus magna vel scelerisque nisl.
-                      </h3>
-                      <p class="blog-desc">
-                        Aenean lacinia bibendum nulla sed consectetur. Integer
-                        posuere erat a ante venenatis dapibus posuere velit aliquet.
-                      </p>
-                      <div class="blog-meta">
-                        <span class="author">Jane Doe</span>
-                        <span class="date">Sept 26, 2025</span>
-                      </div>
-                    </div>
-                  </div>
+          <!-- Slide 2 -->
+          <div class="swiper-slide">
+            <div class="blog-card">
+              <div class="blog-img">
+                <img src="images/Thumbnail3.png" alt="Stock" />
+              </div>
+              <div class="blog-content">
+                <div class="blog-tags">
+                  <span class="tag">Featured</span>
+                  <span class="tag">News</span>
                 </div>
-
-                <!-- Slide 3 -->
-                <div class="swiper-slide">
-                  <div class="blog-card">
-                    <div class="blog-img">
-                      <a href="./news-inner.html"><img src="images/Thumbnail4.png" alt="Graph" /></a>
-                    </div>
-                    <div class="blog-content">
-                      <div class="blog-tags">
-                        <span class="tag">Featured</span>
-                        <span class="tag">Market</span>
-                      </div>
-                      <h3 class="blog-title">
-                        Integer posuere erat a ante venenatis dapibus posuere velit.
-                      </h3>
-                      <p class="blog-desc">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Maecenas pellentesque dignissim dictum.
-                      </p>
-                      <div class="blog-meta">
-                        <span class="author">John Smith</span>
-                        <span class="date">Sept 29, 2025</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Slide 4 -->
-                <div class="swiper-slide">
-                  <div class="blog-card">
-                    <div class="blog-img">
-                      <a href="./news-inner.html"><img src="images/Thumbnail5.png" alt="Analysis" /></a>
-                    </div>
-                    <div class="blog-content">
-                      <div class="blog-tags">
-                        <span class="tag">Featured</span>
-                        <span class="tag">Finance</span>
-                      </div>
-                      <h3 class="blog-title">
-                        Donec ullamcorper nulla non metus auctor fringilla.
-                      </h3>
-                      <p class="blog-desc">
-                        Aenean lacinia bibendum nulla sed consectetur. Integer
-                        posuere erat a ante venenatis dapibus posuere velit aliquet.
-                      </p>
-                      <div class="blog-meta">
-                        <span class="author">Emma White</span>
-                        <span class="date">Sept 30, 2025</span>
-                      </div>
-                    </div>
-                  </div>
+                <h3 class="blog-title">
+                  Praesent commodo cursus magna vel scelerisque nisl
+                  consectetur.
+                </h3>
+                <p class="blog-desc">
+                  Aenean lacinia bibendum nulla sed consectetur. Integer
+                  posuere erat a ante venenatis dapibus posuere velit aliquet.
+                </p>
+                <div class="blog-meta">
+                  <span class="author">Jane Doe</span>
+                  <span class="date">Sept 26, 2025</span>
                 </div>
               </div>
-              <!-- Custom blog slider arrows below -->
             </div>
-            <div class="blog-nav">
-              <button class="blog-button-prev" aria-label="Previous">
-                <img src="./images/arrow-left-icon.svg" alt="arrow-left-icon" />
-              </button>
-              <button class="blog-button-next" aria-label="Next">
-                <img src="./images/arrow-right-icon.svg" alt="arrow-right-icon" />
-              </button>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="swiper-slide">
+            <div class="blog-card">
+              <div class="blog-img">
+                <img src="images/Thumbnail4.png" alt="Graph" />
+              </div>
+              <div class="blog-content">
+                <div class="blog-tags">
+                  <span class="tag">Featured</span>
+                  <span class="tag">Market</span>
+                </div>
+                <h3 class="blog-title">
+                  Integer posuere erat a ante venenatis dapibus posuere velit.
+                </h3>
+                <p class="blog-desc">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Maecenas pellentesque dignissim dictum.
+                </p>
+                <div class="blog-meta">
+                  <span class="author">John Smith</span>
+                  <span class="date">Sept 29, 2025</span>
+                </div>
+              </div>
             </div>
-            <!-- <div class="center-align-button">
-              <a class="button" href="/news.html">View All News</a>
-            </div> -->
+          </div>
+
+          <!-- Slide 4 -->
+          <div class="swiper-slide">
+            <div class="blog-card">
+              <div class="blog-img">
+                <img src="images/Thumbnail5.png" alt="Analysis" />
+              </div>
+              <div class="blog-content">
+                <div class="blog-tags">
+                  <span class="tag">Featured</span>
+                  <span class="tag">Finance</span>
+                </div>
+                <h3 class="blog-title">
+                  Donec ullamcorper nulla non metus auctor fringilla.
+                </h3>
+                <p class="blog-desc">
+                  Aenean lacinia bibendum nulla sed consectetur. Integer
+                  posuere erat a ante venenatis dapibus posuere velit aliquet.
+                </p>
+                <div class="blog-meta">
+                  <span class="author">Emma White</span>
+                  <span class="date">Sept 30, 2025</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+        <!-- Custom blog slider arrows below -->
+      </div>
+      <div class="blog-nav">
+        <button class="blog-button-prev" aria-label="Previous">
+          <img src="./images/arrow-left-icon.svg" alt="arrow-left-icon" />
+        </button>
+        <button class="blog-button-next" aria-label="Next">
+          <img src="./images/arrow-right-icon.svg" alt="arrow-right-icon" />
+        </button>
+      </div>
+      <div class="center-align-button">
+        <a class="button" href="/news.html">View All News</a>
       </div>
     </section>
-    <section class="panel fifth panel-5" id="vertical-panel-5">
+    <section class="panel panel-5 panel-1" id="vertical-panel-5">
       <!-- GLOW + GRID OVERLAY -->
-
-      <div class="outer">
-        <div class="inner">
-          <div class="bg footer">
-            <div class="container-overlay">
-              <div class="hex-grid">
-                <div class="light"></div>
-                <div class="grid"></div>
-              </div>
-            </div>
-            <div class="footer-inner">
-              <div class="footer-left">
-                <a href="./index.html">
-                  <img src="./images/footer-site-logo.svg" alt="Mosaic" class="footer-logo" /></a>
-              </div>
-
-              <nav class="footer-nav">
-                <a href="/index.html">Mosaic</a>
-                <a href="/teams.html">Team</a>
-                <a href="/news.html">News</a>
-              </nav>
-
-              <div class="footer-contact">
-                <h4>Connect</h4>
-                <a href="tel:+1234567890">+1 2345 67890</a>
-                <a href="mailto:info@mosaicats.com">info@mosaicats.com</a>
-                <address>
-                  Mosaic Platforms, Inc.<br />
-                  875 Washington Street, 4th<br />
-                  Floor New York, NY 10014
-                </address>
-                <a class="footer-link" href="#" target="_blank" rel="noopener">LinkedIn <img
-                    src="./images/linkeding-icon.svg" alt="" /></a>
-              </div>
-            </div>
-
-            <div class="footer-bottom">
-              <ul class="footer-legal">
-                <li>© 2025 Mosaic. All Rights Reserved.</li>
-                <li><a href="/privacy.html">Privacy Policy</a></li>
-                <li><a href="/terms-of-use.html">Terms of Use</a></li>
-                <li>
-                  <a href="/disclosure-statements.html">Disclosure Statements</a>
-                </li>
-                <li><a href="/site-legal.html">Site Legal</a></li>
-                <li>
-                  <a href="/compliance-disclaimer.html">Compliance Disclaimers</a>
-                </li>
-              </ul>
-
-              <p class="disclaimer">Mosaic Platforms, Inc. is a privately held technology company advancing efficiency
-                and performance in
-                electronic trading through its wholly owned subsidiaries. This site is intended for INSTITUTIONAL &amp;
-                PROFESSIONAL clients only. Not intended for retail customer use.</p>
-            </div>
-          </div>
+      <div class="container-overlay">
+        <div class="hex-grid">
+          <div class="light"></div>
+          <div class="grid"></div>
         </div>
+      </div>
+      <div class="footer-inner on-top">
+        <div class="footer-left">
+          <a href="./index.html">
+            <img src="./images/footer-site-logo.svg" alt="Mosaic" class="footer-logo" /></a>
+        </div>
+
+        <nav class="footer-nav">
+          <a href="/index.html">Mosaic</a>
+          <a href="/teams.html">Team</a>
+          <a href="/news.html">News</a>
+        </nav>
+
+        <div class="footer-contact">
+          <h4>Connect</h4>
+          <a href="tel:+1234567890">+1 2345 67890</a>
+          <a href="mailto:info@mosaicats.com">info@mosaicats.com</a>
+          <address>
+            Mosaic Platforms, Inc.<br />
+            875 Washington Street, 4th<br />
+            Floor New York, NY 10014
+          </address>
+          <a class="footer-link" href="#" target="_blank" rel="noopener">LinkedIn <img src="./images/linkeding-icon.svg"
+              alt="" /></a>
+        </div>
+      </div>
+
+      <div class="footer-bottom on-top">
+        <ul class="footer-legal">
+          <li>© 2025 Mosaic. All Rights Reserved.</li>
+          <li><a href="/privacy.html">Privacy Policy</a></li>
+          <li><a href="/terms-of-use.html">Terms of Use</a></li>
+          <li>
+            <a href="/disclosure-statements.html">Disclosure Statements</a>
+          </li>
+          <li><a href="/site-legal.html">Site Legal</a></li>
+          <li>
+            <a href="/compliance-disclaimer.html">Compliance Disclaimers</a>
+          </li>
+        </ul>
       </div>
     </section>
   </main>
@@ -416,19 +369,18 @@
   <!-- lenis cdn -->
   <script src="https://unpkg.com/lenis@1.3.11/dist/lenis.min.js"></script>
   <!-- gsap -->
-  <!-- <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
   <!-- scroll trigger  -->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script> -->
-  <script src='https://assets.codepen.io/16327/ScrollTrigger.min.js'></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js"></script>
 
-  <script src='https://assets.codepen.io/16327/gsap-latest-beta.min.js'></script>
-  <script src='https://assets.codepen.io/16327/Observer.min.js'></script>
   <script>
     // Initialize a new Lenis instance for smooth scrolling
     const lenis = new Lenis()
+
     // Synchronize Lenis scrolling with GSAP's ScrollTrigger plugin
-    gsap.registerPlugin(ScrollTrigger);
     lenis.on('scroll', ScrollTrigger.update)
+
     // Add Lenis's requestAnimationFrame (raf) method to GSAP's ticker
     // This ensures Lenis's smooth scroll animation updates on each GSAP tick
     gsap.ticker.add((time) => {
@@ -437,7 +389,6 @@
 
     // Disable lag smoothing in GSAP to prevent any delay in scroll animations
     gsap.ticker.lagSmoothing(0)
-
   </script>
   <!-- Team Data -->
   <script>
@@ -515,11 +466,12 @@ RJ holds a bachelor's degree in Geography and Geographical Information Systems f
     const popupClose = document.querySelector('.team-popup-close')
 
     // === DYNAMIC CARD CREATION ===
+
+    const card1 = document.createElement('div')
+    card1.className = 'team-card extra-space'
+    card1.innerHTML = '.'
+    teamWrapper.appendChild(card1)
     if (teamWrapper) {
-      const space1 = document.createElement('div');
-      space1.classList.add('extra-space', 'team-card');
-      space1.innerText = '.';
-      teamWrapper.appendChild(space1);
       teamMembers.forEach((member) => {
         const card = document.createElement('div')
         card.className = 'team-card'
@@ -547,12 +499,12 @@ RJ holds a bachelor's degree in Geography and Geographical Information Systems f
 
         teamWrapper.appendChild(card)
       })
-      const space = document.createElement('div');
-      space.classList.add('extra-space', 'team-card');
-      space.innerText = '.';
-      teamWrapper.appendChild(space);
-
     }
+
+    const card2 = document.createElement('div')
+    card2.className = 'team-card extra-space'
+    card2.innerHTML = '.'
+    teamWrapper.appendChild(card2)
 
     // === CLOSE POPUP ===
     popupClose.addEventListener('click', () => {
@@ -566,8 +518,6 @@ RJ holds a bachelor's degree in Geography and Geographical Information Systems f
     })
   </script>
   <script type="module" src="./index.js"></script>
-  <script src="./scrollAnimation.js"></script>
-  <!-- <script src="./atsAnimation.js"></script> -->
 </body>
 
 </html>

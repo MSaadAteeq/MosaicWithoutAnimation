@@ -361,12 +361,12 @@ body:not(.single-page) section.panel {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* position: relative; */
+  position: relative;
 }
 
 body:not(.single-page) .panel .panel-container {
-  /* position: relative; */
-  z-index: 9;
+  position: relative;
+  z-index: 12;
   max-width: 1600px;
   display: flex;
   flex-direction: column;
@@ -387,7 +387,7 @@ body:not(.single-page) .panel .panel-container {
 
 #horizontal-scroll {
   overflow: hidden;
-  /* position: relative; */
+  position: relative;
   height: 100vh;
   min-height: 100vh;
 }
@@ -400,26 +400,26 @@ body:not(.single-page) .panel .panel-container {
 }
 
 .panel-2 {
-  background: url('./images/gradient-bg-image-2.png') center center;
+  /* background: url('./images/gradient-bg-image-2.png') center center; */
   background-repeat: repeat;
   background-size: 100%;
 }
 
 .panel-3 {
-  background: url('./images/gradient-bg-image.png') center center;
+  /* background: url('./images/gradient-bg-image.png') center center; */
   background-repeat: repeat;
   background-size: 100%;
 }
 
 .panel-4 {
-  background: url('./images/gradient-bg-image-2.png') center center;
+  /* background: url('./images/gradient-bg-image-2.png') center center; */
   background-repeat: repeat;
   background-size: 100%;
   gap: 20px;
 }
 
 .panel-5 {
-  background: url('./images/gradient-bg-image.png') center center;
+  /* background: url('./images/gradient-bg-image.png') center center; */
   background-repeat: repeat;
   background-size: 100%;
   gap: 171px;
@@ -709,13 +709,13 @@ body:not(.single-page) .panel .panel-container {
 .panel-container#teams {
   padding: 160px 0;
   width: 100% !important;
-  max-width: 100% !important;
+  /* max-width: 100% !important; */
   position: relative;
   z-index: 9;
 }
 
 .teams-scroll-wrapper {
-  overflow: hidden;
+  /* overflow: au; */
   height: 100vh;
   width: 100%;
   display: flex;
@@ -725,7 +725,21 @@ body:not(.single-page) .panel .panel-container {
   position: relative;
   z-index: 9;
   gap: 0;
+  /* overflow: auto; */
 }
+
+.teams-horizontal-cards {
+  /* width: ; */
+  overflow-y: auto;
+  width: 100%;
+}
+
+.teams-horizontal-cards::-webkit-scrollbar {
+  display: none;
+}
+/* .teams-scroll-wrapper::-webkit-scrollbar {
+  visibility: hidden;
+} */
 
 .teams-header {
   display: flex;
@@ -757,15 +771,19 @@ body:not(.single-page) .panel .panel-container {
 .team-container {
   display: flex;
   align-items: center;
-  overflow: hidden;
-  width: 100%;
+  overflow: auto;
+  /* width: 100%; */
+}
+
+.team-container::-webkit-scrollbar {
+  visibility: hidden;
 }
 
 .team-wrapper {
   display: flex;
   gap: 2rem;
   padding: 2rem;
-  width: 100vw;
+  /* width: 100vw; */
 }
 
 .team-card {
@@ -837,6 +855,7 @@ body:not(.single-page) .panel .panel-container {
   padding: 20px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  /* width: max-content; */
 }
 
 .team-popup-overlay:not(.hidden) {
@@ -2594,17 +2613,15 @@ a:focus,
   }
 }
 
-* {
+/* * {
   box-sizing: border-box;
   user-select: none;
-}
+} */
 
-body {
+/* body {
   margin: 0;
   padding: 0;
   height: 100vh;
-  /* color: var(--light); */
-  /* text-transform: uppercase; */
 }
 
 section {
@@ -2613,13 +2630,12 @@ section {
   top: 0;
   position: fixed;
   visibility: hidden;
-}
+} */
 
-section .outer,
+/* section .outer,
 section .inner {
   width: 100%;
   height: 100%;
-  /* overflow-y: hidden; */
 }
 
 section .bg {
@@ -2633,11 +2649,11 @@ section .bg {
   top: 0;
   background-size: cover;
   background-position: center;
-}
+} */
 
-.panel-container {
+/* .panel-container {
   position: relative;
-}
+} */
 
 .swiper-bg {
   flex-direction: column !important;
@@ -2651,7 +2667,7 @@ section .bg {
 }
 
 .extra-space {
-  width: 100px !important;
+  width: 20px !important;
   visibility: hidden;
   flex: none !important;
   height: max-content;
@@ -2686,10 +2702,10 @@ header {
   position: absolute !important;
 }
 
-body {
+/* body {
   background-color: transparent !important;
   background: url('./images/gradient-bg-image.png') center center;
-}
+} */
 
 
 header {
@@ -2697,9 +2713,13 @@ header {
   background: url('./images/gradient-bg-image.png') center center;
 }
 
-
-
-.teams-section {
+/* .teams-section {
   visibility: visible;
   position: static;
+} */
+
+
+.on-top {
+  /* position: relative !important; */
+  z-index: 100 !important;
 }

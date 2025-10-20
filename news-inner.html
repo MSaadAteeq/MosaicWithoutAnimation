@@ -1,631 +1,645 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mosaic</title>
-    <link rel="stylesheet" href="./index.css" />
-    <!-- lenis cdn -->
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/lenis@1.3.11/dist/lenis.css"
-    />
 
-    <style>
-      body.single-page section.panel {
-        overflow: visible;
-        color: #fff;
-        min-height: 100vh;
-        height: auto; /* Allow natural height */
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mosaic</title>
+  <link rel="stylesheet" href="./index.css" />
+  <!-- lenis cdn -->
+  <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.11/dist/lenis.css" />
+
+  <style>
+    body.single-page section.panel {
+      overflow: visible;
+      color: #fff;
+      min-height: 100vh;
+      height: auto;
+      /* Allow natural height */
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Content pages - panel-1 should allow scrolling */
+    body.single-page .panel {
+      min-height: 100vh;
+      height: auto;
+    }
+
+    /* Content pages specific */
+    body.single-page .panel .panel-container {
+      height: auto;
+      min-height: 100vh;
+      z-index: 9;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+    }
+
+    /* ==== Container ==== */
+    .container {
+      width: 100%;
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 250px 0 0;
+    }
+
+    .set {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+    }
+
+    /* ==== News Detail ==== */
+    .news-title {
+      font-size: clamp(2rem, 0.9437rem + 3.3803vw, 5rem);
+      font-weight: 500;
+      margin-bottom: 1rem;
+      line-height: 1.2em;
+      font-family: var(--font-family-first);
+      text-align: center;
+    }
+
+    .news-title+p {
+      text-align: center;
+      font-size: clamp(1rem, 0.912rem + 0.2817vw, 1.25rem);
+      font-weight: 300;
+      color: #ffffff;
+      margin: 0 auto 1.875rem;
+      line-height: 1.6em;
+      font-family: var(--font-family-second);
+    }
+
+    .news-hero-image {
+      width: 100%;
+      margin-bottom: 30px;
+      padding-top: 90px;
+    }
+
+    .news-text {
+      margin-bottom: 40px;
+      color: #dce3ff;
+    }
+
+    .news-text p {
+      text-align: center;
+      font-weight: 300;
+      color: #fff;
+    }
+
+    /* ==== Alternating Sections ==== */
+    .news-section {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      margin-bottom: 50px;
+    }
+
+    .news-section.reverse {
+      flex-direction: row-reverse;
+    }
+
+    .news-section .news-img {
+      flex: 1;
+    }
+
+    .news-section .news-content {
+      flex: 1;
+      color: #dce3ff;
+      font-weight: 300;
+    }
+
+    .news-content p {
+      text-align: left;
+      font-weight: 300;
+      color: #fff;
+      font-family: var(--font-family-second);
+    }
+
+    /* ==== Related News ==== */
+    .related-news-section {
+      padding: 80px 0;
+      text-align: center;
+      z-index: 10;
+    }
+
+    .related-heading {
+      color: #fff;
+      font-size: clamp(2rem, 0.9437rem + 3.3803vw, 5rem);
+      font-weight: 500;
+      margin-bottom: 40px;
+      line-height: 1.2em;
+      font-family: var(--font-family-first);
+    }
+
+    .related-news-container {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .news-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      width: 360px;
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card-img {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      padding: 10px;
+    }
+
+    .card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+    }
+
+    .featured-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      /* light glass background */
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      /* white border */
+      backdrop-filter: blur(6px);
+      /* blur for glass effect */
+      -webkit-backdrop-filter: blur(6px);
+      color: #ffffff;
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+
+    .card-content {
+      padding: 20px;
+      text-align: left;
+    }
+
+    .card-content h3 {
+      color: #dce3ff;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      font-family: var(--font-family-first);
+    }
+
+    .card-content p {
+      color: #b8c3ff;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      font-family: var(--font-family-second);
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      color: #ffff;
+      font-size: 0.85rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 10px;
+    }
+
+    body.single-page section.panel.panel-5 {
+      justify-content: center;
+    }
+
+    @media (max-width: 1100px) {
+      .news-card {
+        width: 45%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .news-card {
         width: 100%;
-        display: flex;
-        flex-direction: column;
-        position: relative;
       }
+    }
 
-      /* Content pages - panel-1 should allow scrolling */
-      body.single-page .panel {
-        min-height: 100vh;
-        height: auto;
-      }
-      /* Content pages specific */
-      body.single-page .panel .panel-container {
-        height: auto;
-        min-height: 100vh;
-        z-index: 9;
-      }
-
-      img {
-        width: 100%;
-        height: auto;
-        display: block;
-        border-radius: 8px;
-      }
-
-      /* ==== Container ==== */
+    /* ==== Responsive Design ==== */
+    @media (max-width: 992px) {
       .container {
-        width: 100%;
-        max-width: 1600px;
-        margin: 0 auto;
-        padding: 250px 0 0;
+        padding: 150px 0 0;
+        padding-inline: 0.99rem;
       }
 
-      /* ==== News Detail ==== */
-      .news-title {
-        font-size: clamp(2rem, 0.9437rem + 3.3803vw, 5rem);
-        font-weight: 500;
-        margin-bottom: 1rem;
-        line-height: 1.2em;
-        font-family: var(--font-family-first);
-        text-align: center;
-      }
-
-      .news-title + p {
-        text-align: center;
-        font-size: clamp(1rem, 0.912rem + 0.2817vw, 1.25rem);
-        font-weight: 300;
-        color: #ffffff;
-        margin: 0 auto 1.875rem;
-        line-height: 1.6em;
-        font-family: var(--font-family-second);
-      }
       .news-hero-image {
-        width: 100%;
-        margin-bottom: 30px;
-        padding-top: 90px;
+        padding-top: 0px;
       }
 
-      .news-text {
-        margin-bottom: 40px;
-        color: #dce3ff;
-      }
-
-      .news-text p {
-        text-align: center;
-        font-weight: 300;
-        color: #fff;
-      }
-      /* ==== Alternating Sections ==== */
       .news-section {
-        display: flex;
-        align-items: center;
-        gap: 30px;
-        margin-bottom: 50px;
+        flex-direction: column;
       }
 
       .news-section.reverse {
-        flex-direction: row-reverse;
+        flex-direction: column;
       }
+    }
 
-      .news-section .news-img {
-        flex: 1;
-      }
+    header {
+      position: absolute !important;
+    }
+  </style>
+</head>
 
-      .news-section .news-content {
-        flex: 1;
-        color: #dce3ff;
-        font-weight: 300;
-      }
-      .news-content p {
-        text-align: left;
-        font-weight: 300;
-        color: #fff;
-        font-family: var(--font-family-second);
-      }
-      /* ==== Related News ==== */
-      .related-news-section {
-        padding: 80px 0;
-        text-align: center;
-        z-index: 10;
-      }
-
-      .related-heading {
-        color: #fff;
-        font-size: clamp(2rem, 0.9437rem + 3.3803vw, 5rem);
-        font-weight: 500;
-        margin-bottom: 40px;
-        line-height: 1.2em;
-        font-family: var(--font-family-first);
-      }
-
-      .related-news-container {
-        display: flex;
-        justify-content: center;
-        gap: 30px;
-        flex-wrap: wrap;
-        max-width: 1200px;
-        margin: 0 auto;
-      }
-
-      .news-card {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 16px;
-        width: 360px;
-        overflow: hidden;
-        backdrop-filter: blur(8px);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-
-      .card-img {
-        position: relative;
-        width: 100%;
-        overflow: hidden;
-        padding: 10px;
-      }
-
-      .card-img img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-        border-top-left-radius: 16px;
-        border-top-right-radius: 16px;
-      }
-
-      .featured-badge {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        background: rgba(255, 255, 255, 0.15); /* light glass background */
-        border: 1px solid rgba(255, 255, 255, 0.5); /* white border */
-        backdrop-filter: blur(6px); /* blur for glass effect */
-        -webkit-backdrop-filter: blur(6px);
-        color: #ffffff;
-        font-size: 0.75rem;
-        padding: 4px 10px;
-        border-radius: 8px;
-        font-weight: 500;
-        letter-spacing: 0.3px;
-      }
-
-      .card-content {
-        padding: 20px;
-        text-align: left;
-      }
-
-      .card-content h3 {
-        color: #dce3ff;
-        font-size: 1rem;
-        font-weight: 600;
-        margin-bottom: 10px;
-        font-family: var(--font-family-first);
-      }
-
-      .card-content p {
-        color: #b8c3ff;
-        font-size: 0.9rem;
-        line-height: 1.6;
-        margin-bottom: 20px;
-        font-family: var(--font-family-second);
-      }
-
-      .card-footer {
-        display: flex;
-        justify-content: space-between;
-        color: #ffff;
-        font-size: 0.85rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        padding-top: 10px;
-      }
-
-      body.single-page section.panel.panel-5 {
-        justify-content: center;
-      }
-
-      @media (max-width: 1100px) {
-        .news-card {
-          width: 45%;
-        }
-      }
-
-      @media (max-width: 768px) {
-        .news-card {
-          width: 100%;
-        }
-      }
-
-      /* ==== Responsive Design ==== */
-      @media (max-width: 992px) {
-        .container {
-          padding: 150px 0 0;
-          padding-inline: 0.99rem;
-        }
-        .news-hero-image {
-          padding-top: 0px;
-        }
-        .news-section {
-          flex-direction: column;
-        }
-
-        .news-section.reverse {
-          flex-direction: column;
-        }
-      }
-    </style>
-  </head>
-  <body class="single-page">
-    <!-- Loader -->
-    <div class="loader-overlay">
-      <!-- panels for stagger -->
-      <div class="reveal-panels">
-        <div class="reveal-panel"></div>
-        <div class="reveal-panel"></div>
-        <div class="reveal-panel"></div>
-        <div class="reveal-panel"></div>
-        <div class="reveal-panel"></div>
-      </div>
-      <div class="logo-stage">
-        <div class="logo">
-          <img src="./images/mos-icon.svg" alt="MOS Icon" class="icon" />
-          <span class="logowrap">
-            <img src="./images/mos-logo.svg" alt="MOS Logo" class="wordmark" />
-          </span>
-        </div>
+<body class="single-page">
+  <!-- Loader -->
+  <div class="loader-overlay">
+    <!-- panels for stagger -->
+    <div class="reveal-panels">
+      <div class="reveal-panel"></div>
+      <div class="reveal-panel"></div>
+      <div class="reveal-panel"></div>
+      <div class="reveal-panel"></div>
+      <div class="reveal-panel"></div>
+    </div>
+    <div class="logo-stage">
+      <div class="logo">
+        <img src="./images/mos-icon.svg" alt="MOS Icon" class="icon" />
+        <span class="logowrap">
+          <img src="./images/mos-logo.svg" alt="MOS Logo" class="wordmark" />
+        </span>
       </div>
     </div>
-    <!-- Header Section -->
-    <header class="mosaic-header">
-      <div class="header-container">
-        <!-- Left: Logo -->
-        <div class="logo">
-          <a href="index.html">
-            <img
-              src="./images/site-logo-header.svg"
-              class="mosaic-logo"
-              alt="Mosaic Logo"
-            />
+  </div>
+  <!-- Header Section -->
+  <header class="mosaic-header">
+    <div class="header-container">
+      <!-- Left: Logo -->
+      <div class="logo">
+        <a href="index.html">
+          <img src="./images/site-logo-header.svg" class="mosaic-logo" alt="Mosaic Logo" />
+        </a>
+      </div>
+      <!-- Mobile Menu Button -->
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+      <!-- Center: Navigation -->
+      <nav class="nav-menu">
+        <a href="/teams.html">Team</a>
+        <a href="#">Careers</a>
+        <a href="/news.html">News</a>
+      </nav>
+      <!-- Right: Button -->
+      <div class="connect-btn">
+        <a href="contact.html">Connect</a>
+      </div>
+    </div>
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav-overlay">
+      <nav class="mobile-nav-menu">
+        <a href="/teams.html">Team</a>
+        <a href="#">Careers</a>
+        <a href="/news.html">News</a>
+        <a href="contact.html" class="mobile-connect-btn">Connect</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- main sections -->
+  <main>
+    <section class="panel teams-section set panel-1">
+      <!-- GLOW + GRID OVERLAY -->
+
+      <div class="container-overlay">
+        <div id="hex-grid">
+          <div class="light"></div>
+          <div class="grid"></div>
+        </div>
+      </div>
+
+      <div class="panel-container">
+        <div class="container">
+          <h1 class="news-title">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          </h1>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+            ullamcorper lectus ut posuere mollis. Mauris scelerisque
+            ullamcorper sapien sed congue. Ut ut metus arcu. In hac habitasse
+            platea dictumst. Pellentesque imperdiet vehicula urna, at faucibus
+            velit viverra quis. Proin dictum ultricies tincidunt. Proin nec
+            risus ac massa rutrum pharetra.
+          </p>
+
+          <div class="news-hero-image">
+            <img src="images/Thumbnail15.png" alt="News Hero" />
+          </div>
+
+          <div class="news-text">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
+              ac hendrerit quam, at placerat libero. Vivamus felis enim,
+              semper vel pretium efficitur, dignissim ut eros. Quisque ac eros
+              ante. Maecenas non enim ut magna ultrices euismod. Nullam massa
+              sem, rhoncus eget magna tincidunt, finibus malesuada tellus.
+              Proin eu ornare lectus. Aliquam sodales tempus faucibus.
+              Curabitur non luctus velit, id bibendum erat. Integer et justo
+              sed ante dignissim viverra vitae at lectus. Suspendisse nulla
+              tortor, viverra sed nulla non, eleifend pulvinar enim. Donec
+              nulla massa, egestas nec ipsum sit amet, egestas mollis eros.
+              Proin non risus ut leo pharetra interdum. Aliquam malesuada eros
+              a dui euismod pretium.<br /><br />
+
+              Curabitur semper finibus sem et mollis. Praesent vel purus ut
+              lectus cursus pretium. Cras feugiat mattis diam, ac vulputate
+              libero blandit a. Aliquam sodales, metus ac dignissim hendrerit,
+              mauris lacus vulputate augue, a tincidunt nisi orci congue
+              ligula. Vivamus elit sem, fermentum quis urna nec, tempor
+              suscipit arcu. Fusce semper quis justo vitae tincidunt. Sed
+              fringilla massa vitae mauris faucibus, ut dapibus dolor
+              pellentesque. Sed auctor leo rhoncus nunc viverra, vel auctor
+              tortor varius. In iaculis mattis urna, sed hendrerit ante
+              vulputate quis.Etiam eu mi eu ante iaculis bibendum. Donec vel
+              aliquet ex. Curabitur id urna risus. Suspendisse aliquet elit
+              quis justo venenatis, maximus tincidunt diam fermentum. Nunc
+              iaculis diam viverra leo luctus bibendum.<br /><br />
+            </p>
+          </div>
+
+          <div class="news-section">
+            <div class="news-img">
+              <img src="images/Thumbnail11.png" alt="News Image 1" />
+            </div>
+            <div class="news-content">
+              <p>
+                Vivamus vitae mollis metus. Praesent quis velit vitae urna
+                placerat posuere a eu dui. Nullam elit enim, vehicula eget
+                tellus non, sagittis auctor magna. Nunc tincidunt vitae ligula
+                id efficitur. Praesent a pharetra justo. Quisque hendrerit
+                maximus ligula eu dignissim. Integer quis erat ac velit
+                ultrices feugiat. Ut in facilisis dolor. Sed dignissim nunc
+                quis urna eleifend, eu vehicula tortor ultricies. Suspendisse
+                a consectetur tellus. Proin at tellus et ante imperdiet
+                lacinia sit amet eu nisl. Ut sodales velit nec diam varius
+                dapibus.<br /><br />
+
+                Proin mollis posuere dolor eget pharetra. Aenean ut sem id mi
+                accumsan sollicitudin. Curabitur ligula neque, ullamcorper
+                eget sodales sed, pulvinar quis arcu. Nulla semper facilisis
+                sem nec tristique. Morbi lobortis metus eu nunc lacinia
+                ullamcorper. Nam sit amet enim id diam viverra auctor sit amet
+                vitae velit. In pulvinar nibh justo, at aliquam velit egestas
+                quis. Nullam tincidunt lectus sit amet cursus dictum.
+              </p>
+            </div>
+          </div>
+
+          <div class="news-section reverse">
+            <div class="news-img">
+              <img src="images/Thumbnail10.png" alt="News Image 2" />
+            </div>
+            <div class="news-content">
+              <p>
+                Morbi eget massa sem. Aliquam dictum ultrices magna.
+                Suspendisse ornare metus vel arcu cursus fermentum. Donec
+                massa lectus, efficitur at aliquam id, suscipit vehicula
+                purus. Sed sodales pretium quam sed mollis. Vestibulum quam
+                nibh, euismod ut lacus vitae, volutpat consequat risus. Aenean
+                massa ipsum, aliquam at rhoncus et, posuere in felis. Vivamus
+                pretium diam ut neque vestibulum, ac pretium nisl
+                hendrerit.<br /><br />
+
+                Phasellus fringilla vulputate viverra. Pellentesque ac
+                consectetur justo. Nunc mollis congue ante, id tincidunt ante
+                gravida nec. Donec pharetra nisi quis leo scelerisque, at
+                malesuada massa vehicula. Sed at dui fermentum, facilisis diam
+                eu, pellentesque massa. Sed sodales arcu vel arcu auctor
+                vulputate. Duis in dapibus ligula. Mauris eleifend luctus
+                tempus. Aliquam venenatis a lacus ut vehicula. Quisque urna
+                ligula, semper quis purus a, cursus aliquam neque. Donec
+                molestie sit amet ex eu bibendum. Praesent in leo et augue
+                viverra commodo in vitae felis.
+              </p>
+            </div>
+          </div>
+
+          <div class="news-text">
+            <p>
+              Mauris placerat tellus metus. Duis nec orci lectus. In eros
+              felis, auctor ut mattis in, dignissim vel orci. Donec est erat,
+              lacinia non consequat non, accumsan quis nibh. Nunc tristique
+              velit nisl, bibendum lobortis lectus lobortis eu. Class aptent
+              taciti sociosqu ad litora torquent per conubia nostra, per
+              inceptos himenaeos. Pellentesque in commodo justo. Curabitur non
+              nibh ullamcorper, ornare arcu commodo, feugiat est. Donec semper
+              justo purus.<br /><br />
+
+              <br />
+
+              Quisque ut sagittis neque, ac consectetur erat. Donec rhoncus
+              nulla eget tortor aliquam, eu fermentum magna malesuada.
+              Vestibulum luctus mauris eu nisl fermentum rutrum. Curabitur
+              ornare at augue eget tincidunt. Cras vitae enim urna. Fusce eu
+              volutpat mi, a elementum mauris. Nam a ullamcorper risus. Aenean
+              sodales elit lorem.<br /><br />
+
+              Ut gravida turpis in nunc efficitur rhoncus sit amet sit amet
+              purus. Nam consectetur, ex ut tempus tempus, diam odio tincidunt
+              neque, non consequat sapien nibh id dolor. Suspendisse potenti.
+              Orci varius natoque penatibus et magnis dis parturient montes,
+              nascetur ridiculus mus. Cras sed consectetur purus. Donec quis
+              lacinia enim, et tristique eros. Aliquam nec malesuada elit.
+              Aliquam nec ex diam. Praesent eget metus metus. Vivamus volutpat
+              rutrum mauris, vitae mollis arcu feugiat in. In vehicula leo
+              ipsum, in convallis velit placerat non. Pellentesque magna
+              nulla, porta sed consequat vel, ultricies eget nisi. Phasellus
+              vitae leo semper, bibendum eros et, pretium ante. Etiam
+              scelerisque auctor sollicitudin. Maecenas nec facilisis risus.
+              Nulla sollicitudin felis ex, ut egestas mauris efficitur
+              dapibus. Class aptent taciti sociosqu ad litora torquent per
+              conubia nostra, per inceptos himenaeos. Aenean venenatis luctus
+              rhoncus. Duis facilisis eu ipsum in efficitur. Sed convallis
+              quam non imperdiet vestibulum. Phasellus eu tellus lorem.<br /><br />
+
+              Maecenas bibendum dictum urna ut aliquet. Sed rhoncus eu orci
+              non aliquet. Suspendisse congue lorem sit amet lacus porttitor
+              ullamcorper. Donec dignissim sit amet lacus ut condimentum.
+              Morbi interdum leo at mauris congue, vel pharetra odio
+              porttitor. Praesent fermentum aliquam leo, at aliquam justo
+              aliquet et. Orci varius natoque penatibus et magnis dis
+              parturient montes, nascetur ridiculus mus. Quisque condimentum
+              ullamcorper sem id commodo. Fusce eget mi sed urna rhoncus
+              suscipit et quis nisl. Vestibulum ante ipsum primis in faucibus
+              orci luctus et ultrices posuere cubilia curae; Vestibulum
+              malesuada massa augue, nec euismod neque bibendum fermentum.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="related-news-section">
+        <h2 class="related-heading">Related News</h2>
+        <div class="related-news-container">
+          <div class="news-card">
+            <div class="card-img">
+              <img src="images/Thumbnail9.png" alt="Related News 1" />
+              <span class="featured-badge">Featured</span>
+            </div>
+            <div class="card-content">
+              <h3>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              </h3>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Maecenas pellentesque dignissim dictum. Fusce pulvinar ipsum
+                quam, sed cursus nulla vestibulum.
+              </p>
+              <div class="card-footer">
+                <span>Lorem Ipsum</span>
+                <span>Sept 23, 2025</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="news-card">
+            <div class="card-img">
+              <img src="images/Thumbnail9.png" alt="Related News 2" />
+              <span class="featured-badge">Featured</span>
+            </div>
+            <div class="card-content">
+              <h3>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              </h3>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Maecenas pellentesque dignissim dictum. Fusce pulvinar ipsum
+                quam, sed cursus nulla vestibulum.
+              </p>
+              <div class="card-footer">
+                <span>Lorem Ipsum</span>
+                <span>Sept 23, 2025</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="news-card">
+            <div class="card-img">
+              <img src="images/Thumbnail10.png" alt="Related News 3" />
+              <span class="featured-badge">Featured</span>
+            </div>
+            <div class="card-content">
+              <h3>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              </h3>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Maecenas pellentesque dignissim dictum. Fusce pulvinar ipsum
+                quam, sed cursus nulla vestibulum.
+              </p>
+              <div class="card-footer">
+                <span>Lorem Ipsum</span>
+                <span>Sept 23, 2025</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="panel teams-section panel-5">
+      <!-- GLOW + GRID OVERLAY -->
+
+      <div class="container-overlay">
+        <div class="hex-grid">
+          <div class="light"></div>
+          <div class="grid"></div>
+        </div>
+      </div>
+      <div class="footer-inner">
+        <div class="footer-left">
+          <a href="/index.html">
+            <img src="./images/footer-site-logo.svg" alt="Mosaic" class="footer-logo" />
           </a>
         </div>
-        <!-- Mobile Menu Button -->
-        <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-        </button>
-        <!-- Center: Navigation -->
-        <nav class="nav-menu">
+
+        <nav class="footer-nav">
+          <a href="/index.html">Mosaic</a>
           <a href="/teams.html">Team</a>
-          <a href="#">Careers</a>
           <a href="/news.html">News</a>
         </nav>
-        <!-- Right: Button -->
-        <div class="connect-btn">
-          <a href="contact.html">Connect</a>
+
+        <div class="footer-contact">
+          <h4>Connect</h4>
+          <a href="tel:+1234567890">+1 2345 67890</a>
+          <a href="mailto:info@mosaicats.com">info@mosaicats.com</a>
+          <address>
+            Mosaic Platforms, Inc.<br />
+            875 Washington Street, 4th<br />
+            Floor New York, NY 10014
+          </address>
+          <a class="footer-link" href="#" target="_blank" rel="noopener">LinkedIn <img src="./images/linkeding-icon.svg"
+              alt="" /></a>
         </div>
       </div>
-      <!-- Mobile Navigation Overlay -->
-      <div class="mobile-nav-overlay">
-        <nav class="mobile-nav-menu">
-          <a href="/teams.html">Team</a>
-          <a href="#">Careers</a>
-          <a href="/news.html">News</a>
-          <a href="contact.html" class="mobile-connect-btn">Connect</a>
-        </nav>
+
+      <div class="footer-bottom">
+        <ul class="footer-legal">
+          <li>© 2025 Mosaic. All Rights Reserved.</li>
+          <li><a href="/privacy.html">Privacy Policy</a></li>
+          <li><a href="/terms-of-use.html">Terms of Use</a></li>
+          <li>
+            <a href="/disclosure-statements.html">Disclosure Statements</a>
+          </li>
+          <li><a href="/site-legal.html">Site Legal</a></li>
+          <li>
+            <a href="/compliance-disclaimer.html">Compliance Disclaimers</a>
+          </li>
+        </ul>
       </div>
-    </header>
+    </section>
+  </main>
 
-    <!-- main sections -->
-    <main>
-      <section class="panel panel-1">
-        <!-- GLOW + GRID OVERLAY -->
+  <script type="module" src="./index.js"></script>
+  <!-- lenis cdn -->
+  <script src="https://unpkg.com/lenis@1.3.11/dist/lenis.min.js"></script>
+  <!-- gsap -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <!-- scroll trigger  -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js"></script>
 
-        <div class="container-overlay">
-          <div id="hex-grid">
-            <div class="light"></div>
-            <div class="grid"></div>
-          </div>
-        </div>
+  <script>
+    // Initialize a new Lenis instance for smooth scrolling
+    const lenis = new Lenis()
 
-        <div class="panel-container">
-          <div class="container">
-            <h1 class="news-title">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </h1>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-              ullamcorper lectus ut posuere mollis. Mauris scelerisque
-              ullamcorper sapien sed congue. Ut ut metus arcu. In hac habitasse
-              platea dictumst. Pellentesque imperdiet vehicula urna, at faucibus
-              velit viverra quis. Proin dictum ultricies tincidunt. Proin nec
-              risus ac massa rutrum pharetra.
-            </p>
+    // Synchronize Lenis scrolling with GSAP's ScrollTrigger plugin
+    lenis.on('scroll', ScrollTrigger.update)
 
-            <div class="news-hero-image">
-              <img src="images/Thumbnail15.png" alt="News Hero" />
-            </div>
+    // Add Lenis's requestAnimationFrame (raf) method to GSAP's ticker
+    // This ensures Lenis's smooth scroll animation updates on each GSAP tick
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000) // Convert time from seconds to milliseconds
+    })
 
-            <div class="news-text">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-                ac hendrerit quam, at placerat libero. Vivamus felis enim,
-                semper vel pretium efficitur, dignissim ut eros. Quisque ac eros
-                ante. Maecenas non enim ut magna ultrices euismod. Nullam massa
-                sem, rhoncus eget magna tincidunt, finibus malesuada tellus.
-                Proin eu ornare lectus. Aliquam sodales tempus faucibus.
-                Curabitur non luctus velit, id bibendum erat. Integer et justo
-                sed ante dignissim viverra vitae at lectus. Suspendisse nulla
-                tortor, viverra sed nulla non, eleifend pulvinar enim. Donec
-                nulla massa, egestas nec ipsum sit amet, egestas mollis eros.
-                Proin non risus ut leo pharetra interdum. Aliquam malesuada eros
-                a dui euismod pretium.<br /><br />
+    // Disable lag smoothing in GSAP to prevent any delay in scroll animations
+    gsap.ticker.lagSmoothing(0)
+  </script>
+</body>
 
-                Curabitur semper finibus sem et mollis. Praesent vel purus ut
-                lectus cursus pretium. Cras feugiat mattis diam, ac vulputate
-                libero blandit a. Aliquam sodales, metus ac dignissim hendrerit,
-                mauris lacus vulputate augue, a tincidunt nisi orci congue
-                ligula. Vivamus elit sem, fermentum quis urna nec, tempor
-                suscipit arcu. Fusce semper quis justo vitae tincidunt. Sed
-                fringilla massa vitae mauris faucibus, ut dapibus dolor
-                pellentesque. Sed auctor leo rhoncus nunc viverra, vel auctor
-                tortor varius. In iaculis mattis urna, sed hendrerit ante
-                vulputate quis.Etiam eu mi eu ante iaculis bibendum. Donec vel
-                aliquet ex. Curabitur id urna risus. Suspendisse aliquet elit
-                quis justo venenatis, maximus tincidunt diam fermentum. Nunc
-                iaculis diam viverra leo luctus bibendum.<br /><br />
-              </p>
-            </div>
-
-            <div class="news-section">
-              <div class="news-img">
-                <img src="images/Thumbnail11.png" alt="News Image 1" />
-              </div>
-              <div class="news-content">
-                <p>
-                  Vivamus vitae mollis metus. Praesent quis velit vitae urna
-                  placerat posuere a eu dui. Nullam elit enim, vehicula eget
-                  tellus non, sagittis auctor magna. Nunc tincidunt vitae ligula
-                  id efficitur. Praesent a pharetra justo. Quisque hendrerit
-                  maximus ligula eu dignissim. Integer quis erat ac velit
-                  ultrices feugiat. Ut in facilisis dolor. Sed dignissim nunc
-                  quis urna eleifend, eu vehicula tortor ultricies. Suspendisse
-                  a consectetur tellus. Proin at tellus et ante imperdiet
-                  lacinia sit amet eu nisl. Ut sodales velit nec diam varius
-                  dapibus.<br /><br />
-
-                  Proin mollis posuere dolor eget pharetra. Aenean ut sem id mi
-                  accumsan sollicitudin. Curabitur ligula neque, ullamcorper
-                  eget sodales sed, pulvinar quis arcu. Nulla semper facilisis
-                  sem nec tristique. Morbi lobortis metus eu nunc lacinia
-                  ullamcorper. Nam sit amet enim id diam viverra auctor sit amet
-                  vitae velit. In pulvinar nibh justo, at aliquam velit egestas
-                  quis. Nullam tincidunt lectus sit amet cursus dictum.
-                </p>
-              </div>
-            </div>
-
-            <div class="news-section reverse">
-              <div class="news-img">
-                <img src="images/Thumbnail10.png" alt="News Image 2" />
-              </div>
-              <div class="news-content">
-                <p>
-                  Morbi eget massa sem. Aliquam dictum ultrices magna.
-                  Suspendisse ornare metus vel arcu cursus fermentum. Donec
-                  massa lectus, efficitur at aliquam id, suscipit vehicula
-                  purus. Sed sodales pretium quam sed mollis. Vestibulum quam
-                  nibh, euismod ut lacus vitae, volutpat consequat risus. Aenean
-                  massa ipsum, aliquam at rhoncus et, posuere in felis. Vivamus
-                  pretium diam ut neque vestibulum, ac pretium nisl
-                  hendrerit.<br /><br />
-
-                  Phasellus fringilla vulputate viverra. Pellentesque ac
-                  consectetur justo. Nunc mollis congue ante, id tincidunt ante
-                  gravida nec. Donec pharetra nisi quis leo scelerisque, at
-                  malesuada massa vehicula. Sed at dui fermentum, facilisis diam
-                  eu, pellentesque massa. Sed sodales arcu vel arcu auctor
-                  vulputate. Duis in dapibus ligula. Mauris eleifend luctus
-                  tempus. Aliquam venenatis a lacus ut vehicula. Quisque urna
-                  ligula, semper quis purus a, cursus aliquam neque. Donec
-                  molestie sit amet ex eu bibendum. Praesent in leo et augue
-                  viverra commodo in vitae felis.
-                </p>
-              </div>
-            </div>
-
-            <div class="news-text">
-              <p>
-                Mauris placerat tellus metus. Duis nec orci lectus. In eros
-                felis, auctor ut mattis in, dignissim vel orci. Donec est erat,
-                lacinia non consequat non, accumsan quis nibh. Nunc tristique
-                velit nisl, bibendum lobortis lectus lobortis eu. Class aptent
-                taciti sociosqu ad litora torquent per conubia nostra, per
-                inceptos himenaeos. Pellentesque in commodo justo. Curabitur non
-                nibh ullamcorper, ornare arcu commodo, feugiat est. Donec semper
-                justo purus.<br /><br />
-
-                <br />
-
-                Quisque ut sagittis neque, ac consectetur erat. Donec rhoncus
-                nulla eget tortor aliquam, eu fermentum magna malesuada.
-                Vestibulum luctus mauris eu nisl fermentum rutrum. Curabitur
-                ornare at augue eget tincidunt. Cras vitae enim urna. Fusce eu
-                volutpat mi, a elementum mauris. Nam a ullamcorper risus. Aenean
-                sodales elit lorem.<br /><br />
-
-                Ut gravida turpis in nunc efficitur rhoncus sit amet sit amet
-                purus. Nam consectetur, ex ut tempus tempus, diam odio tincidunt
-                neque, non consequat sapien nibh id dolor. Suspendisse potenti.
-                Orci varius natoque penatibus et magnis dis parturient montes,
-                nascetur ridiculus mus. Cras sed consectetur purus. Donec quis
-                lacinia enim, et tristique eros. Aliquam nec malesuada elit.
-                Aliquam nec ex diam. Praesent eget metus metus. Vivamus volutpat
-                rutrum mauris, vitae mollis arcu feugiat in. In vehicula leo
-                ipsum, in convallis velit placerat non. Pellentesque magna
-                nulla, porta sed consequat vel, ultricies eget nisi. Phasellus
-                vitae leo semper, bibendum eros et, pretium ante. Etiam
-                scelerisque auctor sollicitudin. Maecenas nec facilisis risus.
-                Nulla sollicitudin felis ex, ut egestas mauris efficitur
-                dapibus. Class aptent taciti sociosqu ad litora torquent per
-                conubia nostra, per inceptos himenaeos. Aenean venenatis luctus
-                rhoncus. Duis facilisis eu ipsum in efficitur. Sed convallis
-                quam non imperdiet vestibulum. Phasellus eu tellus lorem.<br /><br />
-
-                Maecenas bibendum dictum urna ut aliquet. Sed rhoncus eu orci
-                non aliquet. Suspendisse congue lorem sit amet lacus porttitor
-                ullamcorper. Donec dignissim sit amet lacus ut condimentum.
-                Morbi interdum leo at mauris congue, vel pharetra odio
-                porttitor. Praesent fermentum aliquam leo, at aliquam justo
-                aliquet et. Orci varius natoque penatibus et magnis dis
-                parturient montes, nascetur ridiculus mus. Quisque condimentum
-                ullamcorper sem id commodo. Fusce eget mi sed urna rhoncus
-                suscipit et quis nisl. Vestibulum ante ipsum primis in faucibus
-                orci luctus et ultrices posuere cubilia curae; Vestibulum
-                malesuada massa augue, nec euismod neque bibendum fermentum.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="related-news-section">
-          <h2 class="related-heading">Related News</h2>
-          <div class="related-news-container">
-            <div class="news-card">
-              <div class="card-img">
-                <img src="images/Thumbnail9.png" alt="Related News 1" />
-                <span class="featured-badge">Featured</span>
-              </div>
-              <div class="card-content">
-                <h3>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                </h3>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Maecenas pellentesque dignissim dictum. Fusce pulvinar ipsum
-                  quam, sed cursus nulla vestibulum.
-                </p>
-                <div class="card-footer">
-                  <span>Lorem Ipsum</span>
-                  <span>Sept 23, 2025</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="news-card">
-              <div class="card-img">
-                <img src="images/Thumbnail9.png" alt="Related News 2" />
-                <span class="featured-badge">Featured</span>
-              </div>
-              <div class="card-content">
-                <h3>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                </h3>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Maecenas pellentesque dignissim dictum. Fusce pulvinar ipsum
-                  quam, sed cursus nulla vestibulum.
-                </p>
-                <div class="card-footer">
-                  <span>Lorem Ipsum</span>
-                  <span>Sept 23, 2025</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="news-card">
-              <div class="card-img">
-                <img src="images/Thumbnail10.png" alt="Related News 3" />
-                <span class="featured-badge">Featured</span>
-              </div>
-              <div class="card-content">
-                <h3>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                </h3>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Maecenas pellentesque dignissim dictum. Fusce pulvinar ipsum
-                  quam, sed cursus nulla vestibulum.
-                </p>
-                <div class="card-footer">
-                  <span>Lorem Ipsum</span>
-                  <span>Sept 23, 2025</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="panel panel-5">
-        <!-- GLOW + GRID OVERLAY -->
-
-        <div class="container-overlay">
-          <div class="hex-grid">
-            <div class="light"></div>
-            <div class="grid"></div>
-          </div>
-        </div>
-        <div class="footer-inner">
-          <div class="footer-left">
-            <a href="/index.html">
-              <img
-                src="./images/footer-site-logo.svg"
-                alt="Mosaic"
-                class="footer-logo"
-              />
-            </a>
-          </div>
-
-          <nav class="footer-nav">
-            <a href="/index.html">Mosaic</a>
-            <a href="/teams.html">Team</a>
-            <a href="/news.html">News</a>
-          </nav>
-
-          <div class="footer-contact">
-            <h4>Connect</h4>
-            <a href="tel:+1234567890">+1 2345 67890</a>
-            <a href="mailto:info@mosaicats.com">info@mosaicats.com</a>
-            <address>
-              Mosaic Platforms, Inc.<br />
-              875 Washington Street, 4th<br />
-              Floor New York, NY 10014
-            </address>
-            <a class="footer-link" href="#" target="_blank" rel="noopener"
-              >LinkedIn <img src="./images/linkeding-icon.svg" alt=""
-            /></a>
-          </div>
-        </div>
-
-        <div class="footer-bottom">
-          <ul class="footer-legal">
-            <li>© 2025 Mosaic. All Rights Reserved.</li>
-            <li><a href="/privacy.html">Privacy Policy</a></li>
-            <li><a href="/terms-of-use.html">Terms of Use</a></li>
-            <li>
-              <a href="/disclosure-statements.html">Disclosure Statements</a>
-            </li>
-            <li><a href="/site-legal.html">Site Legal</a></li>
-            <li>
-              <a href="/compliance-disclaimer.html">Compliance Disclaimers</a>
-            </li>
-          </ul>
-        </div>
-      </section>
-    </main>
-
-    <script src="./index.js"></script>
-    <!-- lenis cdn -->
-    <script src="https://unpkg.com/lenis@1.3.11/dist/lenis.min.js"></script>
-    <!-- gsap -->
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-    <!-- scroll trigger  -->
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js"></script>
-
-    <script>
-      // Initialize a new Lenis instance for smooth scrolling
-      const lenis = new Lenis()
-
-      // Synchronize Lenis scrolling with GSAP's ScrollTrigger plugin
-      lenis.on('scroll', ScrollTrigger.update)
-
-      // Add Lenis's requestAnimationFrame (raf) method to GSAP's ticker
-      // This ensures Lenis's smooth scroll animation updates on each GSAP tick
-      gsap.ticker.add((time) => {
-        lenis.raf(time * 1000) // Convert time from seconds to milliseconds
-      })
-
-      // Disable lag smoothing in GSAP to prevent any delay in scroll animations
-      gsap.ticker.lagSmoothing(0)
-    </script>
-  </body>
 </html>

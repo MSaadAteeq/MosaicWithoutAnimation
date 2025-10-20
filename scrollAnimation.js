@@ -307,10 +307,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
-    Observer.create({
+    // Create observer instance
+    let observer = Observer.create({
         type: "wheel,touch,pointer",
         wheelSpeed: -1,
         onDown: () => {
+            // Check if team popup is open - if so, allow normal scrolling
+            const teamPopup = document.querySelector('.team-popup-overlay');
+            if (teamPopup && !teamPopup.classList.contains('hidden')) {
+                return;
+            }
+
             if (animating) return;
 
             // If we're on section 2, enable horizontal scroll
@@ -328,6 +335,12 @@ document.addEventListener('DOMContentLoaded', () => {
             gotoSection(currentIndex - 1, -1);
         },
         onUp: () => {
+            // Check if team popup is open - if so, allow normal scrolling
+            const teamPopup = document.querySelector('.team-popup-overlay');
+            if (teamPopup && !teamPopup.classList.contains('hidden')) {
+                return;
+            }
+
             if (animating) return;
 
             // If we're on section 2, enable horizontal scroll
@@ -348,4 +361,24 @@ document.addEventListener('DOMContentLoaded', () => {
         tolerance: 10,
         preventDefault: true
     });
+
+    // Function to disable/enable observer based on popup state
+    function toggleObserver() {
+        const teamPopup = document.querySelector('.team-popup-overlay');
+        if (teamPopup && !teamPopup.classList.contains('hidden')) {
+            observer.disable();
+        } else {
+            observer.enable();
+        }
+    }
+
+    // Monitor popup state changes
+    const popupObserver = new MutationObserver(toggleObserver);
+    const teamPopupOverlay = document.querySelector('.team-popup-overlay');
+    if (teamPopupOverlay) {
+        popupObserver.observe(teamPopupOverlay, { 
+            attributes: true, 
+            attributeFilter: ['class'] 
+        });
+    }
 })

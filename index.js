@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const isHome = document.querySelector('.home');
 
   const dynamicHeightEl = document.getElementById('horizontal-scroll');
-  const objectEl = document.getElementById('scrollWrapper');
+  const objectEl = document.getElementById('teamCards');
 
   // Easing config
   const ease = 0.12; // lower = smoother/laggier, higher = snappier

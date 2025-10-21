@@ -380,7 +380,6 @@ body:not(.single-page) .panel .panel-container {
 
 .horizontal {
   /* border: 1px solid red; */
-
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -388,6 +387,10 @@ body:not(.single-page) .panel .panel-container {
   align-items: center;
   position: sticky;
 }
+
+/* .news{
+  border: 1px solid red;
+} */
 
 #horizontal-scroll {
   overflow: hidden;
@@ -2115,6 +2118,7 @@ a:focus,
   .panel-5 .footer-bottom {
     max-width: 1200px;
     padding-inline: calc(var(--spacing-padding-inline) * 10);
+
   }
 
   .hero-section video {
@@ -2753,4 +2757,7 @@ header {
   z-index: 100 !important;
 }
 
-
+.element-on-top{
+  /* border: 2px solid red; */
+  /* z-index: 1000 !important; */
+}

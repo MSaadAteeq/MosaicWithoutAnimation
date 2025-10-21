@@ -347,6 +347,7 @@ body.loaded .hero-section video {
 
 /* ========== PANELS ========== */
 .panels {
+  /* opacity: 0.9; */
   position: relative;
   width: 100%;
 }
@@ -378,11 +379,14 @@ body:not(.single-page) .panel .panel-container {
 }
 
 .horizontal {
+  /* border: 1px solid red; */
+
   color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: sticky;
 }
 
 #horizontal-scroll {
@@ -397,29 +401,37 @@ body:not(.single-page) .panel .panel-container {
   background: url('./images/gradient-bg-image.png') center center;
   background-repeat: repeat;
   background-size: 100%;
+  /* opacity: 0.5; */
+  /* gap: 171px; */
 }
 
 .panel-2 {
   /* background: url('./images/gradient-bg-image-2.png') center center; */
+  background: url('./images/gradient-bg-image.png') center center;
+  
   background-repeat: repeat;
   background-size: 100%;
+  /* gap: 171px; */
 }
 
 .panel-3 {
-  /* background: url('./images/gradient-bg-image.png') center center; */
+  background: url('./images/gradient-bg-image.png') center center;
   background-repeat: repeat;
   background-size: 100%;
+  /* gap: 171px; */
 }
 
 .panel-4 {
   /* background: url('./images/gradient-bg-image-2.png') center center; */
+  background: url('./images/gradient-bg-image.png') center center;
+  
   background-repeat: repeat;
   background-size: 100%;
-  gap: 20px;
+  /* gap: 171px; */
 }
 
 .panel-5 {
-  /* background: url('./images/gradient-bg-image.png') center center; */
+  background: url('./images/gradient-bg-image.png') center center;
   background-repeat: repeat;
   background-size: 100%;
   gap: 171px;
@@ -707,11 +719,12 @@ body:not(.single-page) .panel .panel-container {
 
 /* ========== TEAMS SECTION ========== */
 .panel-container#teams {
-  padding: 160px 0;
+  /* padding: 160px 0; */
   width: 100% !important;
   /* max-width: 100% !important; */
   position: relative;
   z-index: 9;
+  /* border: 1px solid red; */
 }
 
 .teams-scroll-wrapper {
@@ -730,13 +743,13 @@ body:not(.single-page) .panel .panel-container {
 
 .teams-horizontal-cards {
   /* width: ; */
-  overflow-y: auto;
+  /* overflow-y: auto; */
   width: 100%;
 }
 
-.teams-horizontal-cards::-webkit-scrollbar {
+/* .teams-horizontal-cards::-webkit-scrollbar {
   display: none;
-}
+} */
 /* .teams-scroll-wrapper::-webkit-scrollbar {
   visibility: hidden;
 } */
@@ -746,7 +759,7 @@ body:not(.single-page) .panel .panel-container {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 80px 0 0;
+  /* padding: 80px 0 0; */
   text-align: center;
 }
 
@@ -771,7 +784,7 @@ body:not(.single-page) .panel .panel-container {
 .team-container {
   display: flex;
   align-items: center;
-  overflow: auto;
+  /* overflow: auto; */
   /* width: 100%; */
 }
 
@@ -1598,6 +1611,7 @@ body:not(.single-page) .panel .panel-container {
   }
 
   .button {
+    /* margin-top: 40px; */
     display: inline-block;
     padding: 12px 24px;
     background: transparent;
@@ -2094,7 +2108,7 @@ a:focus,
 
   body:not(.single-page) .panel .panel-container.ats-container .ats-cards .ats-card {
     max-width: 340px;
-    min-height: 320px;
+    min-height: 3px;
   }
 
   body:not(.single-page) .panel .panel-container.ats-container .ats-cards .ats-card p {
@@ -2341,7 +2355,7 @@ a:focus,
   section.panel {
     height: 100%;
     min-height: 100%;
-    padding: 60px 0;
+    /* padding: 60px 0; */
   }
 
   section.panel.panel-2 {
@@ -2708,10 +2722,10 @@ header {
 } */
 
 
-header {
+/* header {
   background-color: transparent !important;
   background: url('./images/gradient-bg-image.png') center center;
-}
+} */
 
 /* .teams-section {
   visibility: visible;
@@ -2720,6 +2734,6 @@ header {
 
 
 .on-top {
-  /* position: relative !important; */
+  position: relative !important;
   z-index: 100 !important;
 }

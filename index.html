@@ -5,17 +5,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mosaic</title>
-  <link rel="stylesheet" href="./index.css" />
 
   <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
   <!-- lenis cdn -->
   <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.11/dist/lenis.css" />
-
+<link rel="stylesheet" href="./index.css" />
   <style></style>
 </head>
 
-<body>
+<body class="home">
   <!-- Loader -->
   <div class="loader-overlay">
     <!-- panels for stagger -->
@@ -142,7 +141,7 @@
             <div class="grid"></div>
           </div>
         </div>
-        <div class="teams-scroll-wrapper">
+        <div class="teams-scroll-wrapper" id="scrollWrapper">
           <div class="teams-header">
             <h2 class="teams-title">Team</h2>
             <p class="teams-description">
@@ -151,7 +150,7 @@
             </p>
           </div>
 
-          <div class="teams-cards teams-horizontal-cards">
+          <div class="teams-cards teams-horizontal-cards" id="teamCards">
             <div class="team-container">
               <div class="team-wrapper"></div>
             </div>
@@ -192,7 +191,7 @@
         <h2 class="news-title">News</h2>
         <p class="news-description">Stay in the loop on what we are up to.</p>
       </div>
-      <div class="swiper blogSwiper">
+      <div class="swiper blogSwiper" id="blogs">
         <div class="swiper-wrapper">
           <!-- Slide 1 -->
           <div class="swiper-slide">
@@ -232,8 +231,7 @@
                   <span class="tag">News</span>
                 </div>
                 <h3 class="blog-title">
-                  Praesent commodo cursus magna vel scelerisque nisl
-                  consectetur.
+                  Praesent commodo cursus magna vel scelerisque nisl.
                 </h3>
                 <p class="blog-desc">
                   Aenean lacinia bibendum nulla sed consectetur. Integer
@@ -467,10 +465,10 @@ RJ holds a bachelor's degree in Geography and Geographical Information Systems f
 
     // === DYNAMIC CARD CREATION ===
 
-    const card1 = document.createElement('div')
-    card1.className = 'team-card extra-space'
-    card1.innerHTML = '.'
-    teamWrapper.appendChild(card1)
+    // const card1 = document.createElement('div')
+    // card1.className = 'team-card extra-space'
+    // card1.innerHTML = '.'
+    // teamWrapper.appendChild(card1)
     if (teamWrapper) {
       teamMembers.forEach((member) => {
         const card = document.createElement('div')
@@ -501,10 +499,10 @@ RJ holds a bachelor's degree in Geography and Geographical Information Systems f
       })
     }
 
-    const card2 = document.createElement('div')
-    card2.className = 'team-card extra-space'
-    card2.innerHTML = '.'
-    teamWrapper.appendChild(card2)
+    // const card2 = document.createElement('div')
+    // card2.className = 'team-card extra-space'
+    // card2.innerHTML = '.'
+    // teamWrapper.appendChild(card2)
 
     // === CLOSE POPUP ===
     popupClose.addEventListener('click', () => {

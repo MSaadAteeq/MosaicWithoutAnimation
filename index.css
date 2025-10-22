@@ -1041,10 +1041,20 @@ body:not(.single-page) .panel .panel-container {
   border-radius: 16px;
   backdrop-filter: blur(12px);
   overflow: hidden;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
   height: auto;
   min-height: 400px;
   flex-direction: row;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 35px rgba(0, 0, 0, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .blog-img {

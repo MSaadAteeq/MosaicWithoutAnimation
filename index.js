@@ -349,7 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
     slidesOffsetAfter: 0,
     spaceBetween: 30,
     grabCursor: false,
-    loop: true,
+    loop: false,
     useCSS3D: true,
     useCSS3DTransform: true,
     on: {

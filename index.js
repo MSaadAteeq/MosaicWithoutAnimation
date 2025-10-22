@@ -462,23 +462,46 @@ document.addEventListener('DOMContentLoaded', () => {
   updateCarousel();
   window.addEventListener('resize', updateCarousel);
   
-  // Touch support
+git   // Touch support for carousel navigation
   let startX = 0;
+  let startY = 0;
   let isDragging = false;
+  let isScrolling = false;
   
   blogSwiper.addEventListener('touchstart', (e) => {
     startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
     isDragging = true;
+    isScrolling = false;
   });
   
   blogSwiper.addEventListener('touchmove', (e) => {
     if (!isDragging) return;
-    e.preventDefault();
+    
+    const currentX = e.touches[0].clientX;
+    const currentY = e.touches[0].clientY;
+    const diffX = Math.abs(startX - currentX);
+    const diffY = Math.abs(startY - currentY);
+    
+    // If vertical movement is greater than horizontal, allow page scroll
+    if (diffY > diffX && diffY > 10) {
+      isScrolling = true;
+      return; // Allow default scroll behavior
+    }
+    
+    // If horizontal movement is significant, prevent default and handle carousel
+    if (diffX > 10) {
+      e.preventDefault();
+      isScrolling = false;
+    }
   });
   
   blogSwiper.addEventListener('touchend', (e) => {
     if (!isDragging) return;
     isDragging = false;
+    
+    // If it was a scroll gesture, don't handle carousel navigation
+    if (isScrolling) return;
     
     const endX = e.changedTouches[0].clientX;
     const diffX = startX - endX;
@@ -490,6 +513,40 @@ document.addEventListener('DOMContentLoaded', () => {
         prevSlide();
       }
     }
+  });
+
+  // Handle click events on blog cards to prevent conflicts with touch
+  const blogCards = document.querySelectorAll('.blog-card');
+  blogCards.forEach(card => {
+    let touchStartTime = 0;
+    let touchMoved = false;
+    
+    card.addEventListener('touchstart', (e) => {
+      touchStartTime = Date.now();
+      touchMoved = false;
+    });
+    
+    card.addEventListener('touchmove', (e) => {
+      touchMoved = true;
+    });
+    
+    card.addEventListener('touchend', (e) => {
+      const touchDuration = Date.now() - touchStartTime;
+      
+      // Only prevent default and navigate if it was a quick tap (not a scroll)
+      if (!touchMoved && touchDuration < 300) {
+        e.preventDefault();
+        // Allow the default link behavior to proceed
+        const href = card.getAttribute('href');
+        if (href) {
+          if (card.getAttribute('target') === '_blank') {
+            window.open(href, '_blank');
+          } else {
+            window.location.href = href;
+          }
+        }
+      }
+    });
   });
 
 

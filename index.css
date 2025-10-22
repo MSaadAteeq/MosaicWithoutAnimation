@@ -362,10 +362,10 @@ body.loaded .hero-section video {
 }
 
 body:not(.single-page) section.panel {
-  overflow: hidden;
+  /* overflow: hidden; */
   /* color: #fff; */
   height: 100vh;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -388,6 +388,7 @@ body:not(.single-page) .panel .panel-container {
   height: 100vh;
 }
 
+
 .horizontal {
   /* border: 1px solid red; */
   color: #fff;
@@ -407,7 +408,7 @@ body:not(.single-page) .panel .panel-container {
   overflow: hidden;
   position: relative;
   height: 1000px !important;
-  min-height: 100vh;
+  min-height: 80vh;
 }
 
 /* Gradient per section */
@@ -1673,13 +1674,14 @@ body:not(.single-page) .panel .panel-container {
   .button {
     /* margin-top: 40px; */
     display: inline-block;
-    padding: 12px 24px;
+    padding: 10px 10px;
     background: transparent;
     border: 2px solid #fff;
     color: #fff;
     text-decoration: none;
     border-radius: 10px !important;
     transition: all 0.3s ease;
+    margin-top: -20px;
   }
 
   .button:hover {

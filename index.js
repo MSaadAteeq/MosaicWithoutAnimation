@@ -461,8 +461,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize
   updateCarousel();
   window.addEventListener('resize', updateCarousel);
-  
-git   // Touch support for carousel navigation
+     // Touch support for carousel navigation
   let startX = 0;
   let startY = 0;
   let isDragging = false;

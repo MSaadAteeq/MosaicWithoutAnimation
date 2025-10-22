@@ -354,13 +354,13 @@ document.addEventListener('DOMContentLoaded', () => {
   function getResponsiveSettings() {
     const width = window.innerWidth;
     if (width < 768) {
-      return { slidesPerView: 1, spaceBetween: 20, slideWidth: '100%' };
+      return { slidesPerView: 1, spaceBetween: 20, padding: 20 };
     } else if (width < 1024) {
-      return { slidesPerView: 2, spaceBetween: 30, slideWidth: 'calc(50% - 15px)' };
-    } else if (width < 1200) {
-      return { slidesPerView: 2.5, spaceBetween: 40, slideWidth: 'calc(40% - 16px)' };
+      return { slidesPerView: 2, spaceBetween: 30, padding: 0 };
+    } else if (width < 1400) {
+      return { slidesPerView: 2, spaceBetween: 40, padding: 0 };
     } else {
-      return { slidesPerView: 3, spaceBetween: 50, slideWidth: 'calc(33.333% - 33.333px)' };
+      return { slidesPerView: 3, spaceBetween: 30, padding: 0 };
     }
   }
   
@@ -370,10 +370,38 @@ document.addEventListener('DOMContentLoaded', () => {
     const settings = getResponsiveSettings();
     const containerWidth = blogSwiper.offsetWidth;
     
+    // Apply padding for mobile
+    if (settings.padding > 0) {
+      blogSwiper.style.paddingLeft = `${settings.padding}px`;
+      blogSwiper.style.paddingRight = `${settings.padding}px`;
+    } else {
+      blogSwiper.style.paddingLeft = '0';
+      blogSwiper.style.paddingRight = '0';
+    }
+    
+    // Calculate effective container width (minus padding)
+    const effectiveWidth = containerWidth - (settings.padding * 2);
+    
     // Calculate slide width more precisely to prevent cutoff
     const totalSlides = Math.floor(settings.slidesPerView);
     const totalGaps = (totalSlides - 1) * settings.spaceBetween;
-    const slideWidth = (containerWidth - totalGaps) / totalSlides;
+    let slideWidth = Math.floor((effectiveWidth - totalGaps) / totalSlides);
+    
+    // Ensure minimum slide width to prevent weird appearance
+    const minSlideWidth = 280; // Minimum width for cards to look good
+    if (slideWidth < minSlideWidth && totalSlides > 1) {
+      // If cards would be too narrow, reduce slides per view
+      const maxSlides = Math.floor((effectiveWidth + settings.spaceBetween) / (minSlideWidth + settings.spaceBetween));
+      if (maxSlides < totalSlides) {
+        // Recalculate with fewer slides
+        const newTotalGaps = (maxSlides - 1) * settings.spaceBetween;
+        slideWidth = Math.floor((effectiveWidth - newTotalGaps) / maxSlides);
+        settings.slidesPerView = maxSlides;
+      }
+    }
+    
+    // Update totalSlides after potential adjustment
+    const finalTotalSlides = Math.floor(settings.slidesPerView);
     
     // Set slide styles
     blogSlides.forEach((slide, index) => {
@@ -384,7 +412,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Calculate max translate to ensure last card is fully visible
     const totalContentWidth = (slideWidth + settings.spaceBetween) * blogSlides.length - settings.spaceBetween;
-    const maxTranslate = Math.max(0, totalContentWidth - containerWidth);
+    const maxTranslate = Math.max(0, totalContentWidth - effectiveWidth);
+    
+    // Safety check: ensure we don't exceed container bounds
+    const maxPossibleIndex = Math.max(0, blogSlides.length - finalTotalSlides);
+    currentIndex = Math.min(currentIndex, maxPossibleIndex);
     
     // Calculate and apply transform with boundary check
     let translateX = -(currentIndex * (slideWidth + settings.spaceBetween));
@@ -398,13 +430,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isAnimating) return;
     const settings = getResponsiveSettings();
     const containerWidth = blogSwiper.offsetWidth;
+    const effectiveWidth = containerWidth - (settings.padding * 2);
     const totalSlides = Math.floor(settings.slidesPerView);
     const totalGaps = (totalSlides - 1) * settings.spaceBetween;
-    const slideWidth = (containerWidth - totalGaps) / totalSlides;
+    const slideWidth = Math.floor((effectiveWidth - totalGaps) / totalSlides);
     
     // Calculate if we can move to next slide without cutting off the last card
     const totalContentWidth = (slideWidth + settings.spaceBetween) * blogSlides.length - settings.spaceBetween;
-    const maxTranslate = Math.max(0, totalContentWidth - containerWidth);
+    const maxTranslate = Math.max(0, totalContentWidth - effectiveWidth);
     const nextTranslate = -((currentIndex + 1) * (slideWidth + settings.spaceBetween));
     
     if (nextTranslate >= -maxTranslate) {

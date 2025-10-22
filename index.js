@@ -290,7 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
       rotationY: -65,
       rotationX: -3,
       rotationZ: 3,
-      opacity: 0.9,
+      opacity: 0.7,
     })
 
     gsap.set(cards[2], {
@@ -300,7 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
       rotationY: -65,
       rotationX: -3,
       rotationZ: 3,
-      opacity: 0.9,
+      opacity: 0.5,
     })
 
     // Animate from stacked to normal positions
@@ -319,7 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
         delay: 0.5,
         ease: 'power3.out',
         stagger: {
-          each: 0.2,
+          // each: 0.2,
           from: 'center',
         },
         scrollTrigger: {
@@ -348,8 +348,8 @@ document.addEventListener('DOMContentLoaded', () => {
     slidesOffsetBefore: 0,
     slidesOffsetAfter: 0,
     spaceBetween: 30,
-    grabCursor: true,
-    // loop: true,
+    grabCursor: false,
+    loop: true,
     useCSS3D: true,
     useCSS3DTransform: true,
     on: {

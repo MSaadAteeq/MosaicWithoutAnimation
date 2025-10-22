@@ -67,9 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (home) videoAnimation();
 
-    const teamCards = document.querySelectorAll('.team-card');
-    const teamWrapper = document.querySelector('.team-wrapper');
-
     function horizontalScrollFunction() {
         const teamCards = document.querySelectorAll('.team-card');
         const teamWrapper = document.querySelector('.team-wrapper');

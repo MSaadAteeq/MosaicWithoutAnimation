@@ -15,9 +15,25 @@
 </head>
 
 <body class="home">
+  <div class="team-popup-overlay hidden">
+    <div class="backdrop"></div>
+    <div class="team-popup">
+      <button class="team-popup-close">&times;</button>
+      <div class="team-popup-content">
+        <div class="team-popup-image-wrapper">
+          <img class="popup-image" src="" alt="" />
+        </div>
+        <div class="team-popup-text">
+          <h3 class="popup-name"></h3>
+          <p class="popup-message"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
   <!-- Loader -->
   <div class="loader-overlay">
-    <!-- panels for stagger -->
+
     <div class="reveal-panels">
       <div class="reveal-panel"></div>
       <div class="reveal-panel"></div>
@@ -29,7 +45,7 @@
       <div class="logo">
         <img src="./images/IntroLogo-Loader.svg" alt="MOS Icon" class="icon" />
         <span class="logowrap">
-          <img src="./images/logo-nav.png" alt="MOS Logo" class="wordmark" />
+          <img src="./images/intro-logo.svg" alt="MOS Logo" class="wordmark" />
         </span>
       </div>
     </div>
@@ -51,8 +67,8 @@
       </button>
       <!-- Center: Navigation -->
       <nav class="nav-menu">
+        <a href="/index.html">Mosaic</a>
         <a href="/teams.html">Team</a>
-        <a href="#">Careers</a>
         <a href="/news.html">News</a>
       </nav>
       <!-- Right: Button -->
@@ -63,8 +79,8 @@
     <!-- Mobile Navigation Overlay -->
     <div class="mobile-nav-overlay">
       <nav class="mobile-nav-menu">
+        <a href="/index.html">Mosaic</a>
         <a href="/teams.html">Team</a>
-        <a href="#">Careers</a>
         <a href="/news.html">News</a>
         <a href="contact.html" class="mobile-connect-btn">Connect</a>
       </nav>
@@ -157,21 +173,7 @@
           </div>
           <!-- Team Popup -->
 
-          <div class="team-popup-overlay hidden">
-            <!-- <div class="backdrop"></div> -->
-            <div class="team-popup">
-              <button class="team-popup-close">&times;</button>
-              <div class="team-popup-content">
-                <div class="team-popup-image-wrapper">
-                  <img class="popup-image" src="" alt="" />
-                </div>
-                <div class="team-popup-text">
-                  <h3 class="popup-name"></h3>
-                  <p class="popup-message"></p>
-                </div>
-              </div>
-            </div>
-          </div>
+          
           <div class="team-footer">
             <p>
               Interested in joining our team?
@@ -199,7 +201,7 @@
           <div class="swiper-slide">
             <div class="blog-card">
               <div class="blog-img">
-                <img src="images/Thumbnail.png" alt="Chart" />
+                <a href="https://www.tradersmagazine.com/podcast/joe-wald-on-entrepreneurship/" target="_blank"><img src="images/JW-Headshot.png" alt="Chart" /></a>
               </div>
               <div class="blog-content">
                 <div class="blog-tags">
@@ -207,15 +209,14 @@
                   <span class="tag">Trending</span>
                 </div>
                 <h3 class="blog-title">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Joe Wald on Entrepreneurship
                 </h3>
                 <p class="blog-desc">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Maecenas pellentesque dignissim dictum.
+                  Capital markets trading and technology veteran Joe Wald talks all things entrepreneurship with...
                 </p>
                 <div class="blog-meta">
-                  <span class="author">Lorem Ipsum</span>
-                  <span class="date">Sept 23, 2025</span>
+                  <span class="author">Terry Flanagan</span>
+                  <span class="date">Sept 15, 2025</span>
                 </div>
               </div>
             </div>
@@ -225,7 +226,7 @@
           <div class="swiper-slide">
             <div class="blog-card">
               <div class="blog-img">
-                <img src="images/Thumbnail3.png" alt="Stock" />
+                <a href="./a-note-from-our-founders.html"><img src="images/mosaic-founders-note.jpg" alt="Stock" /></a>
               </div>
               <div class="blog-content">
                 <div class="blog-tags">
@@ -233,15 +234,15 @@
                   <span class="tag">News</span>
                 </div>
                 <h3 class="blog-title">
-                  Praesent commodo cursus magna vel scelerisque nisl.
+                  A Note From our Founders.
                 </h3>
                 <p class="blog-desc">
-                  Aenean lacinia bibendum nulla sed consectetur. Integer
-                  posuere erat a ante venenatis dapibus posuere velit aliquet.
+                  We are excited to announce that we are launching a new market center in 2026...
+                  
                 </p>
                 <div class="blog-meta">
-                  <span class="author">Jane Doe</span>
-                  <span class="date">Sept 26, 2025</span>
+                  <span class="author">John and Joe</span>
+                  <span class="date">Oct 14, 2025</span>
                 </div>
               </div>
             </div>
@@ -251,7 +252,7 @@
           <div class="swiper-slide">
             <div class="blog-card">
               <div class="blog-img">
-                <img src="images/Thumbnail4.png" alt="Graph" />
+                <a href="./a-new-trading-market-plans-to-transcend-traditional-value-exchange.html"><img src="images/mosaic-platforms-news.png" alt="Graph" /></a>
               </div>
               <div class="blog-content">
                 <div class="blog-tags">
@@ -259,41 +260,14 @@
                   <span class="tag">Market</span>
                 </div>
                 <h3 class="blog-title">
-                  Integer posuere erat a ante venenatis dapibus posuere velit.
+                  A New Trading Market Plans to Transcend Traditional Value Exchange
                 </h3>
                 <p class="blog-desc">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Maecenas pellentesque dignissim dictum.
+                  Mosaic Platforms announced the completion of its strategic investment...
                 </p>
                 <div class="blog-meta">
-                  <span class="author">John Smith</span>
-                  <span class="date">Sept 29, 2025</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Slide 4 -->
-          <div class="swiper-slide">
-            <div class="blog-card">
-              <div class="blog-img">
-                <img src="images/Thumbnail5.png" alt="Analysis" />
-              </div>
-              <div class="blog-content">
-                <div class="blog-tags">
-                  <span class="tag">Featured</span>
-                  <span class="tag">Finance</span>
-                </div>
-                <h3 class="blog-title">
-                  Donec ullamcorper nulla non metus auctor fringilla.
-                </h3>
-                <p class="blog-desc">
-                  Aenean lacinia bibendum nulla sed consectetur. Integer
-                  posuere erat a ante venenatis dapibus posuere velit aliquet.
-                </p>
-                <div class="blog-meta">
-                  <span class="author">Emma White</span>
-                  <span class="date">Sept 30, 2025</span>
+                  <span class="author">Mosaic Platforms</span>
+                  <span class="date">Oct 14, 2025</span>
                 </div>
               </div>
             </div>
@@ -353,13 +327,22 @@
           <li><a href="/privacy.html">Privacy Policy</a></li>
           <li><a href="/terms-of-use.html">Terms of Use</a></li>
           <li>
-            <a href="/disclosure-statements.html">Disclosure Statements</a>
+            <a href="">Cookie Ploicy</a>
           </li>
-          <li><a href="/site-legal.html">Site Legal</a></li>
+          <!-- <li><a href="/site-legal.html">Site Legal</a></li>
           <li>
             <a href="/compliance-disclaimer.html">Compliance Disclaimers</a>
-          </li>
+          </li> -->
         </ul>
+
+        <p class="footer-disclaimer">
+          Mosaic Platforms, Inc. is a privately held technology company advancing efficiency and performance in
+          electronic trading through its wholly owned subsidiaries.
+        </p>
+
+        <p style="text-align: center; margin-top: 10px;">
+          This site is intended for INSTITUTIONAL & PROFESSIONAL clients only. Not intended for retail customer use.
+        </p>
       </div>
     </section>
   </main>

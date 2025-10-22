@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mosaic</title>
+    <link rel="stylesheet" href="./index.css" />
+    <!-- lenis cdn -->
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.11/dist/lenis.css" />
+
+    <style>
+        body.single-page section.panel {
+            overflow: visible;
+            color: #fff;
+            min-height: 100vh;
+            height: auto;
+            /* Allow natural height */
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Content pages - panel-1 should allow scrolling */
+        body.single-page .panel {
+            min-height: 100vh;
+            height: auto;
+        }
+
+        /* Content pages specific */
+        body.single-page .panel .panel-container {
+            height: auto;
+            min-height: 100vh;
+            z-index: 9;
+        }
+
+        .founderImage {
+            height: 400px;
+            width: 600px;
+            margin: auto;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+        }
+
+        /* ==== Container ==== */
+        .container {
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 250px 0 0;
+        }
+
+        .set {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        /* ==== News Detail ==== */
+        .news-title {
+            /* font-size: clamp(2rem, 0.9437rem + 3.3803vw, 5rem); */
+            font-size: 48px !important;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            line-height: 1.2em;
+            font-family: var(--font-family-first);
+            /* text-align: center; */
+        }
+
+        .news-title+p {
+            text-align: center;
+            font-size: clamp(1rem, 0.912rem + 0.2817vw, 1.25rem);
+            font-weight: 300;
+            color: #ffffff;
+            margin: 0 auto 1.875rem;
+            line-height: 1.6em;
+            font-family: var(--font-family-second);
+        }
+
+        .news-hero-image {
+            width: 100%;
+            margin-bottom: 30px;
+            /* padding-top: 90px; */
+        }
+
+        .news-text {
+            margin-bottom: 40px;
+            color: #dce3ff;
+        }
+
+        .news-text p {
+            line-height: 2 !important;
+            margin-top: 20px !important;
+            margin-bottom: 18px !important;
+            word-break: break-word;
+        }
+
+        .news-text p {
+            /* text-align: center; */
+            font-weight: 300;
+            color: #fff;
+        }
+
+        /* ==== Alternating Sections ==== */
+        .news-section {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .news-section.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .news-section .news-img {
+            flex: 1;
+        }
+
+        .news-section .news-content {
+            flex: 1;
+            color: #dce3ff;
+            font-weight: 300;
+        }
+
+        .news-content p {
+            text-align: left;
+            font-weight: 300;
+            color: #fff;
+            font-family: var(--font-family-second);
+        }
+
+        /* ==== Related News ==== */
+        .related-news-section {
+            padding: 80px 0;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .related-heading {
+            color: #fff;
+            font-size: clamp(2rem, 0.9437rem + 3.3803vw, 5rem);
+            font-weight: 500;
+            margin-bottom: 40px;
+            line-height: 1.2em;
+            font-family: var(--font-family-first);
+        }
+
+        .related-news-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .news-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            width: 360px;
+            overflow: hidden;
+            backdrop-filter: blur(8px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card-img {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            padding: 10px;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            border-top-left-radius: 16px;
+            border-top-right-radius: 16px;
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            /* light glass background */
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            /* white border */
+            backdrop-filter: blur(6px);
+            /* blur for glass effect */
+            -webkit-backdrop-filter: blur(6px);
+            color: #ffffff;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .card-content {
+            padding: 20px;
+            text-align: left;
+        }
+
+        .card-content h3 {
+            color: #dce3ff;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-family: var(--font-family-first);
+        }
+
+        .card-content p {
+            color: #b8c3ff;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-family: var(--font-family-second);
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            color: #ffff;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 10px;
+        }
+
+        body.single-page section.panel.panel-5 {
+            justify-content: center;
+        }
+
+        @media (max-width: 1100px) {
+            .news-card {
+                width: 45%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .news-card {
+                width: 100%;
+            }
+        }
+
+        /* ==== Responsive Design ==== */
+        @media (max-width: 992px) {
+            .container {
+                padding: 150px 0 0;
+                padding-inline: 0.99rem;
+            }
+
+            .news-hero-image {
+                padding-top: 0px;
+            }
+
+            .news-section {
+                flex-direction: column;
+            }
+
+            .news-section.reverse {
+                flex-direction: column;
+            }
+        }
+
+        header {
+            position: absolute !important;
+        }
+
+        .footer-disclaimer{
+            margin-top: 50px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body class="single-page">
+    <!-- Loader -->
+
+    <!-- Header Section -->
+    <header class="mosaic-header">
+        <div class="header-container">
+            <!-- Left: Logo -->
+            <div class="logo">
+                <a href="index.html">
+                    <img src="./images/site-logo-header.svg" class="mosaic-logo" alt="Mosaic Logo" />
+                </a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <!-- Center: Navigation -->
+            <nav class="nav-menu">
+                <a href="/index.html">Mosaic</a>
+                <a href="/teams.html">Team</a>
+                <a href="/news.html">News</a>
+            </nav>
+            <!-- Right: Button -->
+            <div class="connect-btn">
+                <a href="contact.html">Connect</a>
+            </div>
+        </div>
+        <!-- Mobile Navigation Overlay -->
+        <div class="mobile-nav-overlay">
+            <nav class="mobile-nav-menu">
+                <a href="/index.html">Mosaic</a>
+                <a href="/teams.html">Team</a>
+                <a href="/news.html">News</a>
+                <a href="contact.html" class="mobile-connect-btn">Connect</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- main sections -->
+    <main>
+        <section class="panel teams-section set panel-1">
+            <!-- GLOW + GRID OVERLAY -->
+
+            <div class="container-overlay">
+                <div id="hex-grid">
+                    <div class="light"></div>
+                    <div class="grid"></div>
+                </div>
+            </div>
+
+            <div class="panel-container">
+                <div class="container">
+                    <!-- <h1 class="news-title">
+                        A Note From our Founders
+                    </h1>
+
+                    <div class="news-hero-image">
+                        <img class="founderImage" src="images/founders.jpg" alt="News Hero" />
+                    </div>
+
+                    <div class="news-text">
+                        <p class="para">
+                            We are excited to announce that we are launching a new market center in 2026.
+                        </p>
+                        <p class="para">
+                            We are not just building another venue. Drawing upon our shared experiences and lessons
+                            learned, we are curating a uniquely qualified team to deliver a solution that will bring
+                            into focus the full picture of trading performance.
+                        </p>
+
+                        <p>
+                            Mosaic evolves how market participants interact with liquidity – transcending traditional
+                            matching engineered for the final milliseconds with a new market interaction model which
+                            allows market participants to share value with a design centered on trading compatibility
+                            and footprint confidentiality.
+                        </p>
+
+                        <p>
+                            We welcome the opportunity to talk more about Mosaic and collaborate. Don’t hesitate to
+                            reach out.
+                        </p>
+
+                        <p>
+                            Best,
+                            <br>
+                            John and Joe
+                        </p>
+                    </div> -->
+
+                    <p class="news-title">A New Trading Market Plans to Transcend Traditional Value Exchange</p>
+
+                    <div class="news-text">
+                        <p class="para">
+                            New York, New York – October 14, 2025
+                        </p>
+                        <p class="para">
+                            Mosaic Platforms announced the completion of its strategic investment round and anticipated
+                            launch of its US equity Alternative Trading System (ATS) in the first quarter of 2026.
+                        </p>
+
+                        <p>
+                            Founded by John Cosenza and Joe Wald, Mosaic Platforms is developing a unique market model
+                            that will evolve market execution.
+                        </p>
+
+                        <p>
+                            The initial investment round included strategic investments from Guggenheim Securities and
+                            RBC.
+                        </p>
+
+                        <p>
+                            “Completing our seed investment round is a critical first step in accelerating our
+                            technology development, business operations, and go-to-market strategy. We are grateful to
+                            all our investors, including our strategic investors, Guggenheim Securities and RBC for
+                            their commitment to Mosaic’s vision and support for market innovation”, said Joe Wald.
+                        </p>
+
+                        <p>
+                            “We are committed to investing in our equity trading product and helping our clients
+                            navigate a complex market structure,” said David Margulies, Managing Director – Electronic
+                            Solutions at Guggenheim Securities. “We believe Mosaic’s innovative concept for a new market
+                            center model can help improve performance for liquidity originators.”
+                        </p>
+
+                        <p>
+                            “We have studied the impact of rising market quality challenges, and we believe Mosaic is
+                            strategically positioned to help improve market quality and overall performance,” said Doug
+                            Crofton, head of US Cash Equities Execution at RBC Capital Markets. “RBC Capital Markets has
+                            a proud history of market structure-related innovations and investments, including through
+                            in-house developed technology solutions, intended to support best execution and more fair
+                            and efficient markets. We look forward to being an early adopter once the venue is live.”
+                        </p>
+
+                        <p>
+                            Earlier in the year, Mosaic selected Nasdaq Eclipse Trading (formerly Ocean) as its
+                            technology partner. Nasdaq is also a leading provider of market infrastructure and
+                            surveillance services, empowering operators to innovate and differentiate on market model,
+                            user features and client service.
+                        </p>
+
+                        <p>
+                            “For innovative players like Mosaic entering the market, leveraging Nasdaq’s battle-tested
+                            market infrastructure allows new entrants to focus investments where they truly
+                            differentiate,” said Magnus Haglind, Head of Capital Markets Technology at Nasdaq.
+                        </p>
+
+                        <p>
+                            Mosaic Platforms has already begun assembling an experienced team of industry practitioners
+                            and operators to unlock the vision of a unified trading ecosystem.
+                        </p>
+
+                        <p>
+                            “People are the success multiplier. Building high performing teams to help clients achieve
+                            their objectives has been a blueprint for Joe and I throughout our careers. We are excited
+                            to begin the journey of creating shared value between diverse market participants,” said
+                            John Cosenza.
+                        </p>
+
+                        <p>
+                            About Mosaic Platforms
+                        </p>
+
+                        <p>
+                            Founded in 2024, Mosaic Platforms, Inc. is a privately held technology company advancing
+                            efficiency and performance in electronic trading through its wholly owned subsidiaries.
+                        </p>
+
+                        <p>
+                            Shelley Eleby
+                        </p>
+
+                        <p>
+                            Chief Marketing Officer
+                        </p>
+
+                        <a href="mailto:marketing@mosaicplatforms.com">marketing@mosaicplatforms.com</a>
+                        <a href="https://www.linkedin.com/company/mosaic-platforms/">
+                            <p>
+                                LikedIN
+                            </p>
+                        </a>
+                    </div>
+
+
+                </div>
+                <!-- <p>Hello</p> -->
+            </div>
+        </section>
+        <section class="panel teams-section panel-5">
+            <!-- GLOW + GRID OVERLAY -->
+
+            <div class="container-overlay">
+                <div class="hex-grid">
+                    <div class="light"></div>
+                    <div class="grid"></div>
+                </div>
+            </div>
+            <div class="footer-inner">
+                <div class="footer-left">
+                    <a href="/index.html">
+                        <img src="./images/footer-site-logo.svg" alt="Mosaic" class="footer-logo" />
+                    </a>
+                </div>
+
+                <nav class="footer-nav">
+                    <a href="/index.html">Mosaic</a>
+                    <a href="/teams.html">Team</a>
+                    <a href="/news.html">News</a>
+                </nav>
+
+                <div class="footer-contact">
+                    <h4>Connect</h4>
+                    <a href="tel:+1234567890">+1 2345 67890</a>
+                    <a href="mailto:info@mosaicats.com">info@mosaicats.com</a>
+                    <address>
+                        Mosaic Platforms, Inc.<br />
+                        875 Washington Street, 4th<br />
+                        Floor New York, NY 10014
+                    </address>
+                    <a class="footer-link" href="#" target="_blank" rel="noopener">LinkedIn <img
+                            src="./images/linkeding-icon.svg" alt="" /></a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <ul class="footer-legal">
+                    <li>© 2025 Mosaic. All Rights Reserved.</li>
+                    <li><a href="/privacy.html">Privacy Policy</a></li>
+                    <li><a href="/terms-of-use.html">Terms of Use</a></li>
+                    <li>
+                        <a href="">Cookie Ploicy</a>
+                    </li>
+                    <!-- <li><a href="/site-legal.html">Site Legal</a></li>
+                      <li>
+                        <a href="/compliance-disclaimer.html">Compliance Disclaimers</a>
+                      </li> -->
+                </ul>
+
+                <p class="footer-disclaimer">
+                    Mosaic Platforms, Inc. is a privately held technology company advancing efficiency and performance
+                    in
+                    electronic trading through its wholly owned subsidiaries.
+                </p>
+
+                <p style="text-align: center; margin-top: 10px;">
+                    This site is intended for INSTITUTIONAL & PROFESSIONAL clients only. Not intended for retail
+                    customer use.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="./index.js"></script>
+    <!-- lenis cdn -->
+    <script src="https://unpkg.com/lenis@1.3.11/dist/lenis.min.js"></script>
+    <!-- gsap -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <!-- scroll trigger  -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js"></script>
+
+    <script>
+        // Initialize a new Lenis instance for smooth scrolling
+        const lenis = new Lenis()
+
+        // Synchronize Lenis scrolling with GSAP's ScrollTrigger plugin
+        lenis.on('scroll', ScrollTrigger.update)
+
+        // Add Lenis's requestAnimationFrame (raf) method to GSAP's ticker
+        // This ensures Lenis's smooth scroll animation updates on each GSAP tick
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000) // Convert time from seconds to milliseconds
+        })
+
+        // Disable lag smoothing in GSAP to prevent any delay in scroll animations
+        gsap.ticker.lagSmoothing(0)
+    </script>
+</body>
+
+</html>

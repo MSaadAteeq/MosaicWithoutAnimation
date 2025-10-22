@@ -87,7 +87,7 @@ async function loaderAnimation() {
         y: 0,
         opacity: 1,
         scale: 1,
-        duration: 1.6,
+        duration: 0.2,
         ease: 'power4.out',
       },
       '-=0.3' // overlap slightly with header

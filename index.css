@@ -101,18 +101,19 @@ body.loaded {
   font-size: 18px;
   line-height: 1em;
   color: #fff;
-  background-image: linear-gradient(45deg,
+  /* background-image: linear-gradient(45deg,
       rgba(189, 189, 189, 0.05) 0%,
-      rgba(232, 232, 232, 0.05) 100%);
+      rgba(232, 232, 232, 0.05) 100%); */
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-radius: 10px;
   font-family: var(--font-family-second);
   font-weight: 300;
-  border: 1px solid transparent;
-  border-image: linear-gradient(135deg, #d7d7d7, #ffffff, #afafaf) 1;
+  border: 1px solid #FFF;
+  /* border-image: linear-gradient(135deg, #d7d7d7, #ffffff, #afafaf) 1; */
   padding: 10px 16px;
   border-radius: 10px;
+  margin-top: 20px;
 }
 
 .button:hover {
@@ -159,8 +160,13 @@ body.loaded {
 }
 
 /* Hide header on non-first sections */
-body.hide-header .mosaic-header {
-  display: none;
+/* body.hide-header .mosaic-header {
+  display: none !important;
+} */
+
+/* Ensure header is visible on single pages */
+body.single-page .mosaic-header {
+  display: flex !important;
 }
 
 .mosaic-header .header-container {
@@ -223,7 +229,10 @@ body.hide-header .mosaic-header {
 /* animation */
 body.loaded .mosaic-header .logo .mosaic-logo,
 body.loaded .mosaic-header .connect-btn,
-body.loaded .mosaic-header .nav-menu {
+body.loaded .mosaic-header .nav-menu,
+body.single-page .mosaic-header .logo .mosaic-logo,
+body.single-page .mosaic-header .connect-btn,
+body.single-page .mosaic-header .nav-menu {
   transform: translateY(0);
 }
 
@@ -1649,7 +1658,7 @@ body:not(.single-page) .panel .panel-container {
     border: 2px solid #fff;
     color: #fff;
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: 10px !important;
     transition: all 0.3s ease;
   }
 
@@ -2770,7 +2779,7 @@ header {
   z-index: 100 !important;
 }
 
-.element-on-top{
-  /* border: 2px solid red; */
-  /* z-index: 1000 !important; */
-}
+/* .element-on-top{
+  border: 2px solid red;
+  z-index: 1000 !important;
+} */

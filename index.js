@@ -28,6 +28,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function setDynamicHeight() {
     if (!objectEl || !dynamicHeightEl) return;
+    
+    // Check if height is already set via CSS (like !important)
+    const computedStyle = window.getComputedStyle(dynamicHeightEl);
+    const currentHeight = computedStyle.height;
+    
+    // If height is already set to a specific value (not auto), don't override it
+    if (currentHeight !== 'auto' && currentHeight !== '0px') {
+      updateTarget(); // refresh target after layout change
+      kickAnimation(); // ensure animation loop is running
+      return;
+    }
+    
     const objectWidth = objectEl.scrollWidth;
     const dynamicHeight = calcDynamicHeight(objectWidth);
     dynamicHeightEl.style.height = `${dynamicHeight}px`;
@@ -41,9 +53,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
     const vh = window.innerHeight;
     const sectionHeight = dynamicHeightEl.offsetHeight;
+    
+    // For fixed height sections, use the actual content width for scroll calculation
+    const objectWidth = objectEl ? objectEl.scrollWidth : 0;
     const maxScroll = Math.max(sectionHeight - vh, 0);
     const current = Math.min(Math.max(scrollY - sectionTop, 0), maxScroll);
-    return current;
+    
+    // Calculate progress as a percentage of the section height
+    const progress = maxScroll > 0 ? current / maxScroll : 0;
+    
+    // Map this progress to the actual horizontal scroll distance
+    const horizontalScrollDistance = objectWidth - window.innerWidth;
+    return progress * horizontalScrollDistance;
   }
 
   function updateTarget() {

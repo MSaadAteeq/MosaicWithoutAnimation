@@ -67,9 +67,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (home) videoAnimation();
 
+    const teamCards = document.querySelectorAll('.team-card');
+    const teamWrapper = document.querySelector('.team-wrapper');
+
     function horizontalScrollFunction() {
         const teamCards = document.querySelectorAll('.team-card');
         const teamWrapper = document.querySelector('.team-wrapper');
+        // console.log(teamCards, teamWrapper)
         let currentCardIndex = 0;
         let isScrolling = false;
 
@@ -162,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         gsap.set(sections[index], { autoAlpha: 1, zIndex: 1 });
         // Toggle header visibility: show only on first section
-        document.body.classList.toggle('hide-header', index !== 0);
+        // document.body.classList.toggle('hide-header', index !== 0 && home);
         tl.fromTo([outerWrappers[index], innerWrappers[index]], {
             yPercent: i => i ? -100 * dFactor : 100 * dFactor
         }, {
@@ -174,52 +178,52 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     gotoSection(0, 1);
 
-    function atsAnimation () {
-    
+    function atsAnimation() {
+
         gsap.from('.panel-2 .ats-title', {
             y: 100,
             opacity: 0,
             duration: 1,
             ease: 'power3.out',
             scrollTrigger: {
-              trigger: '.panel-2',
-              start: 'top 80%',
-              toggleActions: 'play none none reverse',
+                trigger: '.panel-2',
+                start: 'top 80%',
+                toggleActions: 'play none none reverse',
             },
-          })
-      
-          gsap.from('.panel-2 .ats-description', {
+        })
+
+        gsap.from('.panel-2 .ats-description', {
             y: 150,
             opacity: 0,
             duration: 1,
             delay: 0.2,
             ease: 'power3.out',
             scrollTrigger: {
-              trigger: '.panel-2',
-              start: 'top 80%',
-              toggleActions: 'play none none reverse',
+                trigger: '.panel-2',
+                start: 'top 80%',
+                toggleActions: 'play none none reverse',
             },
-          })
-      
-          // Cards animation - 3D stacked to horizontally spread
-          const cards = gsap.utils.toArray('.panel-2 .ats-card')
-      
-          // Add perspective to the container to prevent shrinking
-          gsap.set('.panel-2 .ats-cards', {
+        })
+
+        // Cards animation - 3D stacked to horizontally spread
+        const cards = gsap.utils.toArray('.panel-2 .ats-card')
+
+        // Add perspective to the container to prevent shrinking
+        gsap.set('.panel-2 .ats-cards', {
             perspective: 1200,
             transformStyle: 'preserve-3d',
-          })
-      
-          // Set initial 3D stacked state with preserved scale
-          gsap.set(cards, {
+        })
+
+        // Set initial 3D stacked state with preserved scale
+        gsap.set(cards, {
             transformOrigin: 'center center',
             transformStyle: 'preserve-3d',
             opacity: 0.9,
             scale: 1,
-          })
-      
-          // Stagger the cards in a stacked formation with less extreme rotations
-          gsap.set(cards[0], {
+        })
+
+        // Stagger the cards in a stacked formation with less extreme rotations
+        gsap.set(cards[0], {
             x: 280,
             y: 150,
             z: -50,
@@ -227,9 +231,9 @@ document.addEventListener('DOMContentLoaded', () => {
             rotationX: -3,
             rotationZ: 3,
             opacity: 0.9,
-          })
-      
-          gsap.set(cards[1], {
+        })
+
+        gsap.set(cards[1], {
             x: 0,
             y: 150,
             z: 0,
@@ -237,9 +241,9 @@ document.addEventListener('DOMContentLoaded', () => {
             rotationX: -3,
             rotationZ: 3,
             opacity: 0.9,
-          })
-      
-          gsap.set(cards[2], {
+        })
+
+        gsap.set(cards[2], {
             x: -250,
             y: 150,
             z: 50,
@@ -247,40 +251,40 @@ document.addEventListener('DOMContentLoaded', () => {
             rotationX: -3,
             rotationZ: 3,
             opacity: 0.9,
-          })
-      
-          // Animate from stacked to normal positions
-          gsap.fromTo(
+        })
+
+        // Animate from stacked to normal positions
+        gsap.fromTo(
             cards,
             {},
             {
-              x: 0,
-              y: 0,
-              z: 0,
-              rotationX: 0,
-              rotationY: 0,
-              rotationZ: 0,
-              opacity: 1,
-              duration: 0.5,
-              delay: 0.5,
-              ease: 'power3.out',
-              stagger: {
-                each: 0.2,
-                from: 'center',
-              },
-              scrollTrigger: {
-                trigger: '.panel-2 .ats-cards',
-                markers: false,
-                start: 'top 85%',
-                toggleActions: 'play none none reverse',
-              },
-              onComplete: function () {
-                gsap.set(cards, {
-                  clearProps: 'all',
-                })
-              },
+                x: 0,
+                y: 0,
+                z: 0,
+                rotationX: 0,
+                rotationY: 0,
+                rotationZ: 0,
+                opacity: 1,
+                duration: 0.5,
+                delay: 0.5,
+                ease: 'power3.out',
+                stagger: {
+                    each: 0.2,
+                    from: 'center',
+                },
+                scrollTrigger: {
+                    trigger: '.panel-2 .ats-cards',
+                    markers: false,
+                    start: 'top 85%',
+                    toggleActions: 'play none none reverse',
+                },
+                onComplete: function () {
+                    gsap.set(cards, {
+                        clearProps: 'all',
+                    })
+                },
             }
-          )
+        )
     }
     if (home) atsAnimation();
 
@@ -357,7 +361,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (home) atsAnimation();
-            
+
             gotoSection(currentIndex + 1, 1);
         },
         tolerance: 10,
@@ -378,9 +382,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const popupObserver = new MutationObserver(toggleObserver);
     const teamPopupOverlay = document.querySelector('.team-popup-overlay');
     if (teamPopupOverlay) {
-        popupObserver.observe(teamPopupOverlay, { 
-            attributes: true, 
-            attributeFilter: ['class'] 
+        popupObserver.observe(teamPopupOverlay, {
+            attributes: true,
+            attributeFilter: ['class']
         });
     }
 })

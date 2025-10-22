@@ -1,115 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mosaic</title>
-    <link rel="stylesheet" href="./index.css" />
-    <!-- lenis cdn -->
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/lenis@1.3.11/dist/lenis.css"
-    />
-    <style>
-      body.single-page section.panel {
-        overflow: visible;
-        color: #fff;
-        min-height: 100vh;
-        height: auto; /* Allow natural height */
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        position: relative;
-      }
 
-      /* Content pages - panel-1 should allow scrolling */
-      body.single-page .panel {
-        min-height: 100vh;
-        height: auto;
-      }
-      /* Content pages specific */
-      body.single-page .panel .panel-container {
-        height: auto;
-        min-height: 100vh;
-        padding: 160px 40px 80px;
-        z-index: 9;
-      }
-      .panel-container {
-        max-width: 1600px;
-        margin: 0 auto;
-      }
-      .privacy-content {
-        padding: 160px 0px 0px;
-      }
-      .privacy-wrapper {
-        width: 100%;
-        margin: 0 auto;
-        height: 100%;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mosaic</title>
+  <link rel="stylesheet" href="./index.css" />
+  <!-- lenis cdn -->
+  <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.11/dist/lenis.css" />
+  <style>
+    body.single-page section.panel {
+      overflow: visible;
+      color: #fff;
+      min-height: 100vh;
+      height: auto;
+      /* Allow natural height */
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
 
-      .privacy-content h1 {
-        font-family: 'Armstrong', sans-serif;
-        font-size: 44px;
-        line-height: 1.1;
-        margin: 0 0 10px 0;
-        color: #ffffff;
-      }
+    /* Content pages - panel-1 should allow scrolling */
+    body.single-page .panel {
+      min-height: 100vh;
+      height: auto;
+    }
 
-      .privacy-content .section-divider {
-        height: 1px;
-        background: linear-gradient(
-          90deg,
+    /* Content pages specific */
+    body.single-page .panel .panel-container {
+      height: auto;
+      min-height: 100vh;
+      padding: 160px 40px 80px;
+      z-index: 9;
+    }
+
+    .panel-container {
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .privacy-content {
+      padding: 160px 0px 0px;
+    }
+
+    .privacy-wrapper {
+      width: 100%;
+      margin: 0 auto;
+      height: 100%;
+    }
+
+    .privacy-content h1 {
+      font-family: 'Armstrong', sans-serif;
+      font-size: 44px;
+      line-height: 1.1;
+      margin: 0 0 10px 0;
+      color: #ffffff;
+    }
+
+    .privacy-content .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg,
           rgba(255, 255, 255, 0.1),
           rgba(255, 255, 255, 0.25),
-          rgba(255, 255, 255, 0.1)
-        );
-        margin: 20px 0;
+          rgba(255, 255, 255, 0.1));
+      margin: 20px 0;
+    }
+
+    .privacy-content p,
+    .privacy-content li {
+      font-size: 15px;
+      line-height: 1.9;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .privacy-content h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 18px;
+      margin-top: 60px;
+      line-height: 1.4;
+    }
+
+    .privacy-content ul {
+      margin: 8px 0 14px 20px;
+      padding: 0;
+    }
+
+    .privacy-content li {
+      list-style: disc;
+      margin: 6px 0;
+    }
+
+    /* Add spacing between sections */
+    .privacy-section {
+      margin-bottom: 0px;
+    }
+
+    body.single-page section.panel.panel-5 {
+      justify-content: center;
+    }
+
+    @media screen and (max-width: 991px) {
+      .privacy-wrapper {
+        padding: 0px 30px;
       }
 
-      .privacy-content p,
-      .privacy-content li {
-        font-size: 15px;
-        line-height: 1.9;
-        color: rgba(255, 255, 255, 0.9);
+      .table {
+        font-size: 14px;
+        margin: 15px 0;
       }
 
-      .privacy-content h2 {
-        font-size: 20px;
-        font-weight: 700;
-        color: #ffffff;
-        margin-bottom: 18px;
-        margin-top: 60px;
-        line-height: 1.4;
+      .table thead td {
+        padding: 12px 8px;
+        font-size: 13px;
       }
 
-      .privacy-content ul {
-        margin: 8px 0 14px 20px;
-        padding: 0;
+      .table tbody td {
+        padding: 10px 8px;
+        font-size: 13px;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .table {
+        font-size: 12px;
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
       }
 
-      .privacy-content li {
-        list-style: disc;
-        margin: 6px 0;
+      .table thead td {
+        padding: 10px 6px;
+        font-size: 12px;
       }
 
-      /* Add spacing between sections */
-      .privacy-section {
-        margin-bottom: 0px;
+      .table tbody td {
+        padding: 8px 6px;
+        font-size: 12px;
+        white-space: normal;
+        word-wrap: break-word;
       }
-      body.single-page section.panel.panel-5 {
-        justify-content: center;
-      }
-      @media screen and (max-width: 991px) {
-        .privacy-wrapper {
-          padding: 0px 30px;
-        }
-      }
-    </style>
-  </head>
-  <body class="single-page">
-    <!-- Loader -->
-    <div class="loader-overlay">
-      <!-- panels for stagger -->
+    }
+
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .table thead tr {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .table thead td {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      text-align: center;
+      padding: 15px 10px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .table tbody tr {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .table tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    .table tbody td {
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 12px 10px;
+      vertical-align: top;
+      color: #e0e0e0;
+      line-height: 1.5;
+    }
+
+    .table tbody td:last-child {
+      border-right: none;
+    }
+
+    .table tbody tr:nth-child(even) {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .table tbody tr:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    
+  </style>
+</head>
+
+<body class="single-page">
+  <!-- Loader -->
+  <!-- <div class="loader-overlay">
       <div class="reveal-panels">
         <div class="reveal-panel"></div>
         <div class="reveal-panel"></div>
@@ -133,238 +223,523 @@
           </span>
         </div>
       </div>
+    </div> -->
+  <!-- Header Section -->
+  <header class="mosaic-header">
+    <div class="header-container">
+      <!-- Left: Logo -->
+      <div class="logo">
+        <a href="index.html">
+          <img src="./images/site-logo-header.svg" class="mosaic-logo" alt="Mosaic Logo" />
+        </a>
+      </div>
+      <!-- Mobile Menu Button -->
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+      <!-- Center: Navigation -->
+      <nav class="nav-menu">
+        <a href="/index.html">Mosaic</a>
+        <a href="/teams.html">Team</a>
+        <a href="/news.html">News</a>
+      </nav>
+      <!-- Right: Button -->
+      <div class="connect-btn">
+        <a href="contact.html">Connect</a>
+      </div>
     </div>
-    <!-- Header Section -->
-    <header class="mosaic-header">
-      <div class="header-container">
-        <!-- Left: Logo -->
-        <div class="logo">
-          <a href="index.html">
-            <img
-              src="./images/site-logo-header.svg"
-              class="mosaic-logo"
-              alt="Mosaic Logo"
-            />
-          </a>
-        </div>
-        <!-- Mobile Menu Button -->
-        <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-        </button>
-        <!-- Center: Navigation -->
-        <nav class="nav-menu">
-          <a href="/index.html">Mosaic</a>
-          <a href="/teams.html">Team</a>
-          <a href="/news.html">News</a>
-        </nav>
-        <!-- Right: Button -->
-        <div class="connect-btn">
-          <a href="contact.html">Connect</a>
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav-overlay">
+      <nav class="mobile-nav-menu">
+        <a href="/index.html">Mosaic</a>
+        <a href="/teams.html">Team</a>
+        <a href="/news.html">News</a>
+        <a href="contact.html" class="mobile-connect-btn">Connect</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- main sections -->
+  <main class="panels main-container">
+    <section class="panel panel-1">
+      <!-- GLOW + GRID OVERLAY -->
+
+      <div class="container-overlay">
+        <div class="hex-grid">
+          <div class="light"></div>
+          <div class="grid"></div>
         </div>
       </div>
-      <!-- Mobile Navigation Overlay -->
-      <div class="mobile-nav-overlay">
-        <nav class="mobile-nav-menu">
-          <a href="/index.html">Mosaic</a>
-          <a href="/teams.html">Team</a>
-          <a href="/news.html">News</a>
-          <a href="contact.html" class="mobile-connect-btn">Connect</a>
-        </nav>
-      </div>
-    </header>
 
-    <!-- main sections -->
-    <main class="panels main-container">
-      <section class="panel panel-1">
-        <!-- GLOW + GRID OVERLAY -->
+      <!-- Page Content -->
+      <div class="content privacy-content panel-container">
+        <div class="privacy-wrapper scrolable-content">
+          <h1>Privacy Policy</h1>
+          <!-- <div class="section-divider"></div> -->
+          <p class="muted"><em>Effective data 10/13/25</em></p>
 
-        <div class="container-overlay">
-          <div class="hex-grid">
-            <div class="light"></div>
-            <div class="grid"></div>
+          <p>
+            This Privacy Policy for Mosaic Platforms, Inc. (“we,” “us,” or “our”), describes how and why we access,
+            collect, store, use, and/or share (“process”) the personal information that we collect when you use our
+            products and services, visit our websites, and otherwise interact with us online (collectively, the
+            “Services”). For purposes of this Privacy Policy, personal information and personal data will be
+            collectively referred to as personal information.
+
+            This Privacy Policy describes the personal information that we collect from you when you use the Services.
+            It also describes how we use and process your personal information and for what purposes it is processed. If
+            you do not agree with our policies and practices, please do not use our Services.
+          </p>
+
+          <!-- Section 1 -->
+          <div class="privacy-section">
+            <h2>SUMMARY OF KEY POINTS</h2>
+            <p>What personal information do we process? When you visit, use, or navigate our Services, we process
+              personal information depending on how you interact with us and the Services, the choices you make, and the
+              products and features you use.</p>
           </div>
-        </div>
 
-        <!-- Page Content -->
-        <div class="content privacy-content panel-container">
-          <div class="privacy-wrapper scrolable-content">
-            <h1>Privacy Policy</h1>
-            <div class="section-divider"></div>
-            <p class="muted"><em>Last Updated: [Month DD, YYYY]</em></p>
+          <!-- Section 2 -->
+          <div class="privacy-section">
+            <h2>TABLE OF CONTENT</h2>
+            <ul>
+              <li>WHAT INFORMATION DO WE COLLECT?</li>
+              <li>
+                HOW DO WE USE YOUR PERSONAL INFORMATION?
+              </li>
+              <li>
+                WHEN AND WITH WHOM DO WE SHARE YOUR PERSONAL INFORMATION?
+              </li>
+              <li>DO WE USE COOKIES AND OTHER TRACKING TECHNOLOGIES?</li>
+              <li>HOW LONG DO WE KEEP YOUR INFORMATION?</li>
+              <li>HOW DO WE KEEP YOUR INFORMATION SAFE?</li>
+              <li>WHAT ARE YOUR PRIVACY RIGHTS?</li>
+              <li>CONTROLS FOR DO-NOT-TRACK FEATURES</li>
+              <li>DO WE MAKE UPDATES TO THIS POLICY?</li>
+              <li>HOW CAN YOU CONTACT US ABOUT THIS POLICY?</li>
+            </ul>
+          </div>
 
+          <!-- Section 3 -->
+          <div class="privacy-section">
+            <ol>
+              <li>
+                <h2>WHAT INFORMATION DO WE COLLECT?</h2>
+              </li>
+            </ol>
             <p>
-              At Mosaic Platforms ("we", "our", "us"), we respect your privacy
-              and are committed to protecting your personal information. This
-              Privacy Policy explains how we collect, use, disclose, and
-              safeguard your information when you visit our website.
+              <strong>Personal information you disclose to us</strong>
+            </p>
+            <p>
+              <strong>In Short: </strong>We collect personal information that you provide to us and/or that we
+              automatically collect from you.
+            </p>
+            <p>Personal information, or personal data, means any information about an individual from which that person
+              can be identified.</p>
+            <p><strong>Personal Information Provided by You. </strong>We collect, use, store and transfer different
+              kinds of personal information about you which we have grouped together as follows: </p>
+
+            <ul>
+              <li>Identity Data, such as your first name, maiden name, last name, title, and gender;</li>
+              <li>Contact Data, such as your address, email address and telephone numbers;</li>
+              <li>Technical Data, which includes your internet protocol (IP) address, login data, browser type and
+                version, time zone setting and location, browser plug-in types and versions, operating system and
+                platform and other technology on the devices you use to access our website;</li>
+              <li>Professional Credentials, such as your employer, occupation and job title;</li>
+              <li>Usage Data, which includes information about how you use our Services; and</li>
+              <li>Marketing and Communications Data, such as your preference in receiving marketing information from us
+                and your general communication preferences.</li>
+            </ul>
+
+            <p><strong>Information automatically collected</strong></p>
+            <p><strong>In Short: </strong>Some information — such as your Internet Protocol (IP) address and/or browser
+              and device characteristics — is collected automatically when you use our Services.</p>
+            <p>We automatically collect certain information when you visit, use or navigate the website or use our other
+              Services. This information does not reveal your specific identity (like your name or contact information)
+              but may include device and usage information, such as your IP address, browser and device characteristics,
+              operating system, language preferences, referring URLs, device name, country, location, information about
+              how and when you use our Services, and other technical information. This information is primarily needed
+              to maintain the security and operation of our Services, and for our internal analytics and reporting
+              purposes.
+              Like many businesses, we also collect information through cookies and similar technologies.
+            </p>
+            <p>The information we collect includes:</p>
+
+            <ul>
+              <li>
+                Log and Usage Data. Log and usage data is service-related, diagnostic, usage, and performance
+                information our servers automatically collect when you access or use our Services and which we record in
+                log files. Depending on how you interact with us, this log data may include your IP address, device
+                information, browser type, and settings and information about your activity in the Services (such as the
+                date/time stamps associated with your usage, pages and files viewed, searches, and other actions you
+                take such as which features you use), device event information (such as system activity, error reports
+                (sometimes called “crash dumps”), and hardware settings).
+              </li>
+
+              <li>
+                Location Data. We collect location data such as information about your device’s location, which can be
+                either precise or imprecise. How much information we collect depends on the type and settings of the
+                device you use to access the Services. For example, we may use GPS and other technologies to collect
+                geolocation data that tells us your current location (based on your IP address). You can opt out of
+                allowing us to collect this information either by refusing access to the information or by disabling
+                your Location setting on your device. However, if you choose to opt out, you may not be able to use
+                certain aspects of the Services.
+              </li>
+            </ul>
+
+            <ol>
+              <li>
+                <h2>HOW DO WE USE YOUR PERSONAL INFORMATION?</h2>
+              </li>
+            </ol>
+
+            <p><strong>In Short:</strong> We process your personal information for the following purposes listed below. We may also
+              process your personal information for other purposes only with your prior consent.
+
+              We will only use your personal information if we have a lawful basis for doing so. Most commonly, we will
+              use your personal information in the following circumstances:</p>
+
+            <ul>
+              <li>Where it is necessary for our legitimate interests (or those of a third party) and your interests and
+                fundamental rights do not override those interests; or</li>
+              <li>Where we need to comply with a legal or regulatory obligation.</li>
+            </ul>
+
+            <p>Generally, we do not rely on consent as a legal basis for processing your personal information other than
+              in relation to sending third-party direct marketing communications to you via email where consent is
+              required by law. You have the right to withdraw consent to receive marketing materials at any time by
+              contacting us or clicking on the unsubscribe option in the communications you receive. We also require
+              your consent to use certain cookies. Please see our Cookie Policy for further information.</p>
+
+            <p>We may rely on the following legal bases to process your personal information:</p>
+
+            <table class="table">
+              <thead>
+                <tr>
+                  <td><strong>Purpose/Activity</strong></td>
+                  <td><strong>Type of data</strong></td>
+                  <td><strong>Lawful basis for processing, including basis of legitimate interest</strong></td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    To manage our relationship with you which will include: (a) Notifying you about changes to our Terms
+                    of Service or Privacy Policy (b) Contacting you about your use of the Services (c) Sending
+                    administrative information to you, including details about our products and Services, and other
+                    similar information
+                  </td>
+                  <td>(a) Identity (b) Contact (c) Marketing and Communications</td>
+                  <td>(a) Necessary to comply with a legal obligation (b) Necessary for our legitimate interests (to
+                    keep our records updated about changes to our terms and policies)</td>
+                </tr>
+
+                <tr>
+                  <td>
+                    To deliver relevant content, advertising, marketing and promotional materials to you and measure or
+                    understand the effectiveness of the information we provide to you
+                  </td>
+                  <td>
+                    (a) Identity (b) Contact (c) Usage (d) Marketing and Communications (e) Technical
+                  </td>
+                  <td>
+                    Depending on whether we have an existing business relationship and where you are based, either: (a)
+                    Consent; or (b) Necessary for our legitimate interests (to study how individuals use our Services,
+                    to develop them, to grow our business and to inform our marketing strategy)
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    To use data analytics to identify usage trends, improve our website, services, marketing, and
+                    experiences
+                  </td>
+                  <td>
+                    (a) Technical (b) Usage
+                  </td>
+                  <td>
+                    Consent
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    To protect our Services as part of our efforts to keep our Services safe and secure, including
+                    through fraud monitoring and prevention efforts
+                  </td>
+                  <td>
+                    (a) Identity (b) Contact (c) Technical (d) Usage
+                  </td>
+                  <td>
+                    (a) Necessary for our legitimate interests (to protect you and our Services) (b) Necessary to comply
+                    with a legal obligation
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p><strong><em>If you are located in Canada, this section applies to you.</em></strong></p>
+            <p>We may process your information if you have given us specific permission (i.e., express consent) to use
+              your personal information for a specific purpose, for example, to send you marketing messages and
+              materials, or in situations where your permission can be inferred (i.e., implied consent). You can
+              withdraw your consent at any time.</p>
+
+            <ol>
+              <li>
+                <h2>WHEN AND WITH WHOM DO WE SHARE YOUR PERSONAL INFORMATION?</h2>
+              </li>
+            </ol>
+
+            <p><strong>In Short: </strong>We may share information in specific situations described in this section
+              and/or with the following third parties.</p>
+            <p>We share your personal information in the following situations.</p>
+
+            <ul>
+              <li><strong>Business Transfers: </strong>We may share or transfer your information in connection with, or
+                during negotiations of, any merger, sale of company assets, financing, restructuring or acquisition of
+                all or a portion of our business or assets by another company.</li>
+              <li><strong>Affiliates: </strong>We may share your information with our affiliates, in which case we will
+                require those affiliates to honor this Privacy Policy. Affiliates include our parent company and any
+                subsidiaries, joint venture partners, or other companies that we control or that are under common
+                control with us.</li>
+              <li><strong>Third-party Vendors and Service Providers: </strong>We share your information with third-party
+                vendors and service providers that help us with specialized services, including billing, payment
+                processing, customer service, business analytics, website administration, and data processing.</li>
+            </ul>
+
+            <ol>
+              <li>
+                <h2>DO WE USE COOKIES AND OTHER TRACKING TECHNOLOGIES?</h2>
+              </li>
+            </ol>
+
+            <p><strong>In Short: </strong>We may use cookies and other tracking technologies to collect and store your
+              information.</p>
+            <p>We may use cookies and similar tracking technologies (like web beacons and pixels) to gather information
+              when you interact with our Services. Some online tracking technologies help us maintain the security of
+              our Services, prevent crashes, fix bugs, save your preferences, and assist with basic site functions.</p>
+            <p>
+              Specific information about how we use such technologies and how you can refuse certain cookies is set out
+              in our Cookie Notice.
+              Google Analytics
+            </p>
+            <p>
+              We may share your information with Google Analytics to track and analyze the use of the Services. To opt
+              out of being tracked by Google Analytics across the Services, visit For more information on the privacy
+              practices of Google, please visit the .
             </p>
 
-            <!-- Section 1 -->
-            <div class="privacy-section">
-              <h2>Information We Collect</h2>
-              <ul>
-                <li>
-                  Personal details such as name, email address, and contact
-                  information
-                </li>
-                <li>
-                  Usage data such as IP address, browser type, and pages visited
-                </li>
-                <li>
-                  Information you provide directly through forms or contact
-                  requests
-                </li>
-              </ul>
-            </div>
+            <ol>
+              <li>
+                <h2>HOW LONG DO WE KEEP YOUR INFORMATION?</h2>
+              </li>
+            </ol>
+            <p><strong>In Short: </strong>We aim to protect your personal information through a system of organizational
+              and technical security measures.</p>
+            <p>
+              We have implemented appropriate and reasonable technical and organizational security measures designed to
+              protect the security of any personal information we process. However, despite our safeguards and efforts
+              to secure your information, no electronic transmission over the Internet or information storage technology
+              can be guaranteed to be 100% secure, so we cannot promise or guarantee that unauthorized third parties
+              will not be able to defeat our security and improperly collect, access, copy, or modify your information.
+              Transmission of personal information to and from our Services is at your own risk. You should only access
+              the Services within a secure environment.
+            </p>
 
-            <!-- Section 2 -->
-            <div class="privacy-section">
-              <h2>How We Use Your Information</h2>
-              <ul>
-                <li>To provide, maintain, and improve our services</li>
-                <li>
-                  To respond to inquiries, communications, and support requests
-                </li>
-                <li>
-                  To send updates, marketing communications, and relevant
-                  notices
-                </li>
-                <li>To comply with legal obligations</li>
-              </ul>
-            </div>
+            <ol>
+              <li>
+                <h2>WHAT ARE YOUR PRIVACY RIGHTS?</h2>
+              </li>
+            </ol>
 
-            <!-- Section 3 -->
-            <div class="privacy-section">
-              <h2>Data Sharing</h2>
-              <p>
-                We do not sell your personal data. We may share information with
-                service providers who assist in our operations, under
-                confidentiality agreements and only as necessary.
-              </p>
-            </div>
+            <p><strong>In Short: </strong>Depending on where you reside, such as the European Economic Area (EEA),
+              United Kingdom (UK), Switzerland, or Canada, you have rights that allow you greater access to and control
+              over your personal information. You may review, change, or terminate your account at any time, depending
+              on your country, province, or state of residence.</p>
 
-            <!-- Section 4 -->
-            <div class="privacy-section">
-              <h2>Your Rights</h2>
-              <p>
-                You may request access, correction, or deletion of your personal
-                data at any time by contacting us.
-              </p>
-            </div>
+            <p>
+              In some regions (like the EEA, UK, Switzerland, and Canada), you have certain rights under applicable data
+              protection laws. These include the right to (i) request access and obtain a copy of your personal
+              information; (ii) request correction of your personal information; (iii) request erasure of your personal
+              information; (iv) restrict the processing of your personal information; (v) withdraw consent; (vi)
+              transfer your personal information; and (vii) not to be subject to automated decision-making. If a
+              decision that produces legal or similarly significant effects is made solely by automated means, we will
+              inform you, explain the main factors, and offer a simple way to request human review. In certain
+              circumstances, you may also have the right to object to the processing of your personal information.
+            </p>
 
-            <!-- Section 5 -->
-            <div class="privacy-section">
-              <h2>Security</h2>
-              <p>
-                We implement reasonable measures to protect your data from
-                unauthorized access or disclosure.
-              </p>
-            </div>
+            <p>
+              We will consider and act upon any request in accordance with applicable data protection laws.
+            </p>
 
-            <!-- Section 6 -->
-            <div class="privacy-section">
-              <h2>Changes</h2>
-              <p>
-                We may update this policy periodically. Continued use of the
-                site after updates constitutes acceptance.
-              </p>
-            </div>
+            <p>
+              If you are located in the EEA, UK or Switzerland, you also have the right to complain to your local data
+              protection authority at https://www.edpb.europa.eu/about-edpb/about-edpb/members_en,
+              https://ico.org.uk/make-a-complaint/, or https://www.edoeb.admin.ch/en. If you wish to exercise any of the
+              rights set out above, including withdrawing consent, please contact us at privacy@mosaicplatforms.com and
+              give us specific details regarding which right you choose to exercise.
+            </p>
+
+            <p>
+              <strong>What we may need from you</strong>
+            </p>
+
+            <p>
+              We may need to request specific information from you to help us confirm your identity and ensure your
+              right to access your personal information (or to exercise any of your other rights). This is a security
+              measure to ensure that, for example, personal information is not disclosed to any person who has no right
+              to receive it or that information is not deleted without authorization. We may also contact you to ask you
+              for further information in relation to your request in order to speed up our response.
+            </p>
+
+            <p>
+              <strong>Opting out of marketing and promotional communications: </strong>You can unsubscribe from our
+              marketing and promotional communications at any time by clicking on the unsubscribe link in the emails
+              that we send, or by contacting us using the details provided in the section “HOW CAN YOU CONTACT US ABOUT
+              THIS POLICY?” below. However, we may still communicate with you for other non-marketing purposes.
+            </p>
+
+            <ol>
+              <li>
+                <h2>CONTROLS FOR DO-NOT-TRACK FEATURES</h2>
+              </li>
+            </ol>
+
+            <p>Most web browsers and some mobile operating systems and mobile applications include a Do- Not- Track
+              (“DNT”) feature or setting you can activate to signal your privacy preference not to have data about your
+              online browsing activities monitored and collected. At this stage, no uniform technology standard for
+              recognizing and implementing DNT signals has been finalized. As such, we do not currently respond to DNT
+              browser signals or any other mechanism that automatically communicates your choice not to be tracked
+              online.</p>
+
+            <p><strong>California “Shine The Light” Law</strong></p>
+            <p>California Civil Code Section 1798.83, also known as the “Shine The Light” law, permits our users who are
+              considered California customers to request and obtain from us, once a year and free of charge, information
+              about categories of personal information (if any) we disclosed to third parties for direct marketing
+              purposes and the names and addresses of all third parties with which we shared personal information in the
+              immediately preceding calendar year. If you would like to make such a request, please submit your request
+              in writing to us by using the contact details provided in the section “HOW CAN YOU CONTACT US ABOUT THIS
+              POLICY?”</p>
+
+
+            <ol>
+              <li>
+                <h2>DO WE MAKE UPDATES TO THIS POLICY?</h2>
+              </li>
+            </ol>
+
+            <p>Yes. We may update this Privacy Policy from time to time. The updated version will be indicated by an
+              updated “Revised” date at the top of this Privacy Policy. If we make material changes to this Privacy
+              Policy, we will notify you either by prominently posting a notice of such changes or by directly sending
+              you a notification. We encourage you to review this Privacy Policy frequently to be informed of how we are
+              processing your information.</p>
+
+              <ol>
+                <li><h2>HOW CAN YOU CONTACT US ABOUT THIS POLICY?</h2></li>
+              </ol>
+
+              <p>If you have questions or comments about this policy, you may contact us by email at , or contact us by post at:</p>
+              <p>Mosaic Platforms, Inc.</p>
+              <p>Attn: Privacy</p>
+              <p>875 Washington St, New York, NY 10014, USA</p>
+              <p>4th Floor</p>
+              <p>New York, NY 10014</p>
+              <p>United States</p>
+
           </div>
+
+          <!-- Section 4 -->
+          
         </div>
-      </section>
-      <section class="panel panel-5">
-        <!-- GLOW + GRID OVERLAY -->
+      </div>
+    </section>
+    <section class="panel panel-5">
+      <!-- GLOW + GRID OVERLAY -->
 
-        <div class="container-overlay">
-          <div class="hex-grid">
-            <div class="light"></div>
-            <div class="grid"></div>
-          </div>
+      <div class="container-overlay">
+        <div class="hex-grid">
+          <div class="light"></div>
+          <div class="grid"></div>
         </div>
-        <div class="footer-inner">
-          <div class="footer-left">
-            <a href="/index.html">
-              <img
-                src="./images/footer-site-logo.svg"
-                alt="Mosaic"
-                class="footer-logo"
-              />
-            </a>
-          </div>
-
-          <nav class="footer-nav">
-            <a href="/index.html">Mosaic</a>
-            <a href="/teams.html">Team</a>
-            <a href="/news.html">News</a>
-          </nav>
-
-          <div class="footer-contact">
-            <h4>Connect</h4>
-            <a href="tel:+1234567890">+1 2345 67890</a>
-            <a href="mailto:info@mosaicats.com">info@mosaicats.com</a>
-            <address>
-              Mosaic Platforms, Inc.<br />
-              875 Washington Street, 4th<br />
-              Floor New York, NY 10014
-            </address>
-            <a class="footer-link" href="#" target="_blank" rel="noopener"
-              >LinkedIn <img src="./images/linkeding-icon.svg" alt=""
-            /></a>
-          </div>
+      </div>
+      <div class="footer-inner">
+        <div class="footer-left">
+          <a href="/index.html">
+            <img src="./images/footer-site-logo.svg" alt="Mosaic" class="footer-logo" />
+          </a>
         </div>
 
-        <div class="footer-bottom">
-          <ul class="footer-legal">
-            <li>© 2025 Mosaic. All Rights Reserved.</li>
-            <li><a href="/privacy.html">Privacy Policy</a></li>
-            <li><a href="/terms-of-use.html">Terms of Use</a></li>
-            <li>
-              <a href="">Cookie Ploicy</a>
-            </li>
-            <!-- <li><a href="/site-legal.html">Site Legal</a></li>
-            <li>
-              <a href="/compliance-disclaimer.html">Compliance Disclaimers</a>
-            </li> -->
-          </ul>
-  
-          <p class="footer-disclaimer">
-            Mosaic Platforms, Inc. is a privately held technology company advancing efficiency and performance in
-            electronic trading through its wholly owned subsidiaries.
-          </p>
-  
-          <p style="text-align: center; margin-top: 10px;">
-            This site is intended for INSTITUTIONAL & PROFESSIONAL clients only. Not intended for retail customer use.
-          </p>
+        <nav class="footer-nav">
+          <a href="/index.html">Mosaic</a>
+          <a href="/teams.html">Team</a>
+          <a href="/news.html">News</a>
+        </nav>
+
+        <div class="footer-contact">
+          <h4>Connect</h4>
+          <a href="tel:+1234567890">+1 2345 67890</a>
+          <a href="mailto:info@mosaicats.com">info@mosaicats.com</a>
+          <address>
+            Mosaic Platforms, Inc.<br />
+            875 Washington Street, 4th<br />
+            Floor New York, NY 10014
+          </address>
+          <a class="footer-link" href="#" target="_blank" rel="noopener">LinkedIn <img src="./images/linkeding-icon.svg"
+              alt="" /></a>
         </div>
-      </section>
-    </main>
+      </div>
 
-    <script src="./index.js"></script>
-    <!-- lenis cdn -->
-    <script src="https://unpkg.com/lenis@1.3.11/dist/lenis.min.js"></script>
-    <!-- gsap -->
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-    <!-- scroll trigger  -->
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js"></script>
+      <div class="footer-bottom">
+        <ul class="footer-legal">
+          <li>© 2025 Mosaic. All Rights Reserved.</li>
+          <li><a href="/privacy.html">Privacy Policy</a></li>
+          <li><a href="/terms-of-use.html">Terms of Use</a></li>
+          <li>
+            <a href="">Cookie Ploicy</a>
+          </li>
+          <!-- <li><a href="/site-legal.html">Site Legal</a></li>
+          <li>
+            <a href="/compliance-disclaimer.html">Compliance Disclaimers</a>
+          </li> -->
+        </ul>
 
-    <script>
-      // Initialize a new Lenis instance for smooth scrolling
-      const lenis = new Lenis()
+        <p class="footer-disclaimer">
+          Mosaic Platforms, Inc. is a privately held technology company advancing efficiency and performance in
+          electronic trading through its wholly owned subsidiaries.
+        </p>
 
-      // Synchronize Lenis scrolling with GSAP's ScrollTrigger plugin
-      lenis.on('scroll', ScrollTrigger.update)
+        <p style="text-align: center; margin-top: 10px;">
+          This site is intended for INSTITUTIONAL & PROFESSIONAL clients only. Not intended for retail customer use.
+        </p>
+      </div>
+    </section>
+  </main>
 
-      // Add Lenis's requestAnimationFrame (raf) method to GSAP's ticker
-      // This ensures Lenis's smooth scroll animation updates on each GSAP tick
-      gsap.ticker.add((time) => {
-        lenis.raf(time * 1000) // Convert time from seconds to milliseconds
-      })
+  <script type="module" src="./index.js"></script>
+  <!-- lenis cdn -->
+  <script src="https://unpkg.com/lenis@1.3.11/dist/lenis.min.js"></script>
+  <!-- gsap -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <!-- scroll trigger  -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js"></script>
 
-      // Disable lag smoothing in GSAP to prevent any delay in scroll animations
-      gsap.ticker.lagSmoothing(0)
-    </script>
-  </body>
+  <script>
+    // Initialize a new Lenis instance for smooth scrolling
+    const lenis = new Lenis()
+
+    // Synchronize Lenis scrolling with GSAP's ScrollTrigger plugin
+    lenis.on('scroll', ScrollTrigger.update)
+
+    // Add Lenis's requestAnimationFrame (raf) method to GSAP's ticker
+    // This ensures Lenis's smooth scroll animation updates on each GSAP tick
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000) // Convert time from seconds to milliseconds
+    })
+
+    // Disable lag smoothing in GSAP to prevent any delay in scroll animations
+    gsap.ticker.lagSmoothing(0)
+  </script>
+</body>
+
 </html>

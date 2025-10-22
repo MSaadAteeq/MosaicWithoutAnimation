@@ -340,45 +340,123 @@ document.addEventListener('DOMContentLoaded', () => {
 
   videoAnimation();
 
-  new Swiper('.blogSwiper', {
-
-    speed: 800,
-    slidesPerView: 1.5,
-    centeredSlides: true,
-    slidesOffsetBefore: 0,
-    slidesOffsetAfter: 0,
-    spaceBetween: 30,
-    grabCursor: false,
-    loop: false,
-    useCSS3D: true,
-    useCSS3DTransform: true,
-    on: {
-      init(swiper) {
-        // remove initial left offset added by centeredSlides
-        swiper.setTranslate(0)
+  // Simple carousel implementation - starts from left edge
+  const blogSwiper = document.querySelector('.blogSwiper');
+  const blogWrapper = blogSwiper.querySelector('.swiper-wrapper');
+  const blogSlides = blogSwiper.querySelectorAll('.swiper-slide');
+  const prevBtn = document.querySelector('.blog-button-prev');
+  const nextBtn = document.querySelector('.blog-button-next');
+  
+  let currentIndex = 0;
+  let isAnimating = false;
+  
+  // Get responsive settings
+  function getResponsiveSettings() {
+    const width = window.innerWidth;
+    if (width < 768) {
+      return { slidesPerView: 1, spaceBetween: 20, slideWidth: '100%' };
+    } else if (width < 1024) {
+      return { slidesPerView: 2, spaceBetween: 30, slideWidth: 'calc(50% - 15px)' };
+    } else if (width < 1200) {
+      return { slidesPerView: 2.5, spaceBetween: 40, slideWidth: 'calc(40% - 16px)' };
+    } else {
+      return { slidesPerView: 3, spaceBetween: 50, slideWidth: 'calc(33.333% - 33.333px)' };
+    }
+  }
+  
+  function updateCarousel() {
+    if (isAnimating) return;
+    
+    const settings = getResponsiveSettings();
+    const containerWidth = blogSwiper.offsetWidth;
+    
+    // Calculate slide width more precisely to prevent cutoff
+    const totalSlides = Math.floor(settings.slidesPerView);
+    const totalGaps = (totalSlides - 1) * settings.spaceBetween;
+    const slideWidth = (containerWidth - totalGaps) / totalSlides;
+    
+    // Set slide styles
+    blogSlides.forEach((slide, index) => {
+      slide.style.width = `${slideWidth}px`;
+      slide.style.marginRight = index < blogSlides.length - 1 ? `${settings.spaceBetween}px` : '0';
+      slide.style.flexShrink = '0';
+    });
+    
+    // Calculate max translate to ensure last card is fully visible
+    const totalContentWidth = (slideWidth + settings.spaceBetween) * blogSlides.length - settings.spaceBetween;
+    const maxTranslate = Math.max(0, totalContentWidth - containerWidth);
+    
+    // Calculate and apply transform with boundary check
+    let translateX = -(currentIndex * (slideWidth + settings.spaceBetween));
+    translateX = Math.max(-maxTranslate, Math.min(0, translateX));
+    
+    blogWrapper.style.transform = `translateX(${translateX}px)`;
+    blogWrapper.style.transition = 'transform 0.6s ease';
+  }
+  
+  function nextSlide() {
+    if (isAnimating) return;
+    const settings = getResponsiveSettings();
+    const containerWidth = blogSwiper.offsetWidth;
+    const totalSlides = Math.floor(settings.slidesPerView);
+    const totalGaps = (totalSlides - 1) * settings.spaceBetween;
+    const slideWidth = (containerWidth - totalGaps) / totalSlides;
+    
+    // Calculate if we can move to next slide without cutting off the last card
+    const totalContentWidth = (slideWidth + settings.spaceBetween) * blogSlides.length - settings.spaceBetween;
+    const maxTranslate = Math.max(0, totalContentWidth - containerWidth);
+    const nextTranslate = -((currentIndex + 1) * (slideWidth + settings.spaceBetween));
+    
+    if (nextTranslate >= -maxTranslate) {
+      currentIndex++;
+      updateCarousel();
+    }
+  }
+  
+  function prevSlide() {
+    if (isAnimating) return;
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateCarousel();
+    }
+  }
+  
+  // Event listeners
+  nextBtn.addEventListener('click', nextSlide);
+  prevBtn.addEventListener('click', prevSlide);
+  
+  // Initialize
+  updateCarousel();
+  window.addEventListener('resize', updateCarousel);
+  
+  // Touch support
+  let startX = 0;
+  let isDragging = false;
+  
+  blogSwiper.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    isDragging = true;
+  });
+  
+  blogSwiper.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+  });
+  
+  blogSwiper.addEventListener('touchend', (e) => {
+    if (!isDragging) return;
+    isDragging = false;
+    
+    const endX = e.changedTouches[0].clientX;
+    const diffX = startX - endX;
+    
+    if (Math.abs(diffX) > 50) {
+      if (diffX > 0) {
+        nextSlide();
+      } else {
+        prevSlide();
       }
-    },
-
-    // Full width
-    // width: '100vw', 
-    navigation: {
-      nextEl: '.blog-button-next',
-      prevEl: '.blog-button-prev',
-    },
-    breakpoints: {
-      768: {
-        slidesPerView: 2,
-        spaceBetween: 40,
-      },
-      1024: {
-        slidesPerView: 2.5,
-        spaceBetween: 50,
-      },
-      1200: {
-        slidesPerView: 3,
-        spaceBetween: 60,
-      },
-    },
+    }
   });
 
 

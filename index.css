@@ -364,12 +364,12 @@ body.loaded .hero-section video {
 body:not(.single-page) section.panel {
   overflow: hidden;
   /* color: #fff; */
-  height: 100vh;
-  min-height: 100vh;
+  /* height: 100vh; */
+  /* min-height: 100vh; */
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   position: relative;
   /* height: 1000px !important; */
@@ -393,7 +393,7 @@ body:not(.single-page) .panel .panel-container {
   color: #fff;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   position: sticky;
   /* height: 100px !important; */
@@ -619,6 +619,7 @@ body:not(.single-page) .panel .panel-container {
   margin-bottom: 1rem;
   line-height: 1.2em;
   font-family: var(--font-family-first);
+  margin-top: 100px;
 }
 
 .ats-description {
@@ -2422,7 +2423,7 @@ a:focus,
 
   section.panel.panel-2 {
     height: 100% !important;
-    min-height: 100vh;
+    min-height: 100%;
   }
 
   /* #horizontal-scroll {

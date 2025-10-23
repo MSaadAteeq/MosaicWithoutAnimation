@@ -2291,6 +2291,10 @@ a:focus,
     width: 16px;
   }
 
+  .panel-5{
+    padding-top: 20px !important;
+  }
+
   .panel-5 .footer-inner {
     grid-template-columns: 20% 60% 20%;
   }

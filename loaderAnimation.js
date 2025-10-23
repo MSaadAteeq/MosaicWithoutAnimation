@@ -14,6 +14,10 @@ async function loaderAnimation() {
   const playButton = document.querySelector('.video-play-button')
   const home = document.querySelector('.home')
 
+  // Disable scrolling while loader is active
+  document.body.style.overflowY = 'hidden'
+  document.documentElement.style.overflowY = 'hidden'
+
   // Ensure images load
   const waitForImage = (img) =>
     img.complete && img.naturalWidth > 0
@@ -62,7 +66,12 @@ async function loaderAnimation() {
       stagger: { each: 0.15, from: 'end' },
     })
     .set(loader, { display: 'none' })
-    .call(() => document.body.classList.add('loaded'))
+    .call(() => {
+      document.body.classList.add('loaded')
+      // Re-enable scrolling after loader finishes
+      document.body.style.overflowY = ''
+      document.documentElement.style.overflowY = ''
+    })
 
     // Page content animation (after loader)
     // Header slide down

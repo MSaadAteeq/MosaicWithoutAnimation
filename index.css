@@ -50,6 +50,7 @@ body {
   font-style: normal;
   color: var(--color-text);
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 a {
@@ -74,6 +75,7 @@ ul {
 
 html {
   font-size: 100%;
+  overflow-y: hidden;
 }
 
 html,
@@ -82,6 +84,10 @@ body {
 }
 
 body.loaded {
+  overflow-y: auto;
+}
+
+html:has(body.loaded) {
   overflow-y: auto;
 }
 

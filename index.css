@@ -276,7 +276,7 @@ body.single-page .mosaic-header .nav-menu {
   left: 0;
   width: 100%;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.95);
+  background: #212577;
   backdrop-filter: blur(10px);
   display: none;
   justify-content: center;
@@ -385,7 +385,7 @@ body:not(.single-page) .panel .panel-container {
   align-items: center;
   width: 100%;
   margin: 0 auto;
-  height: 100vh;
+  /* height: 100vh; */
 }
 
 .horizontal {
@@ -407,7 +407,7 @@ body:not(.single-page) .panel .panel-container {
   overflow: hidden;
   position: relative;
   height: 1000px !important;
-  min-height: 100vh;
+  /* min-height: 100vh; */
 }
 
 /* Gradient per section */
@@ -490,7 +490,7 @@ body:not(.single-page) .panel .panel-container {
   position: absolute;
   top: 0;
   left: 0;
-  background: url('./images/Tiles-grid-bg-image.svg') center center;
+  background: url('./images/new-tiles.svg') center center;
   background-repeat: repeat;
   width: 100%;
   height: 100vh;
@@ -1093,7 +1093,7 @@ body:not(.single-page) .panel .panel-container {
 }
 
 .blog-tags {
-  display: flex;
+  display: none;
   gap: 10px;
   justify-content: flex-end;
   flex-wrap: wrap;
@@ -1151,6 +1151,10 @@ body:not(.single-page) .panel .panel-container {
   box-sizing: border-box;
 }
 
+.blogSwiper .swiper-slide a {
+    height: 300px;
+}
+
 .blog-nav {
   display: flex;
   justify-content: center;
@@ -1162,6 +1166,10 @@ body:not(.single-page) .panel .panel-container {
   padding: 10px;
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
+}
+
+span.news-tag {
+    display: none;
 }
 
 .blog-nav .blog-button-prev,
@@ -1291,7 +1299,7 @@ body:not(.single-page) .panel .panel-container {
 
 .footer-legal li+li {
   position: relative;
-  padding-left: 14px;
+  padding-left: 28px;
 }
 
 .footer-legal li+li::before {
@@ -2195,6 +2203,7 @@ a:focus,
 
   body:not(.single-page) .blogSwiper .blog-card .blog-content .blog-title {
     font-size: clamp(1.25rem, -3.125rem + 5vw, 1.875rem);
+    font-size: 24px;
   }
 
   body:not(.single-page) .blogSwiper .blog-card .blog-content .blog-tags .tag,
@@ -2507,7 +2516,7 @@ a:focus,
   }
 
   .hero-section video {
-    /* height: 300px; */
+    height: 250px;
     border-width: 3px;
   }
 
@@ -2528,10 +2537,21 @@ a:focus,
 
   .ats-card {
     max-width: 66.66%;
+    display: flex;
+        flex-direction: row;
+        gap: 20px;
   }
 
   .ats-cards {
     padding-top: 1.5rem;
+  }
+
+  .ats-card img{
+    width: 20%;
+  }
+
+  .ats-card p{
+    width: 80%;
   }
 
   .teams-header {

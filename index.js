@@ -28,18 +28,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function setDynamicHeight() {
     if (!objectEl || !dynamicHeightEl) return;
-    
+
     // Check if height is already set via CSS (like !important)
     const computedStyle = window.getComputedStyle(dynamicHeightEl);
     const currentHeight = computedStyle.height;
-    
+
     // If height is already set to a specific value (not auto), don't override it
     if (currentHeight !== 'auto' && currentHeight !== '0px') {
       updateTarget(); // refresh target after layout change
       kickAnimation(); // ensure animation loop is running
       return;
     }
-    
+
     const objectWidth = objectEl.scrollWidth;
     const dynamicHeight = calcDynamicHeight(objectWidth);
     dynamicHeightEl.style.height = `${dynamicHeight}px`;
@@ -53,15 +53,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
     const vh = window.innerHeight;
     const sectionHeight = dynamicHeightEl.offsetHeight;
-    
+
     // For fixed height sections, use the actual content width for scroll calculation
     const objectWidth = objectEl ? objectEl.scrollWidth : 0;
     const maxScroll = Math.max(sectionHeight - vh, 0);
     const current = Math.min(Math.max(scrollY - sectionTop, 0), maxScroll);
-    
+
     // Calculate progress as a percentage of the section height
     const progress = maxScroll > 0 ? current / maxScroll : 0;
-    
+
     // Map this progress to the actual horizontal scroll distance
     const horizontalScrollDistance = objectWidth - window.innerWidth;
     return progress * horizontalScrollDistance;
@@ -147,14 +147,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-  
+
   pointerAnimation()
   // scrollAnimation()
   navigationToggle()
 
 
 
-  
+
 
 
 
@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Clear existing timeout
         clearTimeout(scrollTimeout);
-        
+
         // Set timeout to detect when scrolling stops
         scrollTimeout = setTimeout(() => {
           isScrolling = false;
@@ -344,12 +344,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const blogSwiper = document.querySelector('.blogSwiper');
   const blogWrapper = blogSwiper.querySelector('.swiper-wrapper');
   const blogSlides = blogSwiper.querySelectorAll('.swiper-slide');
-  const prevBtn = document.querySelector('.blog-button-prev');
-  const nextBtn = document.querySelector('.blog-button-next');
-  
+
   let currentIndex = 0;
   let isAnimating = false;
-  
+
   // Get responsive settings
   function getResponsiveSettings() {
     const width = window.innerWidth;
@@ -363,13 +361,13 @@ document.addEventListener('DOMContentLoaded', () => {
       return { slidesPerView: 3, spaceBetween: 30, padding: 0 };
     }
   }
-  
+
   function updateCarousel() {
     if (isAnimating) return;
-    
+
     const settings = getResponsiveSettings();
     const containerWidth = blogSwiper.offsetWidth;
-    
+
     // Apply padding for mobile
     if (settings.padding > 0) {
       blogSwiper.style.paddingLeft = `${settings.padding}px`;
@@ -378,15 +376,15 @@ document.addEventListener('DOMContentLoaded', () => {
       blogSwiper.style.paddingLeft = '0';
       blogSwiper.style.paddingRight = '0';
     }
-    
+
     // Calculate effective container width (minus padding)
     const effectiveWidth = containerWidth - (settings.padding * 2);
-    
+
     // Calculate slide width more precisely to prevent cutoff
     const totalSlides = Math.floor(settings.slidesPerView);
     const totalGaps = (totalSlides - 1) * settings.spaceBetween;
     let slideWidth = Math.floor((effectiveWidth - totalGaps) / totalSlides);
-    
+
     // Ensure minimum slide width to prevent weird appearance
     const minSlideWidth = 280; // Minimum width for cards to look good
     if (slideWidth < minSlideWidth && totalSlides > 1) {
@@ -399,33 +397,33 @@ document.addEventListener('DOMContentLoaded', () => {
         settings.slidesPerView = maxSlides;
       }
     }
-    
+
     // Update totalSlides after potential adjustment
     const finalTotalSlides = Math.floor(settings.slidesPerView);
-    
+
     // Set slide styles
     blogSlides.forEach((slide, index) => {
       slide.style.width = `${slideWidth}px`;
       slide.style.marginRight = index < blogSlides.length - 1 ? `${settings.spaceBetween}px` : '0';
       slide.style.flexShrink = '0';
     });
-    
+
     // Calculate max translate to ensure last card is fully visible
     const totalContentWidth = (slideWidth + settings.spaceBetween) * blogSlides.length - settings.spaceBetween;
     const maxTranslate = Math.max(0, totalContentWidth - effectiveWidth);
-    
+
     // Safety check: ensure we don't exceed container bounds
     const maxPossibleIndex = Math.max(0, blogSlides.length - finalTotalSlides);
     currentIndex = Math.min(currentIndex, maxPossibleIndex);
-    
+
     // Calculate and apply transform with boundary check
     let translateX = -(currentIndex * (slideWidth + settings.spaceBetween));
     translateX = Math.max(-maxTranslate, Math.min(0, translateX));
-    
+
     blogWrapper.style.transform = `translateX(${translateX}px)`;
     blogWrapper.style.transition = 'transform 0.6s ease';
   }
-  
+
   function nextSlide() {
     if (isAnimating) return;
     const settings = getResponsiveSettings();
@@ -434,18 +432,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalSlides = Math.floor(settings.slidesPerView);
     const totalGaps = (totalSlides - 1) * settings.spaceBetween;
     const slideWidth = Math.floor((effectiveWidth - totalGaps) / totalSlides);
-    
+
     // Calculate if we can move to next slide without cutting off the last card
     const totalContentWidth = (slideWidth + settings.spaceBetween) * blogSlides.length - settings.spaceBetween;
     const maxTranslate = Math.max(0, totalContentWidth - effectiveWidth);
     const nextTranslate = -((currentIndex + 1) * (slideWidth + settings.spaceBetween));
-    
+
     if (nextTranslate >= -maxTranslate) {
       currentIndex++;
       updateCarousel();
     }
   }
-  
+
   function prevSlide() {
     if (isAnimating) return;
     if (currentIndex > 0) {
@@ -453,58 +451,54 @@ document.addEventListener('DOMContentLoaded', () => {
       updateCarousel();
     }
   }
-  
-  // Event listeners
-  nextBtn.addEventListener('click', nextSlide);
-  prevBtn.addEventListener('click', prevSlide);
-  
+
   // Initialize
   updateCarousel();
   window.addEventListener('resize', updateCarousel);
-     // Touch support for carousel navigation
+  // Touch support for carousel navigation
   let startX = 0;
   let startY = 0;
   let isDragging = false;
   let isScrolling = false;
-  
+
   blogSwiper.addEventListener('touchstart', (e) => {
     startX = e.touches[0].clientX;
     startY = e.touches[0].clientY;
     isDragging = true;
     isScrolling = false;
   });
-  
+
   blogSwiper.addEventListener('touchmove', (e) => {
     if (!isDragging) return;
-    
+
     const currentX = e.touches[0].clientX;
     const currentY = e.touches[0].clientY;
     const diffX = Math.abs(startX - currentX);
     const diffY = Math.abs(startY - currentY);
-    
+
     // If vertical movement is greater than horizontal, allow page scroll
     if (diffY > diffX && diffY > 10) {
       isScrolling = true;
       return; // Allow default scroll behavior
     }
-    
+
     // If horizontal movement is significant, prevent default and handle carousel
     if (diffX > 10) {
       e.preventDefault();
       isScrolling = false;
     }
   });
-  
+
   blogSwiper.addEventListener('touchend', (e) => {
     if (!isDragging) return;
     isDragging = false;
-    
+
     // If it was a scroll gesture, don't handle carousel navigation
     if (isScrolling) return;
-    
+
     const endX = e.changedTouches[0].clientX;
     const diffX = startX - endX;
-    
+
     if (Math.abs(diffX) > 50) {
       if (diffX > 0) {
         nextSlide();
@@ -519,19 +513,19 @@ document.addEventListener('DOMContentLoaded', () => {
   blogCards.forEach(card => {
     let touchStartTime = 0;
     let touchMoved = false;
-    
+
     card.addEventListener('touchstart', (e) => {
       touchStartTime = Date.now();
       touchMoved = false;
     });
-    
+
     card.addEventListener('touchmove', (e) => {
       touchMoved = true;
     });
-    
+
     card.addEventListener('touchend', (e) => {
       const touchDuration = Date.now() - touchStartTime;
-      
+
       // Only prevent default and navigate if it was a quick tap (not a scroll)
       if (!touchMoved && touchDuration < 300) {
         e.preventDefault();

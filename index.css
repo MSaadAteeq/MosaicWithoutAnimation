@@ -412,7 +412,7 @@
   #horizontal-scroll {
     overflow: hidden;
     position: relative;
-    height: 1000px !important;
+    height: clamp(63rem, 45.5986rem + 14.0845vw, 62.5rem) !important;
     /* min-height: 100vh; */
   }
 

@@ -2398,6 +2398,12 @@
   }
 
   @media (max-width: 768px) {
+    /* .hex-grid .grid,
+  .hex-grid .grid-2,
+  .hex-grid .light,
+  .hex-grid .trail{
+    display: none;
+  } */
     .panel .panel-container {
       max-width: 100%;
       padding-inline: calc(var(--spacing-padding-inline) * 4);
@@ -2831,4 +2837,11 @@
     margin-top: 50px;
     text-align: center;
   }
-  
+  @supports (hanging-punctuation: first) and (font: -apple-system-body) and (-webkit-appearance: none) {
+  .hex-grid .grid,
+  .hex-grid .grid-2,
+  .hex-grid .light,
+  .hex-grid .trail{
+    display: none;
+  }
+  }

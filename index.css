@@ -2302,7 +2302,7 @@
     }
 
     .panel-5{
-      padding-top: 60px !important;
+      padding-top: 20px !important;
     }
 
     .panel-5 .footer-inner {
@@ -2831,16 +2831,4 @@
     margin-top: 50px;
     text-align: center;
   }
-    /* query that supports on safari browser*/
-    @supports (hanging-punctuation: first) and (font: -apple-system-body) and (-webkit-appearance: none) {
-    .hex-grid .grid,
-    .hex-grid .grid-2,
-    .hex-grid .light,
-    .hex-grid .light,
-    .hex-grid  .trail,
-    .hex-grid  .trail{
-      display: none;
-    }}
- 
-
   

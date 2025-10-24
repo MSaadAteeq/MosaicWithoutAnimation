@@ -2302,7 +2302,7 @@
     }
 
     .panel-5{
-      padding-top: 20px !important;
+      padding-top: 60px !important;
     }
 
     .panel-5 .footer-inner {
@@ -2835,9 +2835,9 @@
     @supports (hanging-punctuation: first) and (font: -apple-system-body) and (-webkit-appearance: none) {
     .hex-grid .grid,
     .hex-grid .grid-2,
-    .hex-grid .grid .light,
-    .hex-grid .grid-2 .light,
-    .hex-grid .grid .trail,
-    .hex-grid .grid-2 .trail{
+    .hex-grid .light,
+    .hex-grid .light,
+    .hex-grid  .trail,
+    .hex-grid  .trail{
       display: none;
     }}

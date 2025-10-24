@@ -496,7 +496,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    background: url('./images/tiles-compressed.svg') center center;
+    /* background: url('./images/tiles-compressed.svg') center center; */
     background-repeat: repeat;
     width: 100%;
     height: 100vh;
@@ -508,7 +508,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    background: url('./images/Tiles-grid-bg-image-2.svg') center center;
+    /* background: url('./images/Tiles-grid-bg-image-2.svg') center center; */
     background-repeat: repeat;
     width: 100%;
     height: 100vh;

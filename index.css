@@ -2440,13 +2440,10 @@
       min-height: 100%;
     }
 
-    #horizontal-scroll {
-      overflow: hidden;
-      position: relative;
-      height: 800px !important;
-      /* min-height: 100vh; */
-    }
-  
+    /* #horizontal-scroll {
+      height: 100% !important;
+      min-height: 100vh;
+    } */
 
     .ats-cards {
       flex-direction: column;

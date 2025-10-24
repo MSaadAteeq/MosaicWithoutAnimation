@@ -15,7 +15,7 @@ const playButton = document.querySelector('.video-play-button')
 const home = document.querySelector('.home')
 
 // Disable scrolling while loader is active
-document.body.style.overflowY = 'hidden'
+// document.body.style.overflowY = 'hidden'
 document.documentElement.style.overflowY = 'hidden'
 
 // Preload critical background images

@@ -2831,3 +2831,9 @@
     margin-top: 50px;
     text-align: center;
   }
+    /* query that supports on safari browser */
+    @supports (hanging-punctuation: first) and (font: -apple-system-body) and (-webkit-appearance: none) {
+    .hex-grid .grid,
+    .hex-grid .grid-2{
+      display: none;
+    }}

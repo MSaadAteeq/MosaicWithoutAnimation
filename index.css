@@ -412,7 +412,7 @@
   #horizontal-scroll {
     overflow: hidden;
     position: relative;
-    height: clamp(63rem, 45.5986rem + 14.0845vw, 62.5rem) !important;
+    height: clamp(70rem, 45.5986rem + 14.0845vw, 62.5rem) !important;
     /* min-height: 100vh; */
   }
 
@@ -2831,7 +2831,7 @@
     margin-top: 50px;
     text-align: center;
   }
-    /* query that supports on safari browser */
+    /* query that supports on safari browser
     @supports (hanging-punctuation: first) and (font: -apple-system-body) and (-webkit-appearance: none) {
     .hex-grid .grid,
     .hex-grid .grid-2,
@@ -2841,3 +2841,6 @@
     .hex-grid  .trail{
       display: none;
     }}
+ */
+
+  

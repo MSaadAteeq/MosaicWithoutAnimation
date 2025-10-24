@@ -2834,6 +2834,10 @@
     /* query that supports on safari browser */
     @supports (hanging-punctuation: first) and (font: -apple-system-body) and (-webkit-appearance: none) {
     .hex-grid .grid,
-    .hex-grid .grid-2{
+    .hex-grid .grid-2,
+    .hex-grid .grid .light,
+    .hex-grid .grid-2 .light,
+    .hex-grid .grid .trail,
+    .hex-grid .grid-2 .trail{
       display: none;
     }}
